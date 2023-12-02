@@ -2,21 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Backend;
+package Model;
 
 import java.io.Serializable;
 
 public class Customer implements Serializable{
     private int customerId;
     private String  customerName;
-    private String contactNo;
-    private float bill;
+    private String phoneNo;
+    private float bill_amt;
 
-    public Customer(int customerId, String customerName, String contactNo, float bill) {
+    public Customer(int customerId, String customerName, String phoneNo, float bill_amt) {
         this.customerId = customerId;
         this.customerName = customerName;
-        this.contactNo = contactNo;
-        this.bill = bill;
+        this.phoneNo = phoneNo;
+        this.bill_amt = bill_amt;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Customer implements Serializable{
     /**
      * @param customerId the customerId to set
      */
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -48,30 +48,30 @@ public class Customer implements Serializable{
     }
 
     /**
-     * @return the contactNo
+     * @return the phoneNo
      */
-    public String getContactNo() {
-        return contactNo;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
     /**
-     * @param contactNo the contactNo to set
+     * @param phoneNo the contactNo to set
      */
-    public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
+    public void setContactNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     /**
-     * @return the Bill
+     * @return the Bill amount
      */
-    public float getBill() {
-        return bill;
+    public float getBillAmount() {
+        return bill_amt;
     }
 
     /**
-     * @param bill the bill to set
+     * @param bill_amt the bill amount to set
      */
-    public void setBill(float bill) {
-        this.bill = bill;
+    public void setBillAmount(float bill_amt) {
+        this.bill_amt = bill_amt;
     }
 }
