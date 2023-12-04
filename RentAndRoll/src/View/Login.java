@@ -138,13 +138,13 @@ public class Login {
                             && String.valueOf(Password_Field.getPassword()).equals("123")) {
                         UN_TextField.setText("");
                         Password_Field.setText("");
-//                        Runner.getFrame().dispose();
-//                        Parent_JFrame frame = new Parent_JFrame();
-//                        MainMenu menu = new MainMenu();
-//                        JFrame mainFrame = Parent_JFrame.getMainFrame();
-//                        JPanel mainPanel = menu.getMainPanel();
-//                        mainFrame.add(menu.getMainPanel());
-//                        mainFrame.setVisible(true);
+                        Runner.getFrame().dispose();
+                        Parent_JFrame frame = new Parent_JFrame();
+                        MainMenu menu = new MainMenu();
+                        JFrame mainFrame = Parent_JFrame.getMainFrame();
+                        JPanel mainPanel = menu.getMainPanel();
+                        mainFrame.add(menu.getMainPanel());
+                        mainFrame.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Invalid UserName/Password", "Error", JOptionPane.ERROR_MESSAGE);
                     }
