@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,7 +31,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  * @author erkur
  */
 public class Login {
-    private final JPanel MiniPanel, MainPanel, ButtonPanel;
+    private final JPanel MiniPanel, MainPanel, ButtonPanel, UnPanel, PwPanel;
     private final JButton Close_Button, Login_Button;
     private final JLabel PW_Label, UN_Label, Image_jLabel, info_Label;
     private final JTextField UN_TextField;
@@ -41,6 +42,8 @@ public class Login {
         MiniPanel = new JPanel();
         MainPanel = new JPanel(new BorderLayout());
         ButtonPanel = new JPanel();
+        UnPanel = new JPanel();
+        PwPanel = new JPanel();
 
         Close_Button = new JButton("Close");
         Login_Button = new JButton("Login");
@@ -56,27 +59,11 @@ public class Login {
         MainPanel.setPreferredSize(new Dimension(1366, 730));
         
         UN_TextField.setPreferredSize(new Dimension(200, 20));
-        UN_TextField.setMaximumSize(new Dimension(UN_TextField.getPreferredSize().width, UN_TextField.getMinimumSize().height));
+        UN_TextField.setMaximumSize(new Dimension(200, UN_TextField.getMinimumSize().height));
+        
         Password_Field.setPreferredSize(new Dimension(200, 20));
         Password_Field.setMaximumSize(new Dimension(Password_Field.getPreferredSize().width, Password_Field.getMinimumSize().height));
-        MiniPanel.setPreferredSize(new Dimension(683, 730));
-        MiniPanel.setBackground(new Color(43,31,80));
-        MiniPanel.setLayout(new BoxLayout(MiniPanel, BoxLayout.PAGE_AXIS));
-        MiniPanel.add(info_Label);
-        MiniPanel.add(UN_Label);
-        MiniPanel.add(UN_TextField);
-        MiniPanel.add(PW_Label);
-        MiniPanel.add(Password_Field);
-        MiniPanel.add(ButtonPanel);
         
-        
-        Login_Button.setPreferredSize(new Dimension(80, 20));
-        Close_Button.setPreferredSize(new Dimension(80, 20));
-        ButtonPanel.setBackground(new Color(43,31,80));
-        ButtonPanel.setLayout(new FlowLayout());
-        ButtonPanel.add(Login_Button);
-        ButtonPanel.add(Close_Button);
-
         info_Label.setFont(new Font("Poppins", 1, 18)); // Consolas, Bold , 18pt
         info_Label.setForeground(Color.WHITE);
 
@@ -87,17 +74,37 @@ public class Login {
         PW_Label.setFont(new Font("Poppins", 0, 18));
         PW_Label.setForeground(Color.WHITE);
         PW_Label.setPreferredSize(new Dimension(100, 20));
-
-
+        
+        UnPanel.setLayout(new FlowLayout());
+        UnPanel.setBackground(new Color(43,31,80));
+        UnPanel.setMaximumSize(new Dimension(683, 50));
+        UnPanel.add(UN_Label);
+        UnPanel.add(UN_TextField);
+        
+        PwPanel.setLayout(new FlowLayout());
+        PwPanel.setMaximumSize(new Dimension(683, 50));
+        PwPanel.setBackground(new Color(43,31,80));
+        PwPanel.add(PW_Label);
+        PwPanel.add(Password_Field);
+        
+        Login_Button.setPreferredSize(new Dimension(80, 20));
+        Close_Button.setPreferredSize(new Dimension(80, 20));
+        ButtonPanel.setBackground(new Color(43,31,80));
+        ButtonPanel.setLayout(new FlowLayout());
+        ButtonPanel.add(Login_Button);
+        ButtonPanel.add(Close_Button);
+        
+        MiniPanel.setPreferredSize(new Dimension(683, 730));
+        MiniPanel.setBackground(new Color(43,31,80));
+        MiniPanel.setLayout(new BoxLayout(MiniPanel, BoxLayout.Y_AXIS));
+        MiniPanel.add(Box.createRigidArea(new Dimension(0,100)));
+        MiniPanel.add(info_Label);
+        MiniPanel.add(UnPanel);
+        MiniPanel.add(PwPanel);
+        MiniPanel.add(ButtonPanel);
+        
         Image_jLabel.setPreferredSize(new Dimension(683, 730));
         Image_jLabel.setIcon(new ImageIcon("LoginImage3.jpg"));
-
-//        UN_TextField.setPreferredSize(new Dimension(200, 20));
-//        Password_Field.setPreferredSize(new Dimension(200, 20));
-
-        
-//        MiniPanel.add(Login_Button);
-//        MiniPanel.add(Close_Button);
 
         MainPanel.add(MiniPanel, BorderLayout.WEST);
         MainPanel.add(Image_jLabel, BorderLayout.EAST);
