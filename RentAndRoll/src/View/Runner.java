@@ -6,9 +6,14 @@ package View;
 
 import View.Login;
 import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import java.util.List;
+import Model.CustomerDashboard;
+import Model.Customer;
 
 /**
  *
@@ -47,6 +52,16 @@ public class Runner {
         } catch (InterruptedException e) {
             System.out.println(e);
         }
+        
+        // For testing purpose to be deleted
+//        CustomerDashboard cd = new CustomerDashboard();
+//        System.out.println(cd.removeCustomer(5));
+//        for(Customer customer: customers){
+//            System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
+//        }
+//        Customer customer = cd.getCustomerById(5);
+//        System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
+
     }
     
 }

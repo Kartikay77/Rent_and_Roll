@@ -12,6 +12,7 @@ public class Customer implements Serializable{
     private String phoneNo;
     private float bill_amt;
 
+    Customer() {}
     public Customer(int customerId, String customerName, String phoneNo, float bill_amt) {
         this.customerId = customerId;
         this.customerName = customerName;
@@ -29,7 +30,7 @@ public class Customer implements Serializable{
     /**
      * @param customerId the customerId to set
      */
-    public void setOwnerId(int customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -57,7 +58,7 @@ public class Customer implements Serializable{
     /**
      * @param phoneNo the contactNo to set
      */
-    public void setContactNo(String phoneNo) {
+    public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
 
