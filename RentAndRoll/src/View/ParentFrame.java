@@ -4,16 +4,11 @@
  */
 package View;
 
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -23,16 +18,12 @@ import javax.swing.JPanel;
  *
  * @author erkur
  */
-public class Parent_JFrame {
+public class ParentFrame {
     private static JFrame MainFrame;
     private final JMenuBar menu_Bar;
     private final JMenuItem Exit, Logout, Help;
-//    private final JMenuItem Exit, addCar, updateCar, removeCar, ViewUnbookedCars, ViewbookedCars,
-//            addCustomer, updateCustomer, removeCustomer,
-//            addCarOwner, updateCarOwner, removeCarOwner,
-//            ViewJavaDoc, ViewDocumentation, About;
 
-    public Parent_JFrame() {
+    public ParentFrame() {
         MainFrame = new JFrame("Rent And Roll - Car Management System");
         MainFrame.setSize(1366, 730);
         MainFrame.setVisible(true);
@@ -87,12 +78,12 @@ public class Parent_JFrame {
                 break;
        
                 case "Help": {
-                    JOptionPane.showMessageDialog(null, "THIS PROGRAM IS WRITTEN AS A SEMESTER PROJECT OF OBJECT ORIENTED PROGRAMMING PROGRAMMIG  BY ABDULLAH SHAHID !");
+                    JOptionPane.showMessageDialog(null, "This is a car rental management system by Its_Not_A_Bug_Its_A_Feature");
                 }
                 break;
                 
                 case "Logout": {
-                Parent_JFrame.getMainFrame().dispose();
+                ParentFrame.getMainFrame().dispose();
                 Runner r = new Runner();
                 JFrame frame = r.getFrame();
                 Login login = new Login();

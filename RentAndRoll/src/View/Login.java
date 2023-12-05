@@ -9,8 +9,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
@@ -23,8 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
+
 
 /**
  *
@@ -139,9 +136,9 @@ public class Login {
                         UN_TextField.setText("");
                         Password_Field.setText("");
                         Runner.getFrame().dispose();
-                        Parent_JFrame frame = new Parent_JFrame();
+                        ParentFrame frame = new ParentFrame();
                         MainMenu menu = new MainMenu();
-                        JFrame mainFrame = Parent_JFrame.getMainFrame();
+                        JFrame mainFrame = ParentFrame.getMainFrame();
                         JPanel mainPanel = menu.getMainPanel();
                         mainFrame.add(menu.getMainPanel());
                         mainFrame.setVisible(true);
