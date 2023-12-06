@@ -1,1 +1,24 @@
 /bin/
+/RentAndRoll/dist/
+# Ignore compiled files
+*.class
+*.jar
+*.war
+
+# Ignore IDE-specific files
+nbproject/
+.nb-gradle/
+
+# Ignore build output directories
+/target/
+/build/
+/out/
+
+# Ignore build-related files and directories
+/RentAndRoll/build/
+
+# Ignore NetBeans project files
+RentAndRoll/nbproject/private/
+RentAndRoll/nbproject/private.properties
+RentAndRoll/nbproject/private.xml
+RentAndRoll/nbproject/project.properties
