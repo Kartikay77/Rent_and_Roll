@@ -18,7 +18,7 @@ public class CarOwner implements Serializable{
         this.phoneNo = phoneNo;
         this.balance_due = balance_due;
     }
-
+ CarOwner() {}
     /**
      * @return the ownerId
      */
