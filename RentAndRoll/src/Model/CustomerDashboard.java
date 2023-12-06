@@ -37,9 +37,9 @@ public class CustomerDashboard {
             while (rs.next()) {
                 Customer customer = new Customer();
                 customer.setCustomerId(rs.getInt("customer_id"));
-                customer.setCustomerName(rs.getString("name"));
-                customer.setPhoneNo(rs.getString("phone_number"));
-                customer.setBillAmount(rs.getFloat("balance_due"));
+                customer.setCustomerName(rs.getString("customer_name"));
+                customer.setPhoneNo(rs.getString("contact_no"));
+                customer.setBillAmount(rs.getFloat("bill"));
                 customers.add(customer);
             }
         } catch (SQLException e) {
@@ -56,9 +56,9 @@ public class CustomerDashboard {
             ResultSet rs = this.stmt.executeQuery(sqlQuery); 
             while(rs.next()){
                 customer.setCustomerId(rs.getInt("customer_id"));
-                customer.setCustomerName(rs.getString("name"));
-                customer.setPhoneNo(rs.getString("phone_number"));
-                customer.setBillAmount(rs.getFloat("balance_due"));
+                customer.setCustomerName(rs.getString("customer_name"));
+                customer.setPhoneNo(rs.getString("contact_no"));
+                customer.setBillAmount(rs.getFloat("bill"));
             }
         } catch (SQLException e) {
             System.out.println("Unable to get customers: "+e);
@@ -70,14 +70,14 @@ public class CustomerDashboard {
         // To do: Get Customer by name from database
         List<Customer> customers = new ArrayList<>();
         try {
-            String sqlQuery = "select * from customer where name=\"" + name +"\";";
+            String sqlQuery = "select * from customer where customer_name=\"" + name +"\";";
             ResultSet rs = this.stmt.executeQuery(sqlQuery); 
             while(rs.next()){
                 Customer customer = new Customer();
                 customer.setCustomerId(rs.getInt("customer_id"));
-                customer.setCustomerName(rs.getString("name"));
-                customer.setPhoneNo(rs.getString("phone_number"));
-                customer.setBillAmount(rs.getFloat("balance_due"));
+                customer.setCustomerName(rs.getString("customer_name"));
+                customer.setPhoneNo(rs.getString("contact_no"));
+                customer.setBillAmount(rs.getFloat("bill"));
                 customers.add(customer);
             }
         } catch (SQLException e) {
@@ -88,7 +88,7 @@ public class CustomerDashboard {
     
     public int addCustomer(String name, String phoneNo, double balance){
         // To do: Add customer with the details into database and return id
-        String sqlQuery = "insert into customer (name, phone_number, balance_due) values (?, ?, ?)";
+        String sqlQuery = "insert into customer (customer_name, contact_no, bill) values (?, ?, ?)";
         int generatedCustomerId = -999;
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, name);
@@ -126,7 +126,7 @@ public class CustomerDashboard {
     public boolean clearBalance(int id){
         // To do: Clear balance due to be paid by Customer
         try {
-            String sqlQuery = "UPDATE customer SET balance_due = 0 WHERE customer_id = " + id + ";";
+            String sqlQuery = "UPDATE customer SET bill = 0 WHERE customer_id = " + id + ";";
             this.stmt.executeUpdate(sqlQuery);
         } catch (SQLException e) {
             System.out.println("Unable to update customer: "+e);

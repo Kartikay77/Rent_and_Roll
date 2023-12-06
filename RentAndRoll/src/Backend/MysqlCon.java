@@ -11,14 +11,6 @@ Connection con=DriverManager.getConnection(
 "jdbc:mysql://localhost:3306/se","root","admin123");  
 //here stock is database name, root is username and heart is password  
 Statement stmt=con.createStatement(); 
-// customer table schema
-//CREATE TABLE customer (
-//    customer_id INT PRIMARY KEY,
-//    name VARCHAR(50),
-//    phone_number VARCHAR(20),
-//    balance_due DECIMAL(10, 2) DEFAULT 0.0
-//);
-// ALTER TABLE customer MODIFY COLUMN customer_id INT AUTO_INCREMENT;
 
 //String sql1 = "insert into customer values (5,'Rachna','+918778993789',180.5)";
 //String sql1 = "insert into customer values (6,'Pranchal','+918778883789',280.5)";

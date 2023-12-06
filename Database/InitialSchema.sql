@@ -1,6 +1,6 @@
 CREATE TABLE 
 customer (
-customer_id INT PRIMARY KEY,
+customer_id INT AUTO_INCREMENT PRIMARY KEY,
 customer_name VARCHAR(50),
 contact_no VARCHAR(20),
 bill DECIMAL(10,2));
