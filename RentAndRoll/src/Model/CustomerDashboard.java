@@ -14,6 +14,10 @@ import java.sql.PreparedStatement;
 
 import utilities.DatabaseConnector;
 
+/**
+ * The CustomerDashboard class is responsible for adding, retrieving and querying data 
+ * from the customer table in the database.
+ */
 public class CustomerDashboard {
     Statement stmt;
     Connection connection;
@@ -26,7 +30,15 @@ public class CustomerDashboard {
             System.out.println("Unable to make database connection: "+e);
         }
     }
-        
+    
+    protected CustomerDashboard(Connection conn) {
+            this.connection = conn;
+    }
+    
+    /**
+     * Gets all customers from database.
+     * @return list of customer objects
+     */
     public List<Customer> getAllCustomers(){
         //To DO: Get all customers from database
         List<Customer> customers = new ArrayList<>();
@@ -48,6 +60,11 @@ public class CustomerDashboard {
         return customers;
     }
     
+    /**
+     * Gets customer object by ID
+     * @param id id of the customer whose details are to be retrieved.
+     * @return Customer object
+     */
     public Customer getCustomerById(int id){
         // To do: Get customer by Id
         Customer customer = new Customer();
@@ -66,6 +83,11 @@ public class CustomerDashboard {
         return customer;
     }
     
+    /**
+     * Gets all customers that match the given name.
+     * @param name name to be matched
+     * @return List of Customer objects whose name matches the name given.
+     */
     public List<Customer> getCustomersByName(String name){
         // To do: Get Customer by name from database
         List<Customer> customers = new ArrayList<>();
@@ -86,6 +108,13 @@ public class CustomerDashboard {
         return customers;
     }
     
+    /**
+     * Adds customer with given details to the database
+     * @param name name of the customer
+     * @param phoneNo contact number of the customer
+     * @param balance balance amount due to be paid by the customer
+     * @return int id of the customer after addition in the database
+     */
     public int addCustomer(String name, String phoneNo, double balance){
         // To do: Add customer with the details into database and return id
         String sqlQuery = "insert into customer (customer_name, contact_no, bill) values (?, ?, ?)";
@@ -110,6 +139,11 @@ public class CustomerDashboard {
         return generatedCustomerId;
     }
     
+    /**
+     * Removes customer from database
+     * @param id ID of the customer to be removed.
+     * @return true if removal was successful else false.
+     */
     public boolean removeCustomer(int id){
         // To do: Remove Customer from database along with all bookings of the customer.
         try {
@@ -123,6 +157,11 @@ public class CustomerDashboard {
         // TO DO Remaining: Remove bookings from booking table also
     }  
     
+    /**
+     * Clears the balance of the customer whose id is given.
+     * @param id ID of the customer whose balance is to be cleared.
+     * @return true if clearing balance was successful else false.
+     */
     public boolean clearBalance(int id){
         // To do: Clear balance due to be paid by Customer
         try {
@@ -134,4 +173,5 @@ public class CustomerDashboard {
         }
         return true;
     }
+    
 }
