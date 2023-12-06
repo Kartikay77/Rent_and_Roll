@@ -67,6 +67,15 @@ public class Runner {
 //            System.out.println("Balance successfully cleared for owner with ID " + ownerId);
 //        } else {
 //            System.out.println("Failed to clear balance for owner with ID " + ownerId);
+
+        // For testing purpose to be deleted
+//        CustomerDashboard cd = new CustomerDashboard();
+//        Customer customer = (cd.getCustomerById(14));
+
+//        CustomerDashboard cd = new CustomerDashboard();
+//        Customer customer = (cd.getCustomerById(14));
+//        for(Customer customer: customers){
+//            System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
 //        }
     }
     

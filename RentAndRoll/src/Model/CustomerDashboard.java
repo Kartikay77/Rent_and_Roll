@@ -31,6 +31,10 @@ public class CustomerDashboard {
         }
     }
     
+    protected CustomerDashboard(Connection conn) {
+            this.connection = conn;
+    }
+    
     /**
      * Gets all customers from database.
      * @return list of customer objects
@@ -169,4 +173,5 @@ public class CustomerDashboard {
         }
         return true;
     }
+    
 }
