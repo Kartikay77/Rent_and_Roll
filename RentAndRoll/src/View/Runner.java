@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import java.util.List;
 import Model.CustomerDashboard;
 import Model.Customer;
+import Model.CarOwnerDashboard;
+import Model.CarOwner;
 
 /**
  *
@@ -53,15 +55,19 @@ public class Runner {
             System.out.println(e);
         }
         
-        // For testing purpose to be deleted
-//        CustomerDashboard cd = new CustomerDashboard();
-//        System.out.println(cd.removeCustomer(5));
-//        for(Customer customer: customers){
-//            System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
+        //        CarOwnerDashboard cd = new CarOwnerDashboard();
+//
+//        // Assuming owner ID for whom balance needs to be cleared
+//        int ownerId = 1; // Replace this with an existing owner ID from your database
+//
+//        // Clear balance for the specified owner
+//        boolean isBalanceCleared = cd.clearBalance(ownerId);
+//
+//        if (isBalanceCleared) {
+//            System.out.println("Balance successfully cleared for owner with ID " + ownerId);
+//        } else {
+//            System.out.println("Failed to clear balance for owner with ID " + ownerId);
 //        }
-//        Customer customer = cd.getCustomerById(5);
-//        System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
-
     }
     
 }

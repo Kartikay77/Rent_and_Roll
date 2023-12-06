@@ -7,7 +7,7 @@ bill DECIMAL(10,2));
 
 CREATE TABLE 
 car_owner (
-owner_id INT PRIMARY KEY,
+owner_id INT AUTO_INCREMENT PRIMARY KEY,
 owner_name VARCHAR(50),
 contact_no VARCHAR(20),
 balance DECIMAL(10,2));
