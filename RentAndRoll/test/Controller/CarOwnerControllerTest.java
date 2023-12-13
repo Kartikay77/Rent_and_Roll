@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package Controller;
 
+import Controller.CarOwnerController;
+import Model.CarOwner;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,8 +27,8 @@ import org.junit.Test;
  *
  * @author Gupta
  */
-public class CarOwnerDashboardTest {
-    private CarOwnerDashboard mockCarOwnerDashboard;
+public class CarOwnerControllerTest {
+    private CarOwnerController mockCarOwnerDashboard;
 
     @Before
     public void setUp() {
@@ -40,8 +42,8 @@ public class CarOwnerDashboardTest {
             e.printStackTrace();
         }
 
-        // Create CarOwnerDashboard instance with the mocked connection
-        mockCarOwnerDashboard = new CarOwnerDashboard(mockConnection);
+        // Create CarOwnerController instance with the mocked connection
+        mockCarOwnerDashboard = new CarOwnerController(mockConnection);
         mockCarOwnerDashboard.stmt = (mockStatement);
 
     }
