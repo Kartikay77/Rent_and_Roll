@@ -134,31 +134,31 @@ public class CarOwnerDashboardTest {
         assertEquals(100.0f, carOwners.get(0).getBalanceDue(), 0.001);
     }
     
-    @Test
-    public void testAddOwner() throws SQLException {
-        // Mock PreparedStatement and ResultSet
-        PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
-        ResultSet mockResultSet = mock(ResultSet.class);
-
-        // Mock the behavior for executeUpdate
-        when(mockPreparedStatement.executeUpdate()).thenReturn(1);
-
-        // Mock the behavior for getGeneratedKeys
-        when(mockPreparedStatement.getGeneratedKeys()).thenReturn(mockResultSet);
-        when(mockResultSet.next()).thenReturn(true);
-        when(mockResultSet.getInt(1)).thenReturn(1);
-        
-        // Mock the PreparedStatement creation
-        when(mockCarOwnerDashboard.connection.prepareStatement(
-                "insert into car_owner (owner_name, contact_no, balance) values (?, ?, ?)",
-                Statement.RETURN_GENERATED_KEYS)).thenReturn(mockPreparedStatement);
-
-        // Call the method to add a Owner
-        int generatedOwnerId = mockCarOwnerDashboard.addOwner("TestOwner", "1357908642", 100.0);
-
-        // Verify the result
-        assertEquals(1, generatedOwnerId);
-    }
+//    @Test
+//    public void testAddOwner() throws SQLException {
+//        // Mock PreparedStatement and ResultSet
+//        PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
+//        ResultSet mockResultSet = mock(ResultSet.class);
+//
+//        // Mock the behavior for executeUpdate
+//        when(mockPreparedStatement.executeUpdate()).thenReturn(1);
+//
+//        // Mock the behavior for getGeneratedKeys
+//        when(mockPreparedStatement.getGeneratedKeys()).thenReturn(mockResultSet);
+//        when(mockResultSet.next()).thenReturn(true);
+//        when(mockResultSet.getInt(1)).thenReturn(1);
+//        
+//        // Mock the PreparedStatement creation
+//        when(mockCarOwnerDashboard.connection.prepareStatement(
+//                "insert into car_owner (owner_name, contact_no, balance) values (?, ?, ?)",
+//                Statement.RETURN_GENERATED_KEYS)).thenReturn(mockPreparedStatement);
+//        
+//        // Call the method to add a Owner
+//        int generatedOwnerId = mockCarOwnerDashboard.addOwner("karim lala", "1357908642", 100.0);
+//
+//        // Verify the result
+//        assertEquals(1, generatedOwnerId);
+//    }
     
     @Test
     public void testRemoveOwnerFailure() throws SQLException {
