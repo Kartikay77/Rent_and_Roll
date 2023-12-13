@@ -12,9 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.util.List;
-import Model.CustomerDashboard;
+import Controller.CustomerController;
 import Model.Customer;
-import Model.CarOwnerDashboard;
+import Controller.CarOwnerController;
 import Model.CarOwner;
 
 /**
@@ -55,28 +55,32 @@ public class Runner {
             System.out.println(e);
         }
         
-        //        CarOwnerDashboard cd = new CarOwnerDashboard();
-//
+                CarOwnerController cd = new CarOwnerController();
+          System.out.println(cd.addOwner("Adwait", "123456", 235))
+                  ;
 //        // Assuming owner ID for whom balance needs to be cleared
-//        int ownerId = 1; // Replace this with an existing owner ID from your database
+        int ownerId = 1; // Replace this with an existing owner ID from your database
 //
 //        // Clear balance for the specified owner
-//        boolean isBalanceCleared = cd.clearBalance(ownerId);
+        boolean isBalanceCleared = cd.clearBalance(ownerId);
 //
-//        if (isBalanceCleared) {
-//            System.out.println("Balance successfully cleared for owner with ID " + ownerId);
-//        } else {
-//            System.out.println("Failed to clear balance for owner with ID " + ownerId);
+        if (isBalanceCleared) {
+            System.out.println("Balance successfully cleared for owner with ID " + ownerId);
+        } else {
+            System.out.println("Failed to clear balance for owner with ID " + ownerId);
 
         // For testing purpose to be deleted
-//        CustomerDashboard cd = new CustomerDashboard();
+//        CustomerController cd = new CustomerController();
 //        Customer customer = (cd.getCustomerById(14));
+        
+//        System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
 
-//        CustomerDashboard cd = new CustomerDashboard();
+
+//        CustomerController cd = new CustomerController();
 //        Customer customer = (cd.getCustomerById(14));
 //        for(Customer customer: customers){
 //            System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
-//        }
+        }
     }
     
 }

@@ -12,7 +12,7 @@ public class Customer implements Serializable{
     private String phoneNo;
     private float bill_amt;
 
-    Customer() {}
+    public Customer() {}
     public Customer(int customerId, String customerName, String phoneNo, float bill_amt) {
         this.customerId = customerId;
         this.customerName = customerName;
