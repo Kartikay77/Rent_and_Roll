@@ -63,16 +63,16 @@ public class MainMenu implements ActionListener {
         switch (e.getActionCommand()) {  
             case "Cars": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-//                Car_Details cd = new Car_Details();
-//                Parent_JFrame.getMainFrame().add(cd.getMainPanel());
-//                Parent_JFrame.getMainFrame().getContentPane().revalidate();
+//                CarDetails cd = new CarDetails();
+//                ParentFrame.getMainFrame().add(cd.getMainPanel());
+//                ParentFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
             case "Customer": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-//                Customer_Details cd = new Customer_Details();
-//                Parent_JFrame.getMainFrame().add(cd.getMainPanel());
-//                Parent_JFrame.getMainFrame().getContentPane().revalidate();
+                CustomerDetails cd = new CustomerDetails();
+                ParentFrame.getMainFrame().add(cd.getMainPanel());
+                ParentFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
             case "Owner": {
@@ -84,9 +84,9 @@ public class MainMenu implements ActionListener {
             break;
             case "Booking Details": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-//                Booking_Details cd = new Booking_Details();
-//                Parent_JFrame.getMainFrame().add(cd.getMainPanel());
-//                Parent_JFrame.getMainFrame().getContentPane().revalidate();
+//                BookingDetails cd = new BookingDetails();
+//                ParentJFrame.getMainFrame().add(cd.getMainPanel());
+//                ParentJFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
         }
