@@ -26,7 +26,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  *
  * @author erkur
  */
-public class CarOwnerDetails implements ActionListener{
+public class OwnerDashboard implements ActionListener{
     private JTextField SearchIdTextField;
     private JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBalanceButton;
     private JScrollPane ScrollPane1;
@@ -35,7 +35,7 @@ public class CarOwnerDetails implements ActionListener{
     static DefaultTableModel TableModel;
     private JPanel MainPanel;
 
-    public CarOwnerDetails() {
+    public OwnerDashboard() {
         MainPanel = new JPanel();
         ParentFrame.getMainFrame().setTitle("Car Owner Details");
         MainPanel.setLayout(new AbsoluteLayout());

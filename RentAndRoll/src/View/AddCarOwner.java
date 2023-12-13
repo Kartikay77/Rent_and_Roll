@@ -85,7 +85,7 @@ public class AddCarOwner {
                     if (!name.isEmpty() & !contact.isEmpty()) {
 //                        new CarOwner(name, contact).Add(); // ID is Auto
                         ParentFrame.getMainFrame().getContentPane().removeAll();
-                        CarOwnerDetails cd = new CarOwnerDetails();
+                        OwnerDashboard cd = new OwnerDashboard();
                         ParentFrame.getMainFrame().add(cd.getMainPanel());
                         ParentFrame.getMainFrame().getContentPane().revalidate();
                         ParentFrame.getMainFrame().setEnabled(true);
