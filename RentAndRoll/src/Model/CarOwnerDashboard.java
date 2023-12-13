@@ -26,7 +26,9 @@ public class CarOwnerDashboard {
             System.out.println("Unable to make database connection: "+e);
         }
     }
-        
+     protected CarOwnerDashboard(Connection conn) {
+            this.connection = conn;
+    }       
     public List<CarOwner> getAllOwners(){
         //To DO: Get all car owners from database
         List<CarOwner> car_owners = new ArrayList<>();
@@ -86,7 +88,7 @@ public class CarOwnerDashboard {
         return car_owners;
     }
     
-    public int addOwner(String name, String phoneNo){
+    public int addOwner(String name, String phoneNo,double balance){
         // To do: Add owner with the details into database and return id
         String sqlQuery = "insert into car_owner (owner_name, contact_no, balance) values (?,?,?)";
         int generatedOwnerId = -999;
