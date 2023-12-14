@@ -14,6 +14,11 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;  
 
 import utilities.DatabaseConnector;
+
+/**
+ * The CarController class is responsible for adding, retrieving and querying data 
+ from the car table in the database.
+ */
 public class CarController {
     List<Car> cars = new ArrayList<>();
     Statement stmt;
@@ -30,8 +35,9 @@ public class CarController {
     }
     protected CarController(Connection conn) {
             this.connection = conn;
-    }   
-        /**
+    }  
+    
+    /**
      * Gets all car from database.
      * @return list of Car objects
      */    

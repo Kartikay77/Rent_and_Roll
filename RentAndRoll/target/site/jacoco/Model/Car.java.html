@@ -4,7 +4,7 @@
  */
 package Model;
 
-<span class="nc" id="L7">public class Car {</span>
+<span class="fc" id="L7">public class Car {</span>
     
     private int carId;
     private String carModel;
@@ -12,89 +12,189 @@ package Model;
     private float rentPerHour;
     private int carOwnerId;
     private String carOwnerName;
+    private String markerName;
+    private String carName;
+    private String color;
+    private String carType;
+    private String carCondition;
+    private String carRegNo;
+    
     
     /**
      * @return the carID
      */
     public int carId() {
-<span class="nc" id="L20">        return carId;</span>
+<span class="fc" id="L27">        return carId;</span>
     }
 
     /**
      * @param carId the carId to set
      */
     public void setCarId(int carId) {
-<span class="nc" id="L27">        this.carId = carId;</span>
-<span class="nc" id="L28">    }</span>
+<span class="fc" id="L34">        this.carId = carId;</span>
+<span class="fc" id="L35">    }</span>
+    
+        /**
+     * @return the Marker Name
+     */
+    
+        public String getMakerName() {
+<span class="fc" id="L42">        return markerName;</span>
+    }
 
+    /**
+     * @param markerName the markerName to set
+     */
+    public void setMakerName(String markerName) {
+<span class="fc" id="L49">        this.markerName = markerName;</span>
+<span class="fc" id="L50">    }</span>
+    
+    
+            /**
+     * @return the carName
+     */
+    
+        public String getCarName() {
+<span class="fc" id="L58">        return carName;</span>
+    }
+
+    /**
+     * @param carName the carName to set
+     */
+    public void setCarName(String carName) {
+<span class="fc" id="L65">        this.carName = carName;</span>
+<span class="fc" id="L66">    }</span>
+    
+                /**
+     * @return the color
+     */
+    
+        public String getColor() {
+<span class="fc" id="L73">        return color;</span>
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(String color) {
+<span class="fc" id="L80">        this.color = color;</span>
+<span class="fc" id="L81">    }</span>
+
+    
+     /**
+     * @return the Marker Name
+     */
+    
+        public String getCarType() {
+<span class="fc" id="L89">        return carType;</span>
+    }
+
+    /**
+     * @param carType the carType to set
+     */
+    public void setCarType(String carType) {
+<span class="fc" id="L96">        this.carType = carType;</span>
+<span class="fc" id="L97">    }</span>
+    
+       /**
+     * @return the Marker Name
+     */
+    
+        public String getCarCondition() {
+<span class="fc" id="L104">        return carCondition;</span>
+    }
+
+    /**
+     * @param carCondition the carCondition to set
+     */
+    public void setCarCondition(String carCondition) {
+<span class="fc" id="L111">        this.carCondition = carCondition;</span>
+<span class="fc" id="L112">    }</span>
+    
+    
+    /**
+     * @param carRegNo the carRegNo to set
+     */
+    public void setCarRegNo(String carRegNo) {
+<span class="fc" id="L119">        this.carRegNo = carRegNo;</span>
+<span class="fc" id="L120">    }</span>
+    
+                /**
+     * @return the carRegNo
+     */
+    
+        public String getCarRegNo() {
+<span class="fc" id="L127">        return carRegNo;</span>
+    }
+        
     /**
      * @return the carModel
      */
     public String getCarModel() {
-<span class="nc" id="L34">        return carModel;</span>
+<span class="fc" id="L134">        return carModel;</span>
     }
 
     /**
      * @param carModel the ownerName to set
      */
     public void setCarModel(String carModel) {
-<span class="nc" id="L41">        this.carModel = carModel;</span>
-<span class="nc" id="L42">    }</span>
+<span class="fc" id="L141">        this.carModel = carModel;</span>
+<span class="fc" id="L142">    }</span>
     
     /**
      * @return the seatingCapacity
      */
     public int getSeatingCapacity() {
-<span class="nc" id="L48">        return seatingCapacity;</span>
+<span class="fc" id="L148">        return seatingCapacity;</span>
     }
 
     /**
      * @param seatingCapacity the seatingCapacity to set
      */
     public void setSeatingCapacity(int seatingCapacity) {
-<span class="nc" id="L55">        this.seatingCapacity = seatingCapacity;</span>
-<span class="nc" id="L56">    }</span>
+<span class="fc" id="L155">        this.seatingCapacity = seatingCapacity;</span>
+<span class="fc" id="L156">    }</span>
 
     /**
      * @return the rentPerHour
      */
     public float getRentPerHour() {
-<span class="nc" id="L62">        return rentPerHour;</span>
+<span class="fc" id="L162">        return rentPerHour;</span>
     }
 
     /**
      * @param rentPerHour set the rentPerHour
      */
     public void setRentPerHour(float rentPerHour) {
-<span class="nc" id="L69">        this.rentPerHour = rentPerHour;</span>
-<span class="nc" id="L70">    }</span>
+<span class="fc" id="L169">        this.rentPerHour = rentPerHour;</span>
+<span class="fc" id="L170">    }</span>
     
     /**
      * @return the carOwnerId
      */
     public int getCarOwnerId() {
-<span class="nc" id="L76">        return carOwnerId;</span>
+<span class="fc" id="L176">        return carOwnerId;</span>
     }
 
     /**
      * @param carOwnerId the carOwnerId to set
      */
     public void setcarOwnerID(int carOwnerId) {
-<span class="nc" id="L83">        this.carOwnerId = carOwnerId;</span>
-<span class="nc" id="L84">    }</span>
+<span class="fc" id="L183">        this.carOwnerId = carOwnerId;</span>
+<span class="fc" id="L184">    }</span>
 
     /**
      * @return the carOwnerName
      */
     public String getCarOwnerName() {
-<span class="nc" id="L90">        return carOwnerName;</span>
+<span class="fc" id="L190">        return carOwnerName;</span>
     }
 
     /**
      * @param carOwnerName the carOwnerName to set
      */
     public void setCarOwnerName(String carOwnerName) {
-<span class="nc" id="L97">        this.carOwnerName = carOwnerName;</span>
-<span class="nc" id="L98">    }</span>
+<span class="fc" id="L197">        this.carOwnerName = carOwnerName;</span>
+<span class="fc" id="L198">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

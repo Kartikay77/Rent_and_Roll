@@ -2,9 +2,17 @@ package Model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+/**
+ * This class contains test cases for the CarOwner class.
+ * It ensures that the CarOwner class functions work as expected by thorough testing.
+ * */
 
 public class CarOwnerTest {
 
+	/**
+     * Tests the behavior of the CarOwner class when it is created with empty constructor.
+     * Verifies that the default state of a CarOwner object is as expected.
+     */
     @Test
     public void testDefaultConstructor() {
         CarOwner carOwner = new CarOwner();

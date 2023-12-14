@@ -19,8 +19,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
- *
- * @author erkur
+ * The class is responsible for painting the Input dialogue box for adding a car owner.
  */
 public class AddCarOwner {
     JButton AddButton, CancelButton;
@@ -77,6 +76,10 @@ public class AddCarOwner {
 
     private class CarOwner_Add_ActionListener implements ActionListener {
 
+    	/**
+         * Perform the action received from the action listener for the Add car owner page.
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {

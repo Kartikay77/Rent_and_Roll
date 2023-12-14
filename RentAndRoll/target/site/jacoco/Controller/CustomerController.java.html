@@ -22,19 +22,19 @@ import utilities.DatabaseConnector;
 public class CustomerController {
     Statement stmt;
     Connection connection;
-<span class="fc" id="L25">    DatabaseConnector databaseConnector = new DatabaseConnector();</span>
-<span class="fc" id="L26">    public CustomerController() {</span>
+<span class="nc" id="L25">    DatabaseConnector databaseConnector = new DatabaseConnector();</span>
+<span class="nc" id="L26">    public CustomerController() {</span>
         try {
-<span class="fc" id="L28">            this.connection = this.databaseConnector.getConnection();</span>
-<span class="fc" id="L29">            this.stmt = connection.createStatement(); </span>
+<span class="nc" id="L28">            this.connection = this.databaseConnector.getConnection();</span>
+<span class="nc" id="L29">            this.stmt = connection.createStatement(); </span>
 <span class="nc" id="L30">        } catch(SQLException e) {</span>
 <span class="nc" id="L31">            System.out.println(&quot;Unable to make database connection: &quot;+e);</span>
-<span class="fc" id="L32">        }</span>
-<span class="fc" id="L33">    }</span>
+<span class="nc" id="L32">        }</span>
+<span class="nc" id="L33">    }</span>
     
-<span class="fc" id="L35">    protected CustomerController(Connection conn) {</span>
-<span class="fc" id="L36">            this.connection = conn;</span>
-<span class="fc" id="L37">    }</span>
+<span class="nc" id="L35">    protected CustomerController(Connection conn) {</span>
+<span class="nc" id="L36">            this.connection = conn;</span>
+<span class="nc" id="L37">    }</span>
     
     /**
      * Gets all customers from database.
@@ -42,23 +42,23 @@ public class CustomerController {
      */
     public List&lt;Customer&gt; getAllCustomers(){
         //To DO: Get all customers from database
-<span class="fc" id="L45">        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L45">        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
 
         try {
-<span class="fc" id="L48">            String sqlQuery = &quot;select * from customer&quot;;</span>
-<span class="fc" id="L49">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">            while (rs.next()) {</span>
-<span class="fc" id="L51">                Customer customer = new Customer();</span>
-<span class="fc" id="L52">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
-<span class="fc" id="L53">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
-<span class="fc" id="L54">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
-<span class="fc" id="L55">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
-<span class="fc" id="L56">                customers.add(customer);</span>
-<span class="fc" id="L57">            }</span>
-<span class="fc" id="L58">        } catch (SQLException e) {</span>
-<span class="fc" id="L59">            System.out.println(&quot;Unable to get all customers: &quot;+e);</span>
-<span class="fc" id="L60">        }</span>
-<span class="fc" id="L61">        return customers;</span>
+<span class="nc" id="L48">            String sqlQuery = &quot;select * from customer&quot;;</span>
+<span class="nc" id="L49">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L51">                Customer customer = new Customer();</span>
+<span class="nc" id="L52">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
+<span class="nc" id="L53">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
+<span class="nc" id="L54">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L55">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
+<span class="nc" id="L56">                customers.add(customer);</span>
+<span class="nc" id="L57">            }</span>
+<span class="nc" id="L58">        } catch (SQLException e) {</span>
+<span class="nc" id="L59">            System.out.println(&quot;Unable to get all customers: &quot;+e);</span>
+<span class="nc" id="L60">        }</span>
+<span class="nc" id="L61">        return customers;</span>
     }
     
     /**
@@ -68,20 +68,20 @@ public class CustomerController {
      */
     public Customer getCustomerById(int id){
         // To do: Get customer by Id
-<span class="fc" id="L71">        Customer customer = new Customer();</span>
+<span class="nc" id="L71">        Customer customer = new Customer();</span>
         try {
-<span class="fc" id="L73">            String sqlQuery = &quot;select * from customer where customer_id=&quot; + id +&quot;;&quot;;</span>
-<span class="fc" id="L74">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">            while(rs.next()){</span>
-<span class="fc" id="L76">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
-<span class="fc" id="L77">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
-<span class="fc" id="L78">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
-<span class="fc" id="L79">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
+<span class="nc" id="L73">            String sqlQuery = &quot;select * from customer where customer_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L74">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L76">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
+<span class="nc" id="L77">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
+<span class="nc" id="L78">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L79">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
             }
-<span class="fc" id="L81">        } catch (SQLException e) {</span>
-<span class="fc" id="L82">            System.out.println(&quot;Unable to get customers: &quot;+e);</span>
-<span class="fc" id="L83">        }</span>
-<span class="fc" id="L84">        return customer;</span>
+<span class="nc" id="L81">        } catch (SQLException e) {</span>
+<span class="nc" id="L82">            System.out.println(&quot;Unable to get customers: &quot;+e);</span>
+<span class="nc" id="L83">        }</span>
+<span class="nc" id="L84">        return customer;</span>
     }
     
     /**
@@ -91,22 +91,22 @@ public class CustomerController {
      */
     public List&lt;Customer&gt; getCustomersByName(String name){
         // To do: Get Customer by name from database
-<span class="fc" id="L94">        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L94">        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L96">            String sqlQuery = &quot;select * from customer where customer_name=\&quot;&quot; + name +&quot;\&quot;;&quot;;</span>
-<span class="fc" id="L97">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
-<span class="fc bfc" id="L98" title="All 2 branches covered.">            while(rs.next()){</span>
-<span class="fc" id="L99">                Customer customer = new Customer();</span>
-<span class="fc" id="L100">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
-<span class="fc" id="L101">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
-<span class="fc" id="L102">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
-<span class="fc" id="L103">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
-<span class="fc" id="L104">                customers.add(customer);</span>
-<span class="fc" id="L105">            }</span>
-<span class="fc" id="L106">        } catch (SQLException e) {</span>
-<span class="fc" id="L107">            System.out.println(&quot;Unable to get customers: &quot;+e);</span>
-<span class="fc" id="L108">        }</span>
-<span class="fc" id="L109">        return customers;</span>
+<span class="nc" id="L96">            String sqlQuery = &quot;select * from customer where customer_name=\&quot;&quot; + name +&quot;\&quot;;&quot;;</span>
+<span class="nc" id="L97">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L99">                Customer customer = new Customer();</span>
+<span class="nc" id="L100">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
+<span class="nc" id="L101">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
+<span class="nc" id="L102">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L103">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
+<span class="nc" id="L104">                customers.add(customer);</span>
+<span class="nc" id="L105">            }</span>
+<span class="nc" id="L106">        } catch (SQLException e) {</span>
+<span class="nc" id="L107">            System.out.println(&quot;Unable to get customers: &quot;+e);</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">        return customers;</span>
     }
     
     /**
@@ -118,26 +118,26 @@ public class CustomerController {
      */
     public int addCustomer(String name, String phoneNo, double balance){
         // To do: Add customer with the details into database and return id
-<span class="fc" id="L121">        String sqlQuery = &quot;insert into customer (customer_name, contact_no, bill) values (?, ?, ?)&quot;;</span>
-<span class="fc" id="L122">        int generatedCustomerId = -999;</span>
-<span class="fc" id="L123">        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {</span>
-<span class="fc" id="L124">            preparedStatement.setString(1, name);</span>
-<span class="fc" id="L125">            preparedStatement.setString(2, phoneNo);</span>
-<span class="fc" id="L126">            preparedStatement.setDouble(3, balance);</span>
+<span class="nc" id="L121">        String sqlQuery = &quot;insert into customer (customer_name, contact_no, bill) values (?, ?, ?)&quot;;</span>
+<span class="nc" id="L122">        int generatedCustomerId = -999;</span>
+<span class="nc" id="L123">        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="nc" id="L124">            preparedStatement.setString(1, name);</span>
+<span class="nc" id="L125">            preparedStatement.setString(2, phoneNo);</span>
+<span class="nc" id="L126">            preparedStatement.setDouble(3, balance);</span>
 
-<span class="fc" id="L128">            int affectedRows = preparedStatement.executeUpdate();</span>
-<span class="pc bpc" id="L129" title="1 of 2 branches missed.">            if (affectedRows &gt; 0) {</span>
+<span class="nc" id="L128">            int affectedRows = preparedStatement.executeUpdate();</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">            if (affectedRows &gt; 0) {</span>
                 // Retrieving the generated ID
-<span class="fc" id="L131">                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {</span>
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">                    if (generatedKeys.next()) {</span>
-<span class="fc" id="L133">                        generatedCustomerId = generatedKeys.getInt(1);</span>
+<span class="nc" id="L131">                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">                    if (generatedKeys.next()) {</span>
+<span class="nc" id="L133">                        generatedCustomerId = generatedKeys.getInt(1);</span>
                     }
                 }
             }
-<span class="fc" id="L137">        } catch (SQLException e) {</span>
-<span class="fc" id="L138">            e.printStackTrace();</span>
-<span class="fc" id="L139">        }</span>
-<span class="fc" id="L140">        return generatedCustomerId;</span>
+<span class="nc" id="L137">        } catch (SQLException e) {</span>
+<span class="nc" id="L138">            e.printStackTrace();</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return generatedCustomerId;</span>
     }
     
     /**
@@ -148,13 +148,13 @@ public class CustomerController {
     public boolean removeCustomer(int id){
         // To do: Remove Customer from database along with all bookings of the customer.
         try {
-<span class="fc" id="L151">            String sqlQuery = &quot;delete from customer where customer_id=&quot; + id +&quot;;&quot;;</span>
-<span class="fc" id="L152">            this.stmt.executeUpdate(sqlQuery);</span>
-<span class="fc" id="L153">        } catch (SQLException e) {</span>
-<span class="fc" id="L154">            System.out.println(&quot;Unable to remove customer: &quot;+e);</span>
-<span class="fc" id="L155">            return false;</span>
-<span class="fc" id="L156">        }</span>
-<span class="fc" id="L157">        return true;</span>
+<span class="nc" id="L151">            String sqlQuery = &quot;delete from customer where customer_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L152">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L153">        } catch (SQLException e) {</span>
+<span class="nc" id="L154">            System.out.println(&quot;Unable to remove customer: &quot;+e);</span>
+<span class="nc" id="L155">            return false;</span>
+<span class="nc" id="L156">        }</span>
+<span class="nc" id="L157">        return true;</span>
         // TO DO Remaining: Remove bookings from booking table also
     }  
     
@@ -166,32 +166,32 @@ public class CustomerController {
     public boolean clearBalance(int id){
         // To do: Clear balance due to be paid by Customer
         try {
-<span class="fc" id="L169">            String sqlQuery = &quot;UPDATE customer SET bill = 0 WHERE customer_id = &quot; + id + &quot;;&quot;;</span>
-<span class="fc" id="L170">            this.stmt.executeUpdate(sqlQuery);</span>
-<span class="fc" id="L171">        } catch (SQLException e) {</span>
-<span class="fc" id="L172">            System.out.println(&quot;Unable to update customer: &quot;+e);</span>
-<span class="fc" id="L173">            return false;</span>
-<span class="fc" id="L174">        }</span>
-<span class="fc" id="L175">        return true;</span>
+<span class="nc" id="L169">            String sqlQuery = &quot;UPDATE customer SET bill = 0 WHERE customer_id = &quot; + id + &quot;;&quot;;</span>
+<span class="nc" id="L170">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L171">        } catch (SQLException e) {</span>
+<span class="nc" id="L172">            System.out.println(&quot;Unable to update customer: &quot;+e);</span>
+<span class="nc" id="L173">            return false;</span>
+<span class="nc" id="L174">        }</span>
+<span class="nc" id="L175">        return true;</span>
     }
 
 	public Connection getConnection() {
-<span class="fc" id="L179">		return this.connection;</span>
+<span class="nc" id="L179">		return this.connection;</span>
 	}
 
 	public Statement getStatement() {
-<span class="fc" id="L183">		return this.stmt;</span>
+<span class="nc" id="L183">		return this.stmt;</span>
 	}
 
 	public void setDatabaseConnector(DatabaseConnector databaseConnector) throws SQLException {
-<span class="fc" id="L187">		this.databaseConnector = databaseConnector;</span>
-<span class="fc" id="L188">        this.connection = this.databaseConnector.getConnection();</span>
+<span class="nc" id="L187">		this.databaseConnector = databaseConnector;</span>
+<span class="nc" id="L188">        this.connection = this.databaseConnector.getConnection();</span>
 		
-<span class="fc" id="L190">	}</span>
+<span class="nc" id="L190">	}</span>
 
 	public void setStatement(Statement statementMock) {
-<span class="fc" id="L193">		this.stmt = statementMock;</span>
-<span class="fc" id="L194">	}</span>
+<span class="nc" id="L193">		this.stmt = statementMock;</span>
+<span class="nc" id="L194">	}</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

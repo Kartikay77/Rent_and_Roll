@@ -15,10 +15,10 @@ import java.sql.PreparedStatement;
 
 import utilities.DatabaseConnector;
 public class CarOwnerController {
-<span class="pc" id="L18">    List&lt;CarOwner&gt; carOwners = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L18">    List&lt;CarOwner&gt; carOwners = new ArrayList&lt;&gt;();</span>
     Statement stmt;
     Connection connection;
-<span class="pc" id="L21">    DatabaseConnector databaseConnector = new DatabaseConnector();</span>
+<span class="nc" id="L21">    DatabaseConnector databaseConnector = new DatabaseConnector();</span>
 
 <span class="nc" id="L23">    public CarOwnerController() {</span>
         try {
@@ -28,116 +28,165 @@ public class CarOwnerController {
 <span class="nc" id="L28">            System.out.println(&quot;Unable to make database connection: &quot;+e);</span>
 <span class="nc" id="L29">        }</span>
 <span class="nc" id="L30">    }</span>
-<span class="fc" id="L31">     protected CarOwnerController(Connection conn) {</span>
-<span class="fc" id="L32">            this.connection = conn;</span>
-<span class="fc" id="L33">    }       </span>
+<span class="nc" id="L31">     protected CarOwnerController(Connection conn) {</span>
+<span class="nc" id="L32">            this.connection = conn;</span>
+<span class="nc" id="L33">    }   </span>
+     
+        /**
+     * Gets all Owners from database.
+     * @return list of Car Owners objects
+     */
     public List&lt;CarOwner&gt; getAllOwners(){
         //To DO: Get all car owners from database
-<span class="fc" id="L36">        List&lt;CarOwner&gt; car_owners = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L41">        List&lt;CarOwner&gt; car_owners = new ArrayList&lt;&gt;();</span>
 
         try {
-<span class="fc" id="L39">            String sqlQuery = &quot;select * from car_owner&quot;;</span>
-<span class="fc" id="L40">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">            while (rs.next()) {</span>
-<span class="fc" id="L42">                CarOwner car_owner = new CarOwner();</span>
-<span class="fc" id="L43">                car_owner.setOwnerId(rs.getInt(&quot;owner_id&quot;));</span>
-<span class="fc" id="L44">                car_owner.setOwnerName(rs.getString(&quot;owner_name&quot;));</span>
-<span class="fc" id="L45">                car_owner.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
-<span class="fc" id="L46">                car_owner.setBalanceDue(rs.getFloat(&quot;balance&quot;));</span>
-<span class="fc" id="L47">                car_owners.add(car_owner);</span>
-<span class="fc" id="L48">            }</span>
-<span class="nc" id="L49">        } catch (SQLException e) {</span>
-<span class="nc" id="L50">            System.out.println(&quot;Unable to get all Car Owners: &quot;+e);</span>
-<span class="fc" id="L51">        }</span>
-<span class="fc" id="L52">        return car_owners;</span>
+<span class="nc" id="L44">            String sqlQuery = &quot;select * from car_owner&quot;;</span>
+<span class="nc" id="L45">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L47">                CarOwner car_owner = new CarOwner();</span>
+<span class="nc" id="L48">                car_owner.setOwnerId(rs.getInt(&quot;owner_id&quot;));</span>
+<span class="nc" id="L49">                car_owner.setOwnerName(rs.getString(&quot;owner_name&quot;));</span>
+<span class="nc" id="L50">                car_owner.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L51">                car_owner.setBalanceDue(rs.getFloat(&quot;balance&quot;));</span>
+<span class="nc" id="L52">                car_owners.add(car_owner);</span>
+<span class="nc" id="L53">            }</span>
+<span class="nc" id="L54">        } catch (Exception e) {</span>
+<span class="nc" id="L55">            System.out.println(&quot;Unable to get all Car Owners: &quot;+e);</span>
+<span class="nc" id="L56">        }</span>
+<span class="nc" id="L57">        return car_owners;</span>
     }
     
+        /**
+     * Gets Owner object by ID
+     * @param id id of the owners whose details are to be retrieved.
+     * @return owner object
+     */
     public CarOwner getOwnerById(int id){
         // To do: Get car owner by Id
-<span class="fc" id="L57">         CarOwner car_owner = new CarOwner();</span>
+<span class="nc" id="L67">         CarOwner car_owner = new CarOwner();</span>
         try {
-<span class="fc" id="L59">            String sqlQuery = &quot;select * from car_owner where owner_id=&quot; + id +&quot;;&quot;;</span>
-<span class="fc" id="L60">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">            while(rs.next()){</span>
-<span class="fc" id="L62">                car_owner.setOwnerId(rs.getInt(&quot;owner_id&quot;));</span>
-<span class="fc" id="L63">                car_owner.setOwnerName(rs.getString(&quot;owner_name&quot;));</span>
-<span class="fc" id="L64">                car_owner.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
-<span class="fc" id="L65">                car_owner.setBalanceDue(rs.getFloat(&quot;balance&quot;));</span>
+<span class="nc" id="L69">            String sqlQuery = &quot;select * from car_owner where owner_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L70">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L72">                car_owner.setOwnerId(rs.getInt(&quot;owner_id&quot;));</span>
+<span class="nc" id="L73">                car_owner.setOwnerName(rs.getString(&quot;owner_name&quot;));</span>
+<span class="nc" id="L74">                car_owner.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L75">                car_owner.setBalanceDue(rs.getFloat(&quot;balance&quot;));</span>
             }
-<span class="nc" id="L67">        } catch (SQLException e) {</span>
-<span class="nc" id="L68">            System.out.println(&quot;Unable to get Car Owners: &quot;+e);</span>
-<span class="fc" id="L69">        }</span>
-<span class="fc" id="L70">        return car_owner;</span>
+<span class="nc" id="L77">        } catch (SQLException e) {</span>
+<span class="nc" id="L78">            System.out.println(&quot;Unable to get Car Owners: &quot;+e);</span>
+<span class="nc" id="L79">        }</span>
+<span class="nc" id="L80">        return car_owner;</span>
     }
     
+        /**
+     * Gets all owners that match the given name.
+     * @param owner_name name to be matched
+     * @return List of owner objects whose name matches the name given.
+     */
     public List&lt;CarOwner&gt; getOwnersByName(String name){
         // To do: Get Car owners by name from database
-<span class="fc" id="L75">        List&lt;CarOwner&gt; car_owners = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L90">        List&lt;CarOwner&gt; car_owners = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L77">            String sqlQuery = &quot;select * from car_owner where owner_name=\&quot;&quot; + name +&quot;\&quot;;&quot;;</span>
-<span class="fc" id="L78">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">            while(rs.next()){</span>
-<span class="fc" id="L80">                CarOwner car_owner = new CarOwner();</span>
-<span class="fc" id="L81">                car_owner.setOwnerId(rs.getInt(&quot;owner_id&quot;));</span>
-<span class="fc" id="L82">                car_owner.setOwnerName(rs.getString(&quot;owner_name&quot;));</span>
-<span class="fc" id="L83">                car_owner.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
-<span class="fc" id="L84">                car_owner.setBalanceDue(rs.getFloat(&quot;balance&quot;));</span>
-<span class="fc" id="L85">                car_owners.add(car_owner);</span>
-<span class="fc" id="L86">            }</span>
-<span class="nc" id="L87">        } catch (SQLException e) {</span>
-<span class="nc" id="L88">            System.out.println(&quot;Unable to get carowner: &quot;+e);</span>
-<span class="fc" id="L89">        }</span>
-<span class="fc" id="L90">        return car_owners;</span>
+<span class="nc" id="L92">            String sqlQuery = &quot;select * from car_owner where owner_name=\&quot;&quot; + name +&quot;\&quot;;&quot;;</span>
+<span class="nc" id="L93">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L95">                CarOwner car_owner = new CarOwner();</span>
+<span class="nc" id="L96">                car_owner.setOwnerId(rs.getInt(&quot;owner_id&quot;));</span>
+<span class="nc" id="L97">                car_owner.setOwnerName(rs.getString(&quot;owner_name&quot;));</span>
+<span class="nc" id="L98">                car_owner.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L99">                car_owner.setBalanceDue(rs.getFloat(&quot;balance&quot;));</span>
+<span class="nc" id="L100">                car_owners.add(car_owner);</span>
+<span class="nc" id="L101">            }</span>
+<span class="nc" id="L102">        } catch (Exception e) {</span>
+<span class="nc" id="L103">            System.out.println(&quot;Unable to get carowner: &quot;+e);</span>
+<span class="nc" id="L104">        }</span>
+<span class="nc" id="L105">        return car_owners;</span>
     }
     
+    
+        /**
+     * Adds owner with given details to the database
+     * @param name name of the owner
+     * @param phoneNo contact number of the owner
+     * @param bill amount pending to be by the owner
+     * @return int id of the owner after addition in the database
+     */
     public int addOwner(String name, String phoneNo, double balance){
         // To do: Add owner with the details into database and return id
-<span class="nc" id="L95">        String sqlQuery = &quot;insert into car_owner (owner_name, contact_no, balance) values (?,?,?)&quot;;</span>
-<span class="nc" id="L96">        int generatedOwnerId = -999;</span>
-<span class="nc" id="L97">        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="nc" id="L118">        String sqlQuery = &quot;insert into car_owner (owner_name, contact_no, balance) values (?,?,?)&quot;;</span>
+<span class="nc" id="L119">        int generatedOwnerId = -999;</span>
+<span class="nc" id="L120">        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {</span>
 
-<span class="nc" id="L99">            preparedStatement.setString(1, name);</span>
-<span class="nc" id="L100">            preparedStatement.setString(2, phoneNo);</span>
-<span class="nc" id="L101">            preparedStatement.setDouble(3, balance);</span>
+<span class="nc" id="L122">            preparedStatement.setString(1, name);</span>
+<span class="nc" id="L123">            preparedStatement.setString(2, phoneNo);</span>
+<span class="nc" id="L124">            preparedStatement.setDouble(3, balance);</span>
 
-<span class="nc" id="L103">            int affectedRows = preparedStatement.executeUpdate();</span>
-<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (affectedRows &gt; 0) {</span>
+<span class="nc" id="L126">            int affectedRows = preparedStatement.executeUpdate();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (affectedRows &gt; 0) {</span>
                 // Retrieving the generated ID
-<span class="nc" id="L106">                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">                    if (generatedKeys.next()) {</span>
-<span class="nc" id="L108">                        generatedOwnerId = generatedKeys.getInt(1);</span>
+<span class="nc" id="L129">                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                    if (generatedKeys.next()) {</span>
+<span class="nc" id="L131">                        generatedOwnerId = generatedKeys.getInt(1);</span>
                     }
                 }
             }
-<span class="nc" id="L112">        } catch (SQLException e) {</span>
-<span class="nc" id="L113">            e.printStackTrace();</span>
-<span class="nc" id="L114">        }</span>
-<span class="nc" id="L115">        return generatedOwnerId;</span>
+<span class="nc" id="L135">        } catch (Exception e) {</span>
+<span class="nc" id="L136">            e.printStackTrace();</span>
+<span class="nc" id="L137">        }</span>
+<span class="nc" id="L138">        return generatedOwnerId;</span>
     }
     
+        /**
+     * Removes owner from database
+     * @param id ID of the owner to be removed.
+     * @return true if removal was successful else false.
+     */
     public boolean removeOwner(int id){
         // To do: Remove Owner from database along with all cars of the owner.
         try {
-<span class="fc" id="L121">            String sqlQuery = &quot;delete from car_owner where owner_id=&quot; + id +&quot;;&quot;;</span>
-<span class="fc" id="L122">            this.stmt.executeUpdate(sqlQuery);</span>
-<span class="fc" id="L123">        } catch (SQLException e) {</span>
-<span class="fc" id="L124">            System.out.println(&quot;Unable to remove Owner: &quot;+e);</span>
-<span class="fc" id="L125">            return false;</span>
-<span class="fc" id="L126">        }</span>
-<span class="fc" id="L127">        return true;</span>
+<span class="nc" id="L149">            String sqlQuery = &quot;delete from car_owner where owner_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L150">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L151">        } catch (SQLException e) {</span>
+<span class="nc" id="L152">            System.out.println(&quot;Unable to remove Owner: &quot;+e);</span>
+<span class="nc" id="L153">            return false;</span>
+<span class="nc" id="L154">        }</span>
+<span class="nc" id="L155">        return true;</span>
     }  
     
+        /**
+     * Clears the balance of the owner whose id is given.
+     * @param id ID of the owner whose balance is to be cleared.
+     * @return true if clearing balance was successful else false.
+     */
     public boolean clearBalance(int id){
         // To do: Clear balance due to pay car owner
         try {
-<span class="fc" id="L133">            String sqlQuery = &quot;UPDATE car_owner SET balance = 0 WHERE owner_id = &quot; + id + &quot;;&quot;;</span>
-<span class="fc" id="L134">            this.stmt.executeUpdate(sqlQuery);</span>
-<span class="fc" id="L135">        } catch (SQLException e) {</span>
-<span class="fc" id="L136">            System.out.println(&quot;Unable to update car_owner: &quot;+e);</span>
-<span class="fc" id="L137">            return false;</span>
-<span class="fc" id="L138">        }</span>
-<span class="fc" id="L139">        return true;</span>
+<span class="nc" id="L166">            String sqlQuery = &quot;UPDATE car_owner SET balance = 0 WHERE owner_id = &quot; + id + &quot;;&quot;;</span>
+<span class="nc" id="L167">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L168">        } catch (SQLException e) {</span>
+<span class="nc" id="L169">            System.out.println(&quot;Unable to update car_owner: &quot;+e);</span>
+<span class="nc" id="L170">            return false;</span>
+<span class="nc" id="L171">        }</span>
+<span class="nc" id="L172">        return true;</span>
     }
-    
+    public Connection getConnection() {
+<span class="nc" id="L175">		return this.connection;</span>
+	}
+
+	public Statement getStatement() {
+<span class="nc" id="L179">		return this.stmt;</span>
+	}
+
+	public void setDatabaseConnector(DatabaseConnector databaseConnector) throws SQLException {
+<span class="nc" id="L183">		this.databaseConnector = databaseConnector;</span>
+<span class="nc" id="L184">        this.connection = this.databaseConnector.getConnection();</span>
+		
+<span class="nc" id="L186">	}   </span>
+        
+        public void setStatement(Statement statementMock) {
+<span class="nc" id="L189">		this.stmt = statementMock;</span>
+<span class="nc" id="L190">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

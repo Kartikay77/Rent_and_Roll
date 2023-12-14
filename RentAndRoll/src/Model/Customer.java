@@ -6,6 +6,10 @@ package Model;
 
 import java.io.Serializable;
 
+/**
+ * The Customer is the model class for a customer object.
+ */
+
 public class Customer implements Serializable{
     private int customerId;
     private String  customerName;

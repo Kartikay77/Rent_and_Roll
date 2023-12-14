@@ -28,11 +28,10 @@ import Model.Car;
 import Model.CarOwner;
 
 /**
- *
- * @author erkur
+ * This class creates the Car Dashboard in the UI.
  */
 public class CarDashboard {
-        private static DefaultTableModel tableModel; // it is made static so that it can be accessed in add GUI class to update the Jtable when a new record is added
+    private static DefaultTableModel tableModel; // it is made static so that it can be accessed in add GUI class to update the Jtable when a new record is added
 
     private static JButton SearchNameButton, SearchRegNoButton, AddButton, RemoveButton, BackButton;
     private static JTextField SearchNameTextField, SearchRegNoTextField;
@@ -41,13 +40,19 @@ public class CarDashboard {
     private JPanel MainPanel;
 
     private CarController carController = new CarController();
-    /**
-     * @return the tableModel
+    
+    /** 
+     * Returns the tableModel for the car dashboard.
+     * @return DefaultTableModel
      */
     public static DefaultTableModel getTableModel() {
         return tableModel;
     }
-
+    
+    /**
+     * Returns the main panel
+     * @return JPanel
+     */
     public JPanel getMainPanel() {
         return MainPanel;
     }
@@ -77,6 +82,12 @@ public class CarDashboard {
         tableModel = new DefaultTableModel(columns, 0) {
 
             @Override
+            /**
+             * Returns a boolean whether the cell is editable.
+             * @param row
+             * @param column
+             * @return boolean 
+             */
             public boolean isCellEditable(int row, int column) {
                 //all cells false
                 return false;
@@ -157,6 +168,10 @@ public class CarDashboard {
 
     private class Car_Details_ActionListener implements ActionListener {
 
+    	/**
+         * Perform the action received from the action listener for CarDashboard page.
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {

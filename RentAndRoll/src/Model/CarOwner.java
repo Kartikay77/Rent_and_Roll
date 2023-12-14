@@ -6,6 +6,9 @@ package Model;
 
 import java.io.Serializable;
 
+/**
+ * The CarOwner is the model class for a CarOwner object.
+ */
 public class CarOwner implements Serializable{
     private int ownerId;
     private String  ownerName;

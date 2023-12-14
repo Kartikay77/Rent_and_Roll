@@ -15,13 +15,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
- * @author erkur
+ *	ParentFrame class creates the parent component for the UI.
  */
 public class ParentFrame {
     private static JFrame MainFrame;
     private final JMenuBar menu_Bar;
-    private final JMenuItem Exit, Logout, Help;
+    final JMenuItem Exit;
+	final JMenuItem Logout;
+	final JMenuItem Help;
 
     public ParentFrame() {
         MainFrame = new JFrame("Rent and Roll - Car Rental Management System");
@@ -58,13 +59,21 @@ public class ParentFrame {
         Help.addActionListener(new Parent_JFrame_ActionListner());
 
     }
-
+    
+    /**
+     * Gets the mainframe of the parent frame
+     * @return JFrame
+     */
     public static JFrame getMainFrame() {
         return MainFrame;
     }
 
-    private class Parent_JFrame_ActionListner implements ActionListener {
+    class Parent_JFrame_ActionListner implements ActionListener {
 
+    	/**
+         * Performs the action received from the action listener.
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {

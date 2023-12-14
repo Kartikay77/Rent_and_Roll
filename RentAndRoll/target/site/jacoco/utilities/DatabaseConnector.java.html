@@ -8,24 +8,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-<span class="fc" id="L11">public class DatabaseConnector {</span>
+<span class="nc" id="L11">public class DatabaseConnector {</span>
     private static final String URL = &quot;jdbc:mysql://localhost:3306/se&quot;;
     private static final String USERNAME = &quot;root&quot;;
     private static final String PASSWORD = &quot;admin123&quot;;
 
     public Connection getConnection() throws SQLException {
-<span class="fc" id="L17">        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD); </span>
-<span class="fc" id="L18">        return connection;</span>
+<span class="nc" id="L17">        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD); </span>
+<span class="nc" id="L18">        return connection;</span>
     }
 
     public static void closeConnection(Connection connection) {
-<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (connection != null) {</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if (connection != null) {</span>
             try {
-<span class="fc" id="L24">                connection.close();</span>
-<span class="fc" id="L25">            } catch (SQLException e) {</span>
-<span class="fc" id="L26">                System.out.println(&quot;Unable to close database connection: &quot;+e);</span>
-<span class="fc" id="L27">            }</span>
+<span class="nc" id="L24">                connection.close();</span>
+<span class="nc" id="L25">            } catch (SQLException e) {</span>
+<span class="nc" id="L26">                System.out.println(&quot;Unable to close database connection: &quot;+e);</span>
+<span class="nc" id="L27">            }</span>
         }
-<span class="fc" id="L29">    }</span>
+<span class="nc" id="L29">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
