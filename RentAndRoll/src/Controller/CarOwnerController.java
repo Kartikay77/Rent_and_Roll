@@ -18,10 +18,11 @@ public class CarOwnerController {
     List<CarOwner> carOwners = new ArrayList<>();
     Statement stmt;
     Connection connection;
+    DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public CarOwnerController() {
         try {
-            this.connection = DatabaseConnector.getConnection();
+            this.connection = databaseConnector.getConnection();
             this.stmt = connection.createStatement(); 
         } catch(SQLException e) {
             System.out.println("Unable to make database connection: "+e);
@@ -89,7 +90,7 @@ public class CarOwnerController {
         return car_owners;
     }
     
-    public int addOwner(String name, String phoneNo,double balance){
+    public int addOwner(String name, String phoneNo, double balance){
         // To do: Add owner with the details into database and return id
         String sqlQuery = "insert into car_owner (owner_name, contact_no, balance) values (?,?,?)";
         int generatedOwnerId = -999;

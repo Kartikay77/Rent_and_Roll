@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Runner.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">Runner.java</span></div><h1>Runner.java</h1><pre class="source lang-java linenums">package View;
+
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
+import View.Login;
+import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.util.List;
+import Controller.CustomerController;
+import Model.Customer;
+import Controller.CarOwnerController;
+import Model.CarOwner;
+
+/**
+ *
+ * @author erkur
+ */
+public class Runner {
+<span class="nc" id="L29">    private static final JFrame FRAME = new JFrame();</span>
+    private final ImageIcon icon;
+    private final JLabel L1;
+
+    public static JFrame getFrame() {
+<span class="nc" id="L34">        return FRAME;</span>
+    }
+
+<span class="nc" id="L37">    public Runner() {</span>
+        
+<span class="nc" id="L39">        icon = new ImageIcon(&quot;WelcomeImage2.jpg&quot;);</span>
+<span class="nc" id="L40">        L1 = new JLabel(icon);</span>
+<span class="nc" id="L41">        FRAME.setUndecorated(true);</span>
+<span class="nc" id="L42">        FRAME.setSize(new Dimension(1000, 534));</span>
+<span class="nc" id="L43">        FRAME.setLocationRelativeTo(null);</span>
+<span class="nc" id="L44">        FRAME.add(L1);</span>
+<span class="nc" id="L45">    }</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L48">        Runner runner = new Runner();</span>
+<span class="nc" id="L49">        Runner.FRAME.setVisible(true);</span>
+
+        try {
+<span class="nc" id="L52">            Thread.sleep(1000);</span>
+<span class="nc" id="L53">            Login LoginObject = new Login();</span>
+<span class="nc" id="L54">            Runner.FRAME.getContentPane().removeAll();</span>
+<span class="nc" id="L55">            Runner.FRAME.add(LoginObject.getMainPanel());</span>
+<span class="nc" id="L56">            Runner.FRAME.getContentPane().revalidate();</span>
+
+<span class="nc" id="L58">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L59">            System.out.println(e);</span>
+<span class="nc" id="L60">        }</span>
+        
+<span class="nc" id="L62">                CarOwnerController cd = new CarOwnerController();</span>
+<span class="nc" id="L63">          System.out.println(cd.addOwner(&quot;Adwait&quot;, &quot;123456&quot;, 235))</span>
+                  ;
+//        // Assuming owner ID for whom balance needs to be cleared
+<span class="nc" id="L66">        int ownerId = 1; // Replace this with an existing owner ID from your database</span>
+//
+//        // Clear balance for the specified owner
+<span class="nc" id="L69">        boolean isBalanceCleared = cd.clearBalance(ownerId);</span>
+//
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (isBalanceCleared) {</span>
+<span class="nc" id="L72">            System.out.println(&quot;Balance successfully cleared for owner with ID &quot; + ownerId);</span>
+        } else {
+<span class="nc" id="L74">            System.out.println(&quot;Failed to clear balance for owner with ID &quot; + ownerId);</span>
+
+        // For testing purpose to be deleted
+//        CustomerController cd = new CustomerController();
+//        Customer customer = (cd.getCustomerById(14));
+        
+//        System.out.println(customer.getCustomerId() + &quot; &quot; + customer.getCustomerName());
+
+
+//        CustomerController cd = new CustomerController();
+//        Customer customer = (cd.getCustomerById(14));
+//        for(Customer customer: customers){
+//            System.out.println(customer.getCustomerId() + &quot; &quot; + customer.getCustomerName());
+        }
+<span class="nc" id="L88">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
