@@ -30,7 +30,11 @@ public class CarController {
     }
     protected CarController(Connection conn) {
             this.connection = conn;
-    }       
+    }   
+        /**
+     * Gets all car from database.
+     * @return list of Car objects
+     */    
     public List<Car> getAllCars(){
         //To DO: Get all car owners from database
         List<Car> cars = new ArrayList<>();
@@ -60,6 +64,11 @@ public class CarController {
         return cars;
     }
     
+            /**
+     * Gets Car object by ID
+     * @param id id of the Car whose details are to be retrieved.
+     * @return Car object
+     */
     public Car getCarById(String carRegNo) {
     Car car = null;
     try (PreparedStatement preparedStatement = this.connection.prepareStatement("SELECT * FROM car WHERE reg_no=?")) {
@@ -80,6 +89,11 @@ public class CarController {
     return car;
  }
     
+            /**
+     * Gets all Car that match the given name.
+     * @param car_name name to be matched
+     * @return List of car objects whose name matches the name given.
+     */
     public List<Car> getCarsByName(String name){
         // To do: Get Car by name from database
         List<Car> cars = new ArrayList<>();
@@ -100,6 +114,13 @@ public class CarController {
         return cars;
     }
     
+            /**
+     * Adds car with given details to the database
+     * @param name name of the car
+     * @param car type of the car
+     * @param seating capacity of the car
+     * @return rent_per_hour of the car
+     */
     public int addCar(String maker, String car_name,String color, String car_type,String model,String reg_no,String car_condition,int seating_capacity,double rent_per_hour,int owner_id){
         // To do: Add car with the details into database and return id
         String sqlQuery = "insert into car (maker, car_name, color, car_type, model,reg_no,car_condition,seating_capacity,rent_per_hour,owner_id) values (?,?,?,?,?,?,?,?,?,?)";
@@ -133,6 +154,11 @@ public class CarController {
         return generatedCarId;
     }
     
+            /**
+     * Removes car from database
+     * @param id ID of the car to be removed.
+     * @return true if removal was successful else false.
+     */
     public boolean removeCar(int id){
         // To do: Remove Car from database.
         try {
