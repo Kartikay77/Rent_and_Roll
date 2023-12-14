@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.Customer;
+import Model.Booking;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -37,142 +37,173 @@ public class BookingController {
     }
     
     /**
-     * Gets all customers from database.
-     * @return list of customer objects
+     * Gets all booking from database.
+     * @return list of Booking objects
      */
-    public List<Customer> getAllCustomers(){
-        //To DO: Get all customers from database
-        List<Customer> customers = new ArrayList<>();
+    public List<Booking> getAllBooking(){
+        //To DO: Get all Booking from database
+        List<Booking> bookings = new ArrayList<>();
 
         try {
-            String sqlQuery = "select * from customer";
-            ResultSet rs = this.stmt.executeQuery(sqlQuery); 
-            while (rs.next()) {
-                Customer customer = new Customer();
-                customer.setCustomerId(rs.getInt("customer_id"));
-                customer.setCustomerName(rs.getString("customer_name"));
-                customer.setPhoneNo(rs.getString("contact_no"));
-                customer.setBillAmount(rs.getFloat("bill"));
-                customers.add(customer);
-            }
-        } catch (SQLException e) {
-            System.out.println("Unable to get all customers: "+e);
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+                          "FROM booking b " +
+                          "JOIN car c ON b.car_id = c.car_id";
+
+        ResultSet rs = this.stmt.executeQuery(sqlQuery);
+        while (rs.next()) {
+            Booking booking = new Booking();
+            booking.setBookingId(rs.getInt("booking_id"));
+            booking.setRentalStartTime(rs.getLong("rent_time"));
+            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setCustomerId(rs.getInt("customer_id"));
+            booking.setCarId(rs.getInt("car_id"));
+            booking.setCarName(rs.getString("car_name")); // Set car name
+            bookings.add(booking);
         }
-        return customers;
+    } catch (SQLException e) {
+        System.out.println("Unable to get all Booking with car names: " + e);
+    }
+    return bookings;
     }
     
     /**
-     * Gets customer object by ID
-     * @param id id of the customer whose details are to be retrieved.
-     * @return Customer object
+     * Gets Booking object by ID
+     * @param id id of the Booking whose details are to be retrieved.
+     * @return Booking object
      */
-    public Customer getCustomerById(int id){
-        // To do: Get customer by Id
-        Customer customer = new Customer();
+    public Booking getBookingByCustomerId(int id){
+        // To do: Get booking by Id
+        Booking booking = new Booking();
         try {
-            String sqlQuery = "select * from customer where customer_id=" + id +";";
-            ResultSet rs = this.stmt.executeQuery(sqlQuery); 
-            while(rs.next()){
-                customer.setCustomerId(rs.getInt("customer_id"));
-                customer.setCustomerName(rs.getString("customer_name"));
-                customer.setPhoneNo(rs.getString("contact_no"));
-                customer.setBillAmount(rs.getFloat("bill"));
-            }
-        } catch (SQLException e) {
-            System.out.println("Unable to get customers: "+e);
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+                          "FROM booking b " +
+                          "JOIN car c ON b.car_id = c.car_id " +
+                          "WHERE b.customer_id = " + id;
+
+        ResultSet rs = this.stmt.executeQuery(sqlQuery);
+        while (rs.next()) {
+            booking.setBookingId(rs.getInt("booking_id"));
+            booking.setRentalStartTime(rs.getLong("rent_time"));
+            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setCustomerId(rs.getInt("customer_id"));
+            booking.setCarId(rs.getInt("car_id"));
+            booking.setCarName(rs.getString("car_name")); // Set car name
         }
-        return customer;
+    } catch (SQLException e) {
+        System.out.println("Unable to get bookings: " + e);
+    }
+    return booking;
     }
     
-    /**
-     * Gets all customers that match the given name.
-     * @param name name to be matched
-     * @return List of Customer objects whose name matches the name given.
-     */
-    public List<Customer> getCustomersByName(String name){
-        // To do: Get Customer by name from database
-        List<Customer> customers = new ArrayList<>();
-        try {
-            String sqlQuery = "select * from customer where customer_name=\"" + name +"\";";
-            ResultSet rs = this.stmt.executeQuery(sqlQuery); 
-            while(rs.next()){
-                Customer customer = new Customer();
-                customer.setCustomerId(rs.getInt("customer_id"));
-                customer.setCustomerName(rs.getString("customer_name"));
-                customer.setPhoneNo(rs.getString("contact_no"));
-                customer.setBillAmount(rs.getFloat("bill"));
-                customers.add(customer);
-            }
-        } catch (SQLException e) {
-            System.out.println("Unable to get customers: "+e);
-        }
-        return customers;
-    }
     
     /**
-     * Adds customer with given details to the database
+     * Adds Booking with given details to the database
      * @param name name of the customer
      * @param phoneNo contact number of the customer
      * @param balance balance amount due to be paid by the customer
      * @return int id of the customer after addition in the database
      */
-    public int addCustomer(String name, String phoneNo, double balance){
-        // To do: Add customer with the details into database and return id
-        String sqlQuery = "insert into customer (customer_name, contact_no, bill) values (?, ?, ?)";
-        int generatedCustomerId = -999;
+    public int addBooking(String rentTime, String returnTime, int customerId, int carId) {
+    String sqlQuery = "INSERT INTO booking (rentTime, returnTime, customerId, carId, reg_no) VALUES (?, ?, ?, ?, ?)";
+    int generatedBookingId = -999;
+    String carRegNo = ""; // Variable to store car registration number
+
+    try {
+        // Retrieve the car registration number based on the provided carId
+        String fetchCarRegNoQuery = "SELECT reg_no FROM car WHERE car_id = ?";
+        try (PreparedStatement regNoStatement = connection.prepareStatement(fetchCarRegNoQuery)) {
+            regNoStatement.setInt(1, carId);
+            ResultSet carResultSet = regNoStatement.executeQuery();
+            if (carResultSet.next()) {
+                carRegNo = carResultSet.getString("reg_no");
+            }
+        }
+
+        // Proceed with adding the booking details
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, phoneNo);
-            preparedStatement.setDouble(3, balance);
+            preparedStatement.setString(1, rentTime);
+            preparedStatement.setString(2, returnTime);
+            preparedStatement.setInt(3, customerId);
+            preparedStatement.setInt(4, carId);
+            preparedStatement.setString(5, carRegNo); // Set the registration number
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
-                // Retrieving the generated ID
+                // Retrieve the generated ID
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                        generatedCustomerId = generatedKeys.getInt(1);
+                        generatedBookingId = generatedKeys.getInt(1);
                     }
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return generatedCustomerId;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return generatedBookingId;
+}
+
     
     /**
-     * Removes customer from database
-     * @param id ID of the customer to be removed.
+     * Removes booking from database
+     * @param id ID of the booking to be removed.
      * @return true if removal was successful else false.
      */
-    public boolean removeCustomer(int id){
-        // To do: Remove Customer from database along with all bookings of the customer.
+    public boolean removeBooking(int id){
+        // To do: Remove booking from database along with all bookings of the particular booking.
         try {
-            String sqlQuery = "delete from customer where customer_id=" + id +";";
+            String sqlQuery = "delete from booking where booking_id=" + id +";";
             this.stmt.executeUpdate(sqlQuery);
         } catch (SQLException e) {
-            System.out.println("Unable to remove customer: "+e);
+            System.out.println("Unable to remove booking: "+e);
             return false;
         }
         return true;
         // TO DO Remaining: Remove bookings from booking table also
     }  
+    /**
+    * Gets Booking object by car registration number
+    * @param regNo car registration number for which booking details are to be retrieved.
+    * @return Booking object
+    */
+   public Booking getBookingByCarRegNo(String regNo){
+       // To do: Get booking by car registration number
+       Booking booking = null;
+       try {
+           String sqlQuery = "SELECT * FROM booking INNER JOIN car ON booking.car_id = car.car_id WHERE car.reg_no=?";
+           PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+           preparedStatement.setString(1, regNo);
+           ResultSet rs = preparedStatement.executeQuery();
+
+           if (rs.next()) {
+               booking = new Booking();
+               booking.setBookingId(rs.getInt("booking_id"));
+               booking.setRentalStartTime(rs.getLong("rent_time"));
+               booking.setRentalReturnTime(rs.getLong("return_time"));
+               booking.setCustomerId(rs.getInt("customer_id"));
+               booking.setCarId(rs.getInt("car_id"));
+           }
+       } catch (SQLException e) {
+           System.out.println("Unable to get booking by car registration number: " + e);
+       }
+       return booking;
+   }
     
     /**
-     * Clears the balance of the customer whose id is given.
-     * @param id ID of the customer whose balance is to be cleared.
+     * Clears the balance of the booking whose id is given.
+     * @param id ID of the booking whose balance is to be cleared.
      * @return true if clearing balance was successful else false.
      */
-    public boolean clearBalance(int id){
-        // To do: Clear balance due to be paid by Customer
-        try {
-            String sqlQuery = "UPDATE customer SET bill = 0 WHERE customer_id = " + id + ";";
-            this.stmt.executeUpdate(sqlQuery);
-        } catch (SQLException e) {
-            System.out.println("Unable to update customer: "+e);
-            return false;
-        }
-        return true;
-    }
+//    public boolean clearBalance(int id){
+//        // To do: Clear balance due to be paid by booking
+//        try {
+//            String sqlQuery = "UPDATE booking SET bill = 0 WHERE customer_id = " + id + ";";
+//            this.stmt.executeUpdate(sqlQuery);
+//        } catch (SQLException e) {
+//            System.out.println("Unable to update customer: "+e);
+//            return false;
+//        }
+//        return true;
+//    }
     
 }
