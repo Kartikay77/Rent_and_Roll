@@ -4,13 +4,13 @@
  */
 package View;
 
+import Controller.CarOwnerController;
 import Model.CarOwner;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,6 +34,8 @@ public class OwnerDashboard implements ActionListener{
     private JTextField SearchNameTextField;
     static DefaultTableModel TableModel;
     private JPanel MainPanel;
+    
+    private CarOwnerController ownerController = new CarOwnerController();
 
     public OwnerDashboard() {
         MainPanel = new JPanel();
@@ -67,17 +69,16 @@ public class OwnerDashboard implements ActionListener{
         OwnerTable.setSize(new Dimension(1330, 550));
         ScrollPane1 = new JScrollPane(OwnerTable);
         OwnerTable.setFillsViewportHeight(true);// makes the size of table equal to that of scroll pane to fill the table in the scrollpane
-//        ArrayList<CarOwner> OwnersList = //Call controller;
-//        ArrayList<CarOwner> CarOwner_objects = new ArrayList<CarOwner>();
-//        for (int i = 0; i < CarOwner_objects.size(); i++) {
-//            int ID = CarOwner_objects.get(i).getID();
-//            String Name = CarOwner_objects.get(i).getName();
-//            String ContactNo = CarOwner_objects.get(i).getContactNo();
-//            int Balance = CarOwner_objects.get(i).getBalance();
-//
-//            String[] tableRecord = {"" + ID, Name, ContactNo, Balance + ""};
-//            TableModel.addRow(tableRecord);
-//        }
+        List<CarOwner> OwnersList = ownerController.getAllOwners();
+        for (int i = 0; i < OwnersList.size(); i++) {
+            int ID = OwnersList.get(i).getOwnerId();
+            String Name = OwnersList.get(i).getOwnerName();
+            String ContactNo = OwnersList.get(i).getPhoneNo();
+            float Balance = OwnersList.get(i).getBalanceDue();
+
+            String[] tableRecord = {"" + ID, Name, ContactNo, Balance + ""};
+            TableModel.addRow(tableRecord);
+        }
 
         // center aligning the text in all the columns
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -124,14 +125,15 @@ public class OwnerDashboard implements ActionListener{
             case "Search ID": {
                 String id = SearchIdTextField.getText().trim();
                 if (!id.isEmpty()) {
-//                    CarOwner co = CarOwner.SearchById(Integer.parseInt(id));
-//                    if (co != null) {
-//                        JOptionPane.showMessageDialog(null, co.toString());
-//                        SearchIdTextField.setText("");
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "ID not found!");
-//                        SearchIdTextField.setText("");
-//                    }                   
+                      int searchId = Integer.parseInt(id);
+                      CarOwner co = ownerController.getOwnerById(searchId);
+                    if (co != null) {
+                        JOptionPane.showMessageDialog(null, co.toString());
+                        SearchIdTextField.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ID not found!");
+                        SearchIdTextField.setText("");
+                    }                   
                 } else {
                     JOptionPane.showMessageDialog(null, "Please enter ID");
                 }
@@ -140,18 +142,18 @@ public class OwnerDashboard implements ActionListener{
             case "Search Name": {
                 String name = SearchNameTextField.getText().trim();
                 if (!name.isEmpty()) {
-//                        ArrayList<CarOwner> carOwnerArrayList = CarOwner.SearchByName(name);
-//                        String record = "";
-//                        if (!carOwnerArrayList.isEmpty()) {
-//                            for (int i = 0; i < carOwnerArrayList.size(); i++) {
-//                                record += carOwnerArrayList.get(i).toString() + "\n";
-//                            }
-//                            JOptionPane.showMessageDialog(null, record);
-//                            SearchNameTextField.setText("");
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Required person not found");
-//                            SearchNameTextField.setText("");
-//                        }
+                        List<CarOwner> carOwnerArrayList = ownerController.getOwnersByName(name);
+                        String record = "";
+                        if (!carOwnerArrayList.isEmpty()) {
+                            for (int i = 0; i < carOwnerArrayList.size(); i++) {
+                                record += carOwnerArrayList.get(i).toString() + "\n";
+                            }
+                            JOptionPane.showMessageDialog(null, record);
+                            SearchNameTextField.setText("");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Required person not found");
+                            SearchNameTextField.setText("");
+                        }
                 } else {
                     JOptionPane.showMessageDialog(null, "Please enter a name");
                 }
@@ -164,8 +166,31 @@ public class OwnerDashboard implements ActionListener{
             }
             break;
             case "Remove": {
-                ParentFrame.getMainFrame().setEnabled(false);
-                new RemoveCarOwner().frame.setVisible(true);
+                int selectedIndex = OwnerTable.getSelectedRow();
+                if (selectedIndex == -1 && OwnerTable.getRowCount() > 0) {
+                    JOptionPane.showMessageDialog(null, "Please select a row!");
+                }
+                else {
+                    String clearId = (String)OwnerTable.getValueAt(selectedIndex, 0);
+                    int id = Integer.parseInt(clearId);
+                    CarOwner carOwner = ownerController.getOwnerById(id);
+                    int showConfirmDialog = JOptionPane.showConfirmDialog(null, "You are about the following car owner\n"
+                            + carOwner + "\nAre you sure you want to continue ?", "Remove Owner Confirmation",
+                            JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+                    if (showConfirmDialog == 0) {
+                        boolean removed = ownerController.removeOwner(id);
+                        if(removed){
+                            ParentFrame.getMainFrame().getContentPane().removeAll();
+                            OwnerDashboard cd = new OwnerDashboard();
+                            ParentFrame.getMainFrame().add(cd.getMainPanel());
+                            ParentFrame.getMainFrame().getContentPane().revalidate();
+                            JOptionPane.showMessageDialog(null, "Owner Removed Succesfully!");
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "Error in deleting owner. Please try again later!");
+                        }
+                    }
+                }
             }
             break;
             case "Update": {
@@ -174,39 +199,31 @@ public class OwnerDashboard implements ActionListener{
             }
             break;
             case "Clear Balance": {
-//                Creating an array that contains IDs of all CarOwners
-//                ArrayList<CarOwner> View = CarOwner.View(); // getting all the available Car Owner Objects
-//                if (!View.isEmpty()) {
-//                    ArrayList<String> IDsArray = new ArrayList<>(0);
-//                    for (int i = 0; i < View.size(); i++) { // getting IDs of all the Car Owners with Balance > 0
-//                        if (View.get(i).getBalance() != 0) {
-//                            IDsArray.add(View.get(i).getID() + "");
-//                        }
-//                    }
-//
-//                    Object showInputDialog = JOptionPane.showInputDialog(null, "Select ID for Car Owner whose balance you want to clear.",
-//                            "Clear Balance", JOptionPane.PLAIN_MESSAGE, null, IDsArray.toArray(), null);
-//                    System.out.println(showInputDialog);
-//
-//                    if (showInputDialog != null) {
-//                        CarOwner carOwner = CarOwner.SearchByID(Integer.parseInt(showInputDialog + ""));
-//
-//                        int showConfirmDialog = JOptionPane.showConfirmDialog(null, "You are about to clear the balance for the following Car Owner\n"
-//                                + carOwner + "\nAre you sure you want to continue ?", "Clear Balance Confirmation",
-//                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
-//                        if (showConfirmDialog == 0) {
-//                            carOwner.setBalance(0);
-//                            carOwner.Update();
-//                            Parent_JFrame.getMainFrame().getContentPane().removeAll();
-//                            CarOwner_Details cd = new CarOwner_Details();
-//                            Parent_JFrame.getMainFrame().add(cd.getMainPanel());
-//                            Parent_JFrame.getMainFrame().getContentPane().revalidate();
-//                            JOptionPane.showMessageDialog(null, "Balance Successfully Cleared !");
-//                        }
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "No Car Owner is registered !");
-//                }
+                int selectedIndex = OwnerTable.getSelectedRow();
+                if (selectedIndex == -1 && OwnerTable.getRowCount() > 0) {
+                    JOptionPane.showMessageDialog(null, "No row selected!");
+                }
+                else {
+                    String clearId = (String)OwnerTable.getValueAt(selectedIndex, 0);
+                    int id = Integer.parseInt(clearId);
+                    CarOwner carOwner = ownerController.getOwnerById(id);
+                    int showConfirmDialog = JOptionPane.showConfirmDialog(null, "You are about to clear the balance for the following Car Owner\n"
+                            + carOwner + "\nAre you sure you want to continue ?", "Clear Balance Confirmation",
+                            JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+                    if (showConfirmDialog == 0) {
+                        boolean cleared = ownerController.clearBalance(id);
+                        if(cleared) {
+                            ParentFrame.getMainFrame().getContentPane().removeAll();
+                            OwnerDashboard cd = new OwnerDashboard();
+                            ParentFrame.getMainFrame().add(cd.getMainPanel());
+                            ParentFrame.getMainFrame().getContentPane().revalidate();
+                            JOptionPane.showMessageDialog(null, "Balance Successfully Cleared!");
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null, "Error in clearing balance. Please try again later!");
+                        }
+                    }
+                }
             }
             break;
             case "Back": {

@@ -74,4 +74,9 @@ public class CarOwner implements Serializable{
     public void setBalanceDue(float balance_due) {
         this.balance_due = balance_due;
     }
+    
+    @Override
+    public String toString(){
+        return ("ID: " + this.ownerId + " Name: " + this.ownerName + " Contact: " + this.phoneNo + " Balance: " + this.balance_due);
+    }
 }
