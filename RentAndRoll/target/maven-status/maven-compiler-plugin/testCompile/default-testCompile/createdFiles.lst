@@ -1,0 +1,5 @@
+Model\CustomerTest.class
+utilities\DatabaseConnectorTest.class
+Controller\CarOwnerControllerTest.class
+Controller\CustomerControllerTest.class
+Model\CarOwnerTest.class

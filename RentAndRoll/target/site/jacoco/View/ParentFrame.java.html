@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParentFrame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">ParentFrame.java</span></div><h1>ParentFrame.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package View;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author erkur
+ */
+public class ParentFrame {
+    private static JFrame MainFrame;
+    private final JMenuBar menu_Bar;
+    private final JMenuItem Exit, Logout, Help;
+
+<span class="nc" id="L26">    public ParentFrame() {</span>
+<span class="nc" id="L27">        MainFrame = new JFrame(&quot;Rent And Roll - Car Management System&quot;);</span>
+<span class="nc" id="L28">        MainFrame.setSize(1366, 730);</span>
+<span class="nc" id="L29">        MainFrame.setVisible(true);</span>
+
+                
+<span class="nc" id="L32">        MainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);</span>
+<span class="nc" id="L33">        MainFrame.addWindowListener(new WindowAdapter() {</span>
+            @Override
+            public void windowClosing(WindowEvent e) {
+<span class="nc" id="L36">                int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
+                        + &quot; Are you sure you want to continue ?&quot;, &quot;Close Confirmation&quot;, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null);
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                if (showConfirmDialog == 0) {</span>
+<span class="nc" id="L39">                    System.exit(0);</span>
+                }
+<span class="nc" id="L41">            }</span>
+        });
+
+<span class="nc" id="L44">        menu_Bar = new JMenuBar();</span>
+
+<span class="nc" id="L46">        Exit = new JMenuItem(&quot;Exit&quot;);</span>
+<span class="nc" id="L47">        Logout = new JMenuItem(&quot;Logout&quot;);</span>
+<span class="nc" id="L48">        Help = new JMenuItem(&quot;Help&quot;);</span>
+
+<span class="nc" id="L50">        menu_Bar.add(Exit);</span>
+<span class="nc" id="L51">        menu_Bar.add(Logout);</span>
+<span class="nc" id="L52">        menu_Bar.add(Help);</span>
+        
+<span class="nc" id="L54">        MainFrame.setJMenuBar(menu_Bar);</span>
+
+<span class="nc" id="L56">        Exit.addActionListener(new Parent_JFrame_ActionListner());</span>
+<span class="nc" id="L57">        Logout.addActionListener(new Parent_JFrame_ActionListner());</span>
+<span class="nc" id="L58">        Help.addActionListener(new Parent_JFrame_ActionListner());</span>
+
+<span class="nc" id="L60">    }</span>
+
+    public static JFrame getMainFrame() {
+<span class="nc" id="L63">        return MainFrame;</span>
+    }
+
+<span class="nc" id="L66">    private class Parent_JFrame_ActionListner implements ActionListener {</span>
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L70" title="All 4 branches missed.">            switch (e.getActionCommand()) {</span>
+                case &quot;Exit&quot;: {
+<span class="nc" id="L72">                    int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
+                            + &quot; Are you sure you want to continue ?&quot;, &quot;Close Confirmation&quot;, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null);
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    if (showConfirmDialog == 0) {</span>
+<span class="nc" id="L75">                        System.exit(0);</span>
+                    }
+                }
+<span class="nc" id="L78">                break;</span>
+       
+                case &quot;Help&quot;: {
+<span class="nc" id="L81">                    JOptionPane.showMessageDialog(null, &quot;This is a car rental management system by Its_Not_A_Bug_Its_A_Feature&quot;);</span>
+                }
+<span class="nc" id="L83">                break;</span>
+                
+                case &quot;Logout&quot;: {
+<span class="nc" id="L86">                ParentFrame.getMainFrame().dispose();</span>
+<span class="nc" id="L87">                Runner r = new Runner();</span>
+<span class="nc" id="L88">                JFrame frame = r.getFrame();</span>
+<span class="nc" id="L89">                Login login = new Login();</span>
+<span class="nc" id="L90">                JPanel panel = login.getMainPanel();</span>
+<span class="nc" id="L91">                frame.add(panel);</span>
+<span class="nc" id="L92">                frame.setVisible(true);</span>
+            }
+            break;
+
+            }
+<span class="nc" id="L97">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

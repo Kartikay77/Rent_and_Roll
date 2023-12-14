@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
 /**
  *
  * @author erkur

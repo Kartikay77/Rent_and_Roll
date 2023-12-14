@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BookingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">Controller</a> &gt; <span class="el_source">BookingController.java</span></div><h1>BookingController.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Controller;
+
+import Model.Customer;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;  
+import java.sql.PreparedStatement;  
+
+import utilities.DatabaseConnector;
+
+/**
+ * The BookingController class is responsible for adding, retrieving and querying data 
+ from the bookings table in the database.
+ */
+public class BookingController {
+    Statement stmt;
+    Connection connection;
+    
+<span class="nc" id="L26">    public BookingController() {</span>
+        try {
+//            this.connection = DatabaseConnector.getConnection();
+<span class="nc" id="L29">            this.stmt = connection.createStatement(); </span>
+<span class="nc" id="L30">        } catch(SQLException e) {</span>
+<span class="nc" id="L31">            System.out.println(&quot;Unable to make database connection: &quot;+e);</span>
+<span class="nc" id="L32">        }</span>
+<span class="nc" id="L33">    }</span>
+    
+<span class="nc" id="L35">    protected BookingController(Connection conn) {</span>
+<span class="nc" id="L36">            this.connection = conn;</span>
+<span class="nc" id="L37">    }</span>
+    
+    /**
+     * Gets all customers from database.
+     * @return list of customer objects
+     */
+    public List&lt;Customer&gt; getAllCustomers(){
+        //To DO: Get all customers from database
+<span class="nc" id="L45">        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L48">            String sqlQuery = &quot;select * from customer&quot;;</span>
+<span class="nc" id="L49">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L51">                Customer customer = new Customer();</span>
+<span class="nc" id="L52">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
+<span class="nc" id="L53">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
+<span class="nc" id="L54">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L55">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
+<span class="nc" id="L56">                customers.add(customer);</span>
+<span class="nc" id="L57">            }</span>
+<span class="nc" id="L58">        } catch (SQLException e) {</span>
+<span class="nc" id="L59">            System.out.println(&quot;Unable to get all customers: &quot;+e);</span>
+<span class="nc" id="L60">        }</span>
+<span class="nc" id="L61">        return customers;</span>
+    }
+    
+    /**
+     * Gets customer object by ID
+     * @param id id of the customer whose details are to be retrieved.
+     * @return Customer object
+     */
+    public Customer getCustomerById(int id){
+        // To do: Get customer by Id
+<span class="nc" id="L71">        Customer customer = new Customer();</span>
+        try {
+<span class="nc" id="L73">            String sqlQuery = &quot;select * from customer where customer_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L74">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L76">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
+<span class="nc" id="L77">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
+<span class="nc" id="L78">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L79">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
+            }
+<span class="nc" id="L81">        } catch (SQLException e) {</span>
+<span class="nc" id="L82">            System.out.println(&quot;Unable to get customers: &quot;+e);</span>
+<span class="nc" id="L83">        }</span>
+<span class="nc" id="L84">        return customer;</span>
+    }
+    
+    /**
+     * Gets all customers that match the given name.
+     * @param name name to be matched
+     * @return List of Customer objects whose name matches the name given.
+     */
+    public List&lt;Customer&gt; getCustomersByName(String name){
+        // To do: Get Customer by name from database
+<span class="nc" id="L94">        List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L96">            String sqlQuery = &quot;select * from customer where customer_name=\&quot;&quot; + name +&quot;\&quot;;&quot;;</span>
+<span class="nc" id="L97">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L99">                Customer customer = new Customer();</span>
+<span class="nc" id="L100">                customer.setCustomerId(rs.getInt(&quot;customer_id&quot;));</span>
+<span class="nc" id="L101">                customer.setCustomerName(rs.getString(&quot;customer_name&quot;));</span>
+<span class="nc" id="L102">                customer.setPhoneNo(rs.getString(&quot;contact_no&quot;));</span>
+<span class="nc" id="L103">                customer.setBillAmount(rs.getFloat(&quot;bill&quot;));</span>
+<span class="nc" id="L104">                customers.add(customer);</span>
+<span class="nc" id="L105">            }</span>
+<span class="nc" id="L106">        } catch (SQLException e) {</span>
+<span class="nc" id="L107">            System.out.println(&quot;Unable to get customers: &quot;+e);</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">        return customers;</span>
+    }
+    
+    /**
+     * Adds customer with given details to the database
+     * @param name name of the customer
+     * @param phoneNo contact number of the customer
+     * @param balance balance amount due to be paid by the customer
+     * @return int id of the customer after addition in the database
+     */
+    public int addCustomer(String name, String phoneNo, double balance){
+        // To do: Add customer with the details into database and return id
+<span class="nc" id="L121">        String sqlQuery = &quot;insert into customer (customer_name, contact_no, bill) values (?, ?, ?)&quot;;</span>
+<span class="nc" id="L122">        int generatedCustomerId = -999;</span>
+<span class="nc" id="L123">        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {</span>
+<span class="nc" id="L124">            preparedStatement.setString(1, name);</span>
+<span class="nc" id="L125">            preparedStatement.setString(2, phoneNo);</span>
+<span class="nc" id="L126">            preparedStatement.setDouble(3, balance);</span>
+
+<span class="nc" id="L128">            int affectedRows = preparedStatement.executeUpdate();</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">            if (affectedRows &gt; 0) {</span>
+                // Retrieving the generated ID
+<span class="nc" id="L131">                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">                    if (generatedKeys.next()) {</span>
+<span class="nc" id="L133">                        generatedCustomerId = generatedKeys.getInt(1);</span>
+                    }
+                }
+            }
+<span class="nc" id="L137">        } catch (SQLException e) {</span>
+<span class="nc" id="L138">            e.printStackTrace();</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return generatedCustomerId;</span>
+    }
+    
+    /**
+     * Removes customer from database
+     * @param id ID of the customer to be removed.
+     * @return true if removal was successful else false.
+     */
+    public boolean removeCustomer(int id){
+        // To do: Remove Customer from database along with all bookings of the customer.
+        try {
+<span class="nc" id="L151">            String sqlQuery = &quot;delete from customer where customer_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L152">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L153">        } catch (SQLException e) {</span>
+<span class="nc" id="L154">            System.out.println(&quot;Unable to remove customer: &quot;+e);</span>
+<span class="nc" id="L155">            return false;</span>
+<span class="nc" id="L156">        }</span>
+<span class="nc" id="L157">        return true;</span>
+        // TO DO Remaining: Remove bookings from booking table also
+    }  
+    
+    /**
+     * Clears the balance of the customer whose id is given.
+     * @param id ID of the customer whose balance is to be cleared.
+     * @return true if clearing balance was successful else false.
+     */
+    public boolean clearBalance(int id){
+        // To do: Clear balance due to be paid by Customer
+        try {
+<span class="nc" id="L169">            String sqlQuery = &quot;UPDATE customer SET bill = 0 WHERE customer_id = &quot; + id + &quot;;&quot;;</span>
+<span class="nc" id="L170">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L171">        } catch (SQLException e) {</span>
+<span class="nc" id="L172">            System.out.println(&quot;Unable to update customer: &quot;+e);</span>
+<span class="nc" id="L173">            return false;</span>
+<span class="nc" id="L174">        }</span>
+<span class="nc" id="L175">        return true;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
