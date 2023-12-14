@@ -45,21 +45,25 @@ public class BookingController {
         List<Booking> bookings = new ArrayList<>();
 
         try {
-            String sqlQuery = "select * from booking";
-            ResultSet rs = this.stmt.executeQuery(sqlQuery); 
-            while (rs.next()) {
-                Booking booking = new Booking();
-                booking.setBookingId(rs.getInt("booking_id"));
-                booking.setRentalStartTime(rs.getLong("rent_time"));
-                booking.setRentalReturnTime(rs.getLong("return_time"));
-                booking.setCustomerId(rs.getInt("customer_id"));
-                booking.setCarId(rs.getInt("car_id"));
-                bookings.add(booking);
-            }
-        } catch (SQLException e) {
-            System.out.println("Unable to get all Booking: "+e);
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+                          "FROM booking b " +
+                          "JOIN car c ON b.car_id = c.car_id";
+
+        ResultSet rs = this.stmt.executeQuery(sqlQuery);
+        while (rs.next()) {
+            Booking booking = new Booking();
+            booking.setBookingId(rs.getInt("booking_id"));
+            booking.setRentalStartTime(rs.getLong("rent_time"));
+            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setCustomerId(rs.getInt("customer_id"));
+            booking.setCarId(rs.getInt("car_id"));
+            booking.setCarName(rs.getString("car_name")); // Set car name
+            bookings.add(booking);
         }
-        return bookings;
+    } catch (SQLException e) {
+        System.out.println("Unable to get all Booking with car names: " + e);
+    }
+    return bookings;
     }
     
     /**
@@ -71,19 +75,24 @@ public class BookingController {
         // To do: Get booking by Id
         Booking booking = new Booking();
         try {
-            String sqlQuery = "select * from booking where customer_id=" + id +";";
-            ResultSet rs = this.stmt.executeQuery(sqlQuery); 
-            while(rs.next()){
-                booking.setBookingId(rs.getInt("booking_id"));
-                booking.setRentalStartTime(rs.getLong("rent_time"));
-                booking.setRentalReturnTime(rs.getLong("return_time"));
-                booking.setCustomerId(rs.getInt("customer_id"));
-                booking.setCarId(rs.getInt("car_id"));
-            }
-        } catch (SQLException e) {
-            System.out.println("Unable to get bookings: "+e);
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+                          "FROM booking b " +
+                          "JOIN car c ON b.car_id = c.car_id " +
+                          "WHERE b.customer_id = " + id;
+
+        ResultSet rs = this.stmt.executeQuery(sqlQuery);
+        while (rs.next()) {
+            booking.setBookingId(rs.getInt("booking_id"));
+            booking.setRentalStartTime(rs.getLong("rent_time"));
+            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setCustomerId(rs.getInt("customer_id"));
+            booking.setCarId(rs.getInt("car_id"));
+            booking.setCarName(rs.getString("car_name")); // Set car name
         }
-        return booking;
+    } catch (SQLException e) {
+        System.out.println("Unable to get bookings: " + e);
+    }
+    return booking;
     }
     
     
@@ -94,30 +103,46 @@ public class BookingController {
      * @param balance balance amount due to be paid by the customer
      * @return int id of the customer after addition in the database
      */
-    public int addBooking(String rentTime, String returnTime, int customerId, int carId){
-        // To do: Add Booking with the details into database and return id
-        String sqlQuery = "insert into booking (rentTime, returnTime, customerId,carId) values (?, ?, ?, ?)";
-        int generatedBookingId = -999;
+    public int addBooking(String rentTime, String returnTime, int customerId, int carId) {
+    String sqlQuery = "INSERT INTO booking (rentTime, returnTime, customerId, carId, reg_no) VALUES (?, ?, ?, ?, ?)";
+    int generatedBookingId = -999;
+    String carRegNo = ""; // Variable to store car registration number
+
+    try {
+        // Retrieve the car registration number based on the provided carId
+        String fetchCarRegNoQuery = "SELECT reg_no FROM car WHERE car_id = ?";
+        try (PreparedStatement regNoStatement = connection.prepareStatement(fetchCarRegNoQuery)) {
+            regNoStatement.setInt(1, carId);
+            ResultSet carResultSet = regNoStatement.executeQuery();
+            if (carResultSet.next()) {
+                carRegNo = carResultSet.getString("reg_no");
+            }
+        }
+
+        // Proceed with adding the booking details
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, rentTime);
             preparedStatement.setString(2, returnTime);
-            preparedStatement.setDouble(3, customerId);
-            preparedStatement.setDouble(4, carId);
+            preparedStatement.setInt(3, customerId);
+            preparedStatement.setInt(4, carId);
+            preparedStatement.setString(5, carRegNo); // Set the registration number
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
-                // Retrieving the generated ID
+                // Retrieve the generated ID
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         generatedBookingId = generatedKeys.getInt(1);
                     }
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return generatedBookingId;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return generatedBookingId;
+}
+
     
     /**
      * Removes booking from database

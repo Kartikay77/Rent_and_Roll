@@ -9,7 +9,8 @@ public class Booking {
     private int customerId;
     private int carId;
     private long rentalStartTime, rentalReturnTime;
-    private String carModel;
+    private String carName;
+    private String carRegNo;
     
     /**
      * @return the carID
@@ -82,16 +83,29 @@ public class Booking {
     }
     
     /**
-     * @return the rentalReturnTime
+     * @return the car name
      */
-    public String getCarModel() {
-        return carModel;
+    public String getCarName() {
+        return carName;
     }
 
     /**
-     * @param carModel the carModel to set
+     * @param carName the carName to set
      */
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
+        /**
+     * @return the carRegNo
+     */
+    public String getReg_No() {
+        return carRegNo;
+    }
+
+    /**
+     * @param carRegNo the carRegNo to set
+     */
+    public void setReg_No(String carRegNo) {
+        this.carRegNo = carRegNo;
     }
 }
