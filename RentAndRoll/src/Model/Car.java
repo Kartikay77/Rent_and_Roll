@@ -12,6 +12,13 @@ public class Car {
     private float rentPerHour;
     private int carOwnerId;
     private String carOwnerName;
+    private String markerName;
+    private String carName;
+    private String color;
+    private String carType;
+    private String carCondition;
+    private String carRegNo;
+    
     
     /**
      * @return the carID
@@ -26,7 +33,100 @@ public class Car {
     public void setCarId(int carId) {
         this.carId = carId;
     }
+    
+        /**
+     * @return the Marker Name
+     */
+    
+        public String getMakerName() {
+        return markerName;
+    }
 
+    /**
+     * @param markerName the markerName to set
+     */
+    public void setMakerName(String markerName) {
+        this.markerName = markerName;
+    }
+    
+    
+            /**
+     * @return the carName
+     */
+    
+        public String getCarName() {
+        return carName;
+    }
+
+    /**
+     * @param carName the carName to set
+     */
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
+    
+                /**
+     * @return the color
+     */
+    
+        public String getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    
+     /**
+     * @return the Marker Name
+     */
+    
+        public String getCarType() {
+        return carType;
+    }
+
+    /**
+     * @param carType the carType to set
+     */
+    public void setCarType(String carType) {
+        this.carType = carType;
+    }
+    
+       /**
+     * @return the Marker Name
+     */
+    
+        public String getCarCondition() {
+        return carCondition;
+    }
+
+    /**
+     * @param carCondition the carCondition to set
+     */
+    public void setCarCondition(String carCondition) {
+        this.carCondition = carCondition;
+    }
+    
+    
+    /**
+     * @param carRegNo the carRegNo to set
+     */
+    public void setCarRegNo(String carRegNo) {
+        this.carRegNo = carRegNo;
+    }
+    
+                /**
+     * @return the carRegNo
+     */
+    
+        public String getCarRegNo() {
+        return carRegNo;
+    }
+        
     /**
      * @return the carModel
      */
