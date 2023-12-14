@@ -63,30 +63,30 @@ public class MainMenu implements ActionListener {
 <span class="nc bnc" id="L63" title="All 5 branches missed.">        switch (e.getActionCommand()) {  </span>
             case &quot;Cars&quot;: {
 <span class="nc" id="L65">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-//                CarDetails cd = new CarDetails();
-//                ParentFrame.getMainFrame().add(cd.getMainPanel());
-//                ParentFrame.getMainFrame().getContentPane().revalidate();
+<span class="nc" id="L66">                CarDashboard cd = new CarDashboard();</span>
+<span class="nc" id="L67">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L68">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
 <span class="nc" id="L70">            break;</span>
             case &quot;Customer&quot;: {
 <span class="nc" id="L72">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-<span class="nc" id="L73">                CustomerDetails cd = new CustomerDetails();</span>
+<span class="nc" id="L73">                CustomerDashboard cd = new CustomerDashboard();</span>
 <span class="nc" id="L74">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
 <span class="nc" id="L75">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
 <span class="nc" id="L77">            break;</span>
             case &quot;Owner&quot;: {
 <span class="nc" id="L79">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-<span class="nc" id="L80">                CarOwnerDetails cd = new CarOwnerDetails();</span>
+<span class="nc" id="L80">                OwnerDashboard cd = new OwnerDashboard();</span>
 <span class="nc" id="L81">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
 <span class="nc" id="L82">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
 <span class="nc" id="L84">            break;</span>
             case &quot;Booking Details&quot;: {
 <span class="nc" id="L86">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-//                BookingDetails cd = new BookingDetails();
-//                ParentJFrame.getMainFrame().add(cd.getMainPanel());
-//                ParentJFrame.getMainFrame().getContentPane().revalidate();
+<span class="nc" id="L87">                BookingDashboard cd = new BookingDashboard();</span>
+<span class="nc" id="L88">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L89">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
             break;
         }

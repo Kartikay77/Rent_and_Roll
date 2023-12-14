@@ -1,2 +1,4 @@
-Controller\CustomerControllerTest.class
+Model\CustomerTest.class
 Controller\CarOwnerControllerTest.class
+Controller\CustomerControllerTest.class
+Model\CarOwnerTest.class
