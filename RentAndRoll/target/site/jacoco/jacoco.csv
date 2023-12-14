@@ -8,7 +8,7 @@ RentAndRoll,Controller,BookingController,246,0,10,0,80,0,13,0,8,0
 RentAndRoll,Controller,CarController,3,0,0,0,1,0,1,0,1,0
 RentAndRoll,Controller,CarOwnerController,87,184,4,6,28,55,4,9,2,6
 RentAndRoll,Controller,CustomerController,5,275,2,8,2,87,2,15,0,12
-RentAndRoll,utilities,DatabaseConnector,11,10,2,0,6,3,2,2,1,2
+RentAndRoll,utilities,DatabaseConnector,0,21,1,1,0,9,1,3,0,3
 RentAndRoll,View,AddCustomer.new WindowAdapter() {...},14,0,0,0,4,0,2,0,2,0
 RentAndRoll,View,AddCar.new ActionListener() {...},13,0,0,0,4,0,2,0,2,0
 RentAndRoll,View,OwnerDashboard,439,0,12,0,77,0,12,0,3,0
