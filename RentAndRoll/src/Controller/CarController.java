@@ -83,7 +83,7 @@ public class CarController {
                 car.setRentPerHour(rs.getFloat("rent_per_hour"));
             }
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         System.out.println("Unable to get Car: " + e);
     }
     return car;
@@ -108,7 +108,7 @@ public class CarController {
                 car.setRentPerHour(rs.getFloat("rent_per_hour"));
                 cars.add(car);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Unable to get car: "+e);
         }
         return cars;
@@ -148,7 +148,7 @@ public class CarController {
                     }
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return generatedCarId;
@@ -171,6 +171,9 @@ public class CarController {
         return true;
     }    
 
+    public void setStatement(Statement statementMock) {
+	this.stmt = statementMock;
+	}
     Object getConnection() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
