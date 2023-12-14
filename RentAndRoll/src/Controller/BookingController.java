@@ -40,44 +40,46 @@ public class BookingController {
      * Gets all booking from database.
      * @return list of Booking objects
      */
-    public List<Booking> getAllBooking(){
-        //To DO: Get all Booking from database
-        List<Booking> bookings = new ArrayList<>();
+    public List<Booking> getAllBooking() {
+    List<Booking> bookings = new ArrayList<>();
 
-        try {
-        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+    try {
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, cust.customer_name " +
                           "FROM booking b " +
-                          "JOIN car c ON b.car_id = c.car_id";
+                          "JOIN car c ON b.car_id = c.car_id " +
+                          "JOIN customer cust ON b.customer_id = cust.customer_id";
 
         ResultSet rs = this.stmt.executeQuery(sqlQuery);
         while (rs.next()) {
-            Booking booking = new Booking();
-            booking.setBookingId(rs.getInt("booking_id"));
-            booking.setRentalStartTime(rs.getLong("rent_time"));
-            booking.setRentalReturnTime(rs.getLong("return_time"));
-            booking.setCustomerId(rs.getInt("customer_id"));
-            booking.setCarId(rs.getInt("car_id"));
-            booking.setCarName(rs.getString("car_name")); // Set car name
-            bookings.add(booking);
+                Booking booking = new Booking();
+                booking.setBookingId(rs.getInt("booking_id"));
+                booking.setRentalStartTime(rs.getLong("rent_time"));
+                booking.setRentalReturnTime(rs.getLong("return_time"));
+                booking.setCustomerId(rs.getInt("customer_id"));
+                booking.setCarId(rs.getInt("car_id"));
+                booking.setCarName(rs.getString("car_name")); // Set car name
+                booking.setCustomerName(rs.getString("customer_name")); // Set customer name
+                bookings.add(booking);
+            }
+        } catch (SQLException e) {
+            System.out.println("Unable to get all Booking with car and customer names: " + e);
         }
-    } catch (SQLException e) {
-        System.out.println("Unable to get all Booking with car names: " + e);
+        return bookings;
     }
-    return bookings;
-    }
+
     
     /**
      * Gets Booking object by ID
      * @param id id of the Booking whose details are to be retrieved.
      * @return Booking object
      */
-    public Booking getBookingByCustomerId(int id){
-        // To do: Get booking by Id
-        Booking booking = new Booking();
-        try {
-        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+    public Booking getBookingByCustomerId(int id) {
+    Booking booking = new Booking();
+    try {
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, cust.customer_name " +
                           "FROM booking b " +
                           "JOIN car c ON b.car_id = c.car_id " +
+                          "JOIN customer cust ON b.customer_id = cust.customer_id " +
                           "WHERE b.customer_id = " + id;
 
         ResultSet rs = this.stmt.executeQuery(sqlQuery);
@@ -88,12 +90,13 @@ public class BookingController {
             booking.setCustomerId(rs.getInt("customer_id"));
             booking.setCarId(rs.getInt("car_id"));
             booking.setCarName(rs.getString("car_name")); // Set car name
+            booking.setCustomerName(rs.getString("customer_name")); // Set customer name
         }
     } catch (SQLException e) {
         System.out.println("Unable to get bookings: " + e);
     }
     return booking;
-    }
+}
     
     
     /**
@@ -166,28 +169,34 @@ public class BookingController {
     * @param regNo car registration number for which booking details are to be retrieved.
     * @return Booking object
     */
-   public Booking getBookingByCarRegNo(String regNo){
-       // To do: Get booking by car registration number
-       Booking booking = null;
-       try {
-           String sqlQuery = "SELECT * FROM booking INNER JOIN car ON booking.car_id = car.car_id WHERE car.reg_no=?";
-           PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-           preparedStatement.setString(1, regNo);
-           ResultSet rs = preparedStatement.executeQuery();
+    public Booking getBookingByCarRegNo(String regNo) {
+    Booking booking = null;
+    try {
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, cust.customer_name " +
+                          "FROM booking b " +
+                          "JOIN car c ON b.car_id = c.car_id " +
+                          "JOIN customer cust ON b.customer_id = cust.customer_id " +
+                          "WHERE c.reg_no = ?";
+        
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+        preparedStatement.setString(1, regNo);
+        ResultSet rs = preparedStatement.executeQuery();
 
-           if (rs.next()) {
-               booking = new Booking();
-               booking.setBookingId(rs.getInt("booking_id"));
-               booking.setRentalStartTime(rs.getLong("rent_time"));
-               booking.setRentalReturnTime(rs.getLong("return_time"));
-               booking.setCustomerId(rs.getInt("customer_id"));
-               booking.setCarId(rs.getInt("car_id"));
-           }
-       } catch (SQLException e) {
-           System.out.println("Unable to get booking by car registration number: " + e);
-       }
-       return booking;
-   }
+        if (rs.next()) {
+            booking = new Booking();
+            booking.setBookingId(rs.getInt("booking_id"));
+            booking.setRentalStartTime(rs.getLong("rent_time"));
+            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setCustomerId(rs.getInt("customer_id"));
+            booking.setCarId(rs.getInt("car_id"));
+            booking.setCarName(rs.getString("car_name")); // Set car name
+            booking.setCustomerName(rs.getString("customer_name")); // Set customer name
+        }
+    } catch (SQLException e) {
+        System.out.println("Unable to get booking by car registration number: " + e);
+    }
+    return booking;
+}
     
     /**
      * Clears the balance of the booking whose id is given.

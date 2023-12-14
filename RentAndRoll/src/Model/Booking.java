@@ -11,6 +11,7 @@ public class Booking {
     private long rentalStartTime, rentalReturnTime;
     private String carName;
     private String carRegNo;
+    private String custName;
     
     /**
      * @return the carID
@@ -107,5 +108,18 @@ public class Booking {
      */
     public void setReg_No(String carRegNo) {
         this.carRegNo = carRegNo;
+    }
+    /**
+     * @return the custName
+     */
+    public String getCustomerName() {
+        return custName;
+    }
+
+    /**
+     * @param custName the custName to set
+     */
+    public void setCustomerName(String custName) {
+        this.custName = custName;
     }
 }
