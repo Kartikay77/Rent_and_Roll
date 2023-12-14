@@ -75,4 +75,9 @@ public class Customer implements Serializable{
     public void setBillAmount(float bill_amt) {
         this.bill_amt = bill_amt;
     }
+    
+    @Override 
+    public String toString() {
+        return ("ID: " + this.customerId + " Name: " + this.customerName + " Contact: " + this.phoneNo + " Bill: " + this.bill_amt);
+    }
 }

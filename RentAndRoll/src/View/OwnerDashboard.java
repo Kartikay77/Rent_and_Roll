@@ -227,7 +227,7 @@ public class OwnerDashboard implements ActionListener{
             }
             break;
             case "Back": {
-                ParentFrame.getMainFrame().setTitle("Rent and Roll - Car Management System");
+                ParentFrame.getMainFrame().setTitle("Rent and Roll - Car Rental Management System");
                 MainMenu mm = new MainMenu();
                 ParentFrame.getMainFrame().getContentPane().removeAll();
                 ParentFrame.getMainFrame().add(mm.getMainPanel());

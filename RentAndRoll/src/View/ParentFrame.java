@@ -24,7 +24,7 @@ public class ParentFrame {
     private final JMenuItem Exit, Logout, Help;
 
     public ParentFrame() {
-        MainFrame = new JFrame("Rent and Roll - Car Management System");
+        MainFrame = new JFrame("Rent and Roll - Car Rental Management System");
         MainFrame.setSize(1366, 730);
         MainFrame.setVisible(true);
 
