@@ -20,6 +20,9 @@ import Controller.CustomerController;
 import Model.Customer;
 import Controller.CarOwnerController;
 import Model.CarOwner;
+import Controller.CarController;
+import Model.Car;
+
 
 /**
  *
@@ -59,19 +62,34 @@ public class Runner {
             System.out.println(e);
         }
         
-                CarOwnerController cd = new CarOwnerController();
-          System.out.println(cd.addOwner("Adwait", "123456", 235))
-                  ;
-//        // Assuming owner ID for whom balance needs to be cleared
-        int ownerId = 1; // Replace this with an existing owner ID from your database
+//    CarController cd = new CarController();
+//    // Call the method to get cars by name
+//    Car carById = cd.getCarById("DT13DT1807");
+//    System.out.println(carById);
 //
-//        // Clear balance for the specified owner
-        boolean isBalanceCleared = cd.clearBalance(ownerId);
-//
-        if (isBalanceCleared) {
-            System.out.println("Balance successfully cleared for owner with ID " + ownerId);
-        } else {
-            System.out.println("Failed to clear balance for owner with ID " + ownerId);
+//    // Iterate through the list of cars retrieved and print their details
+//    // Check if car is not null (car found)
+//        if (carById != null) {
+//            System.out.println("Car ID: " + carById.carId());
+//            System.out.println("Car Model: " + carById.getCarModel());
+//            System.out.println("Car Registration No.: " + carById.getCarRegNo());
+//            System.out.println("Rent per Hour: " + carById.getRentPerHour());
+//            System.out.println("---------------------");
+//        } else {
+//            System.out.println("Car with registration number " + " not found.");
+//        }
+//          System.out.println(cd.addOwner("Adwait", "123456", 235))
+//                  ;
+////        // Assuming owner ID for whom balance needs to be cleared
+//        int ownerId = 1; // Replace this with an existing owner ID from your database
+////
+////        // Clear balance for the specified owner
+//        boolean isBalanceCleared = cd.clearBalance(ownerId);
+////
+//        if (isBalanceCleared) {
+//            System.out.println("Balance successfully cleared for owner with ID " + ownerId);
+//        } else {
+//            System.out.println("Failed to clear balance for owner with ID " + ownerId);
 
         // For testing purpose to be deleted
 //        CustomerController cd = new CustomerController();
@@ -84,7 +102,6 @@ public class Runner {
 //        Customer customer = (cd.getCustomerById(14));
 //        for(Customer customer: customers){
 //            System.out.println(customer.getCustomerId() + " " + customer.getCustomerName());
-        }
-    }
-    
+//        }
+    }   
 }
