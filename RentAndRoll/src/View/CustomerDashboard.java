@@ -26,7 +26,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  *
  * @author erkur
  */
-public class CustomerDetails implements ActionListener{
+public class CustomerDashboard implements ActionListener{
     private JTextField SearchIdTextField;
     private JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBillButton;
     private JScrollPane ScrollPane1;
@@ -35,7 +35,7 @@ public class CustomerDetails implements ActionListener{
     static DefaultTableModel tableModel;
     private JPanel MainPanel;
 
-    public CustomerDetails() {
+    public CustomerDashboard() {
         MainPanel = new JPanel();
         ParentFrame.getMainFrame().setTitle("Customer Details - Rent-A-Car Management System");
         MainPanel.setLayout(new AbsoluteLayout());

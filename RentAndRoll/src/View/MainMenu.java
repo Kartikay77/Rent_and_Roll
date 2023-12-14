@@ -63,30 +63,30 @@ public class MainMenu implements ActionListener {
         switch (e.getActionCommand()) {  
             case "Cars": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-//                CarDetails cd = new CarDetails();
-//                ParentFrame.getMainFrame().add(cd.getMainPanel());
-//                ParentFrame.getMainFrame().getContentPane().revalidate();
+                CarDashboard cd = new CarDashboard();
+                ParentFrame.getMainFrame().add(cd.getMainPanel());
+                ParentFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
             case "Customer": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-                CustomerDetails cd = new CustomerDetails();
+                CustomerDashboard cd = new CustomerDashboard();
                 ParentFrame.getMainFrame().add(cd.getMainPanel());
                 ParentFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
             case "Owner": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-                CarOwnerDetails cd = new CarOwnerDetails();
+                OwnerDashboard cd = new OwnerDashboard();
                 ParentFrame.getMainFrame().add(cd.getMainPanel());
                 ParentFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
             case "Booking Details": {
                 ParentFrame.getMainFrame().getContentPane().removeAll();
-//                BookingDetails cd = new BookingDetails();
-//                ParentJFrame.getMainFrame().add(cd.getMainPanel());
-//                ParentJFrame.getMainFrame().getContentPane().revalidate();
+                BookingDashboard cd = new BookingDashboard();
+                ParentFrame.getMainFrame().add(cd.getMainPanel());
+                ParentFrame.getMainFrame().getContentPane().revalidate();
             }
             break;
         }
