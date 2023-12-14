@@ -55,7 +55,7 @@ public class CarController {
                 car.setSeatingCapacity(rs.getInt("seating_capacity"));
                 car.setRentPerHour(rs.getFloat("rent_per_hour"));
                 car.setcarOwnerID(rs.getInt("owner_id"));
-                car.setCarOwnerName(rs.getString("owner_name"));
+//                car.setCarOwnerName(rs.getString("owner_name"));
                 cars.add(car);
             }
         } catch (SQLException e) {
@@ -78,8 +78,9 @@ public class CarController {
             if (rs.next()) {
                 car = new Car();
                 car.setCarId(rs.getInt("car_id"));
-                car.setCarModel(rs.getString("model"));
+                car.setCarName(rs.getString("car_name"));
                 car.setCarRegNo(rs.getString("reg_no"));
+                car.setMakerName(rs.getString("maker"));
                 car.setRentPerHour(rs.getFloat("rent_per_hour"));
             }
         }
@@ -103,8 +104,9 @@ public class CarController {
             while(rs.next()){
                 Car car = new Car();
                 car.setCarId(rs.getInt("car_id"));
-                car.setCarModel(rs.getString("model"));
+                car.setCarName(rs.getString("car_name"));
                 car.setCarRegNo(rs.getString("reg_no"));
+                car.setMakerName(rs.getString("maker"));
                 car.setRentPerHour(rs.getFloat("rent_per_hour"));
                 cars.add(car);
             }
