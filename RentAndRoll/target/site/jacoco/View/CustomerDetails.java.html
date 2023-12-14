@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CustomerDetails.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">CustomerDetails.java</span></div><h1>CustomerDetails.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package View;
+
+import Model.Customer;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
+
+/**
+ *
+ * @author erkur
+ */
+public class CustomerDetails implements ActionListener{
+    private JTextField SearchIdTextField;
+    private JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBillButton;
+    private JScrollPane ScrollPane1;
+    private JTable CustomerTable;
+    private JTextField SearchNameTextField;
+    static DefaultTableModel tableModel;
+    private JPanel MainPanel;
+
+<span class="nc" id="L38">    public CustomerDetails() {</span>
+<span class="nc" id="L39">        MainPanel = new JPanel();</span>
+<span class="nc" id="L40">        ParentFrame.getMainFrame().setTitle(&quot;Customer Details - Rent-A-Car Management System&quot;);</span>
+<span class="nc" id="L41">        MainPanel.setLayout(new AbsoluteLayout());</span>
+<span class="nc" id="L42">        MainPanel.setMinimumSize(new Dimension(1366, 730));</span>
+
+<span class="nc" id="L44">        SearchIdButton = new JButton(&quot;Search ID&quot;);</span>
+<span class="nc" id="L45">        UpdateButton = new JButton(&quot;Update&quot;);</span>
+<span class="nc" id="L46">        AddButton = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L47">        RemoveButton = new JButton(&quot;Remove&quot;);</span>
+<span class="nc" id="L48">        BackButton = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L49">        SearchNameButton = new JButton(&quot;Search Name&quot;);</span>
+<span class="nc" id="L50">        ClearBillButton = new JButton(&quot;Clear Bill&quot;);</span>
+<span class="nc" id="L51">        SearchIdTextField = new JTextField();</span>
+<span class="nc" id="L52">        SearchNameTextField = new JTextField();</span>
+<span class="nc" id="L53">        ScrollPane1 = new JScrollPane();</span>
+<span class="nc" id="L54">        CustomerTable = new JTable();</span>
+
+<span class="nc" id="L56">        String[] columns = {&quot;ID&quot;, &quot;Name&quot;, &quot;Contact Number&quot;, &quot;Car Rented&quot;, &quot;Bill&quot;};</span>
+<span class="nc" id="L57">        tableModel = new DefaultTableModel(columns, 0) {</span>
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+<span class="nc" id="L62">                return false;</span>
+            }
+        };
+
+<span class="nc" id="L66">        CustomerTable = new JTable(tableModel);</span>
+
+<span class="nc" id="L68">        CustomerTable.setSize(new Dimension(1330, 550));</span>
+<span class="nc" id="L69">        ScrollPane1 = new JScrollPane();</span>
+<span class="nc" id="L70">        ScrollPane1.setViewportView(CustomerTable);</span>
+<span class="nc" id="L71">        CustomerTable.setFillsViewportHeight(true);// makes the size of table equal to that of scroll pane to fill the table in the scrollpane</span>
+//        ArrayList&lt;Customer&gt; Customer_objects = Customer.View();
+//        for (int i = 0; i &lt; Customer_objects.size(); i++) {
+//
+//            int ID = Customer_objects.get(i).getID();
+//            String CNIC = Customer_objects.get(i).getCNIC();
+//            String Name = Customer_objects.get(i).getName();
+//            String ContactNo = Customer_objects.get(i).getContact_No();
+//            int Bill = Customer_objects.get(i).getBill();
+//
+//            // getting booked cars for customer
+//            ArrayList&lt;Booking&gt; bookings = Booking.SearchByCustomerID(ID);
+//            String bookedCars = &quot;&quot;;
+//            if (!bookings.isEmpty()) {
+//                for (int j = 0; j &lt; bookings.size(); j++) {
+//                    if (bookings.get(j).getReturnTime() == 0) {
+//                        bookedCars += bookings.get(j).getCar().getID() + &quot;: &quot; + bookings.get(j).getCar().getID() + &quot;\n&quot;;
+//                    } else {
+//                        bookedCars = &quot;No Cars Booked !&quot;;
+//                    }
+//                }
+//            } else {
+//                bookedCars = &quot;No Cars Booked !&quot;;
+//            }
+//            String[] one_s_Record = {(i + 1) + &quot;&quot;, &quot;&quot; + ID, CNIC, Name, ContactNo, bookedCars, Bill + &quot;&quot;};
+//            tableModel.addRow(one_s_Record);
+//        }
+
+        // center aligning the text in all the columns
+<span class="nc" id="L100">        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();</span>
+<span class="nc" id="L101">        centerRenderer.setHorizontalAlignment(JLabel.CENTER);</span>
+<span class="nc" id="L102">        CustomerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L103">        CustomerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L104">        CustomerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L105">        CustomerTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L106">        CustomerTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);</span>
+
+        // adjusting size of each column
+<span class="nc" id="L109">        CustomerTable.getColumnModel().getColumn(0).setPreferredWidth(70);</span>
+<span class="nc" id="L110">        CustomerTable.getColumnModel().getColumn(1).setPreferredWidth(150);</span>
+<span class="nc" id="L111">        CustomerTable.getColumnModel().getColumn(2).setPreferredWidth(170);</span>
+<span class="nc" id="L112">        CustomerTable.getColumnModel().getColumn(3).setPreferredWidth(110);</span>
+<span class="nc" id="L113">        CustomerTable.getColumnModel().getColumn(4).setPreferredWidth(180);</span>
+
+//        ScrollPane1.setViewportView(CustomerTable);
+<span class="nc" id="L116">        MainPanel.add(SearchIdButton, new AbsoluteConstraints(390, 10, 130, 22));</span>
+<span class="nc" id="L117">        MainPanel.add(SearchIdTextField, new AbsoluteConstraints(525, 10, 240, 22));</span>
+<span class="nc" id="L118">        MainPanel.add(SearchNameButton, new AbsoluteConstraints(10, 10, 130, 22));</span>
+<span class="nc" id="L119">        MainPanel.add(SearchNameTextField, new AbsoluteConstraints(145, 10, 240, 22));</span>
+<span class="nc" id="L120">        MainPanel.add(ScrollPane1, new AbsoluteConstraints(10, 50, 1330, 550));</span>
+<span class="nc" id="L121">        MainPanel.add(UpdateButton, new AbsoluteConstraints(579, 625, 130, 22));</span>
+<span class="nc" id="L122">        MainPanel.add(AddButton, new AbsoluteConstraints(420, 625, 130, 22));</span>
+<span class="nc" id="L123">        MainPanel.add(RemoveButton, new AbsoluteConstraints(735, 625, 130, 22));</span>
+<span class="nc" id="L124">        MainPanel.add(BackButton, new AbsoluteConstraints(1106, 625, 100, 22));</span>
+<span class="nc" id="L125">        MainPanel.add(ClearBillButton, new AbsoluteConstraints(10, 625, 200, 22));</span>
+
+<span class="nc" id="L127">        SearchIdButton.addActionListener(this);</span>
+<span class="nc" id="L128">        SearchNameButton.addActionListener(this);</span>
+<span class="nc" id="L129">        RemoveButton.addActionListener(this);</span>
+<span class="nc" id="L130">        AddButton.addActionListener(this);</span>
+<span class="nc" id="L131">        UpdateButton.addActionListener(this);</span>
+<span class="nc" id="L132">        BackButton.addActionListener(this);</span>
+<span class="nc" id="L133">        ClearBillButton.addActionListener(this);</span>
+<span class="nc" id="L134">    }</span>
+
+//    public static void main(String args[]) {
+//        new Customer_Details().setVisible(true);
+//
+//    }
+    public JPanel getMainPanel() {
+<span class="nc" id="L141">        return MainPanel;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L146" title="All 7 branches missed.">        switch (e.getActionCommand()) {</span>
+            case &quot;Search ID&quot;: {
+<span class="nc" id="L148">                String id = SearchIdTextField.getText().trim();</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">                if (!id.isEmpty()) {</span>
+//                    if (Customer.isIDvalid(id)) {
+//                        Customer co = Customer.SearchByID(Integer.parseInt(id));
+//                        if (co != null) {
+//                            JOptionPane.showMessageDialog(null, co.toString());
+//                            SearchIdTextField.setText(&quot;&quot;);
+//                        } else {
+//                            JOptionPane.showMessageDialog(null, &quot;Required person not found&quot;);
+//                            SearchIdTextField.setText(&quot;&quot;);
+//                        }
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, &quot;Invalid ID !&quot;);
+//                    }
+                } else {
+<span class="nc" id="L163">                    JOptionPane.showMessageDialog(null, &quot;Please Enter ID first !&quot;);</span>
+                }
+            }
+<span class="nc" id="L166">            break;</span>
+            case &quot;Search Name&quot;: {
+<span class="nc" id="L168">                String name = SearchNameTextField.getText().trim();</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                if (!name.isEmpty()) {</span>
+//                    if (Customer.isNameValid(name)) {
+//                        ArrayList&lt;Customer&gt; customerArrayList = Customer.SearchByName(name);
+//                        String record = &quot;&quot;;
+//                        for (int i = 0; i &lt; customerArrayList.size(); i++) {
+//                            record += customerArrayList.get(i).toString() + &quot;\n&quot;;
+//                        }
+//                        if (!customerArrayList.isEmpty()) {
+//                            JOptionPane.showMessageDialog(null, record);
+//                            SearchName_TextField.setText(&quot;&quot;);
+//                        } else {
+//                            JOptionPane.showMessageDialog(null, &quot;Required person not found&quot;);
+//                            SearchName_TextField.setText(&quot;&quot;);
+//                        }
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, &quot;Invalid Name !&quot;);
+//                    }
+                } else {
+<span class="nc" id="L187">                    JOptionPane.showMessageDialog(null, &quot;Please Enter Name first !&quot;);</span>
+                }
+            }
+<span class="nc" id="L190">            break;</span>
+            case &quot;Add&quot;: {
+<span class="nc" id="L192">                ParentFrame.getMainFrame().setEnabled(false);</span>
+<span class="nc" id="L193">                AddCustomer aco = new AddCustomer();</span>
+<span class="nc" id="L194">                aco.frame.setVisible(true);</span>
+            }
+<span class="nc" id="L196">            break;</span>
+            case &quot;Remove&quot;: {
+<span class="nc" id="L198">                ParentFrame.getMainFrame().setEnabled(false);</span>
+<span class="nc" id="L199">                new RemoveCustomer().frame.setVisible(true);</span>
+            }
+<span class="nc" id="L201">            break;</span>
+            case &quot;Update&quot;: {
+//                ParentFrame.getMainFrame().setEnabled(false);
+//                new UpdateCustomer().frame.setVisible(true);
+            }
+<span class="nc" id="L206">            break;</span>
+            case &quot;Back&quot;: {
+<span class="nc" id="L208">                ParentFrame.getMainFrame().setTitle(&quot;Rent-A-Car Management System [REBORN]&quot;);</span>
+<span class="nc" id="L209">                MainMenu mm = new MainMenu();</span>
+<span class="nc" id="L210">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L211">                ParentFrame.getMainFrame().add(mm.getMainPanel());</span>
+<span class="nc" id="L212">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+            }
+<span class="nc" id="L214">            break;</span>
+            
+            case &quot;Clear Bill&quot;: {
+//                ArrayList&lt;Customer&gt; View = Customer.View();//Creating an arrayList that contains Objects of all Customers
+//                if (!View.isEmpty()) {
+//                    ArrayList&lt;String&gt; IDsArray = new ArrayList&lt;&gt;(0);
+//                    for (int i = 0; i &lt; View.size(); i++) { // getting IDs of all the Customers with Bill &gt; 0
+//                        if (View.get(i).getBill() != 0) {
+//                            IDsArray.add(View.get(i).getID() + &quot;&quot;);
+//                        }
+//                    }
+//                    Object showInputDialog = JOptionPane.showInputDialog(null, &quot;Select ID for Customer whose bill you want to clear.&quot;, &quot;Clear Bill&quot;,
+//                            JOptionPane.PLAIN_MESSAGE, null, IDsArray.toArray(), null);
+//                    System.out.println(showInputDialog);
+//
+//                    if (showInputDialog != null) {
+//                        Customer customer = Customer.SearchByID((Integer.parseInt(showInputDialog + &quot;&quot;)));
+//
+//                        int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to clear the balance for the following Customer\n&quot;
+//                                + customer + &quot;\nAre you sure you want to continue ?&quot;, &quot;Clear Bill Confirmation&quot;,
+//                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+//                        if (showConfirmDialog == 0) {
+//                            customer.setBill(0);
+//                            customer.Update();
+//                            ParentFrame.getMainFrame().getContentPane().removeAll();
+//                            Customer_Details cd = new Customer_Details();
+//                            ParentFrame.getMainFrame().add(cd.getMainPanel());
+//                            ParentFrame.getMainFrame().getContentPane().revalidate();
+//                            JOptionPane.showMessageDialog(null, &quot;Bill Successfully Cleared !&quot;);
+//                        }
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(null, &quot;No Customer Currently Registered !&quot;);
+//                }
+            }
+            break;
+        }
+<span class="nc" id="L251">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

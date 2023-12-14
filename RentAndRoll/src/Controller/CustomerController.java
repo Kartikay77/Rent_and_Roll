@@ -22,10 +22,10 @@ import utilities.DatabaseConnector;
 public class CustomerController {
     Statement stmt;
     Connection connection;
-    
+    DatabaseConnector databaseConnector = new DatabaseConnector();
     public CustomerController() {
         try {
-            this.connection = DatabaseConnector.getConnection();
+            this.connection = this.databaseConnector.getConnection();
             this.stmt = connection.createStatement(); 
         } catch(SQLException e) {
             System.out.println("Unable to make database connection: "+e);
@@ -174,5 +174,23 @@ public class CustomerController {
         }
         return true;
     }
+
+	public Connection getConnection() {
+		return this.connection;
+	}
+
+	public Statement getStatement() {
+		return this.stmt;
+	}
+
+	public void setDatabaseConnector(DatabaseConnector databaseConnector) throws SQLException {
+		this.databaseConnector = databaseConnector;
+        this.connection = this.databaseConnector.getConnection();
+		
+	}
+
+	public void setStatement(Statement statementMock) {
+		this.stmt = statementMock;
+	}
     
 }

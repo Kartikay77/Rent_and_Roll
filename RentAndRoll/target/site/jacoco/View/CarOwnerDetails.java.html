@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CarOwnerDetails.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">CarOwnerDetails.java</span></div><h1>CarOwnerDetails.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package View;
+
+import Model.CarOwner;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
+
+/**
+ *
+ * @author erkur
+ */
+public class CarOwnerDetails implements ActionListener{
+    private JTextField SearchIdTextField;
+    private JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBalanceButton;
+    private JScrollPane ScrollPane1;
+    private JTable OwnerTable;
+    private JTextField SearchNameTextField;
+    static DefaultTableModel TableModel;
+    private JPanel MainPanel;
+
+<span class="nc" id="L38">    public CarOwnerDetails() {</span>
+<span class="nc" id="L39">        MainPanel = new JPanel();</span>
+<span class="nc" id="L40">        ParentFrame.getMainFrame().setTitle(&quot;Car Owner Details&quot;);</span>
+<span class="nc" id="L41">        MainPanel.setLayout(new AbsoluteLayout());</span>
+<span class="nc" id="L42">        MainPanel.setMinimumSize(new Dimension(1366, 730));</span>
+
+<span class="nc" id="L44">        SearchIdButton = new JButton(&quot;Search ID&quot;);</span>
+<span class="nc" id="L45">        UpdateButton = new JButton(&quot;Update&quot;);</span>
+<span class="nc" id="L46">        AddButton = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L47">        RemoveButton = new JButton(&quot;Remove&quot;);</span>
+<span class="nc" id="L48">        BackButton = new JButton(&quot;Back&quot;);</span>
+<span class="nc" id="L49">        SearchNameButton = new JButton(&quot;Search Name&quot;);</span>
+<span class="nc" id="L50">        ClearBalanceButton = new JButton(&quot;Clear Balance&quot;);</span>
+<span class="nc" id="L51">        SearchIdTextField = new JTextField();</span>
+<span class="nc" id="L52">        SearchNameTextField = new JTextField();</span>
+<span class="nc" id="L53">        ScrollPane1 = new JScrollPane();</span>
+<span class="nc" id="L54">        OwnerTable = new JTable();</span>
+
+<span class="nc" id="L56">        String[] columns = {&quot;ID&quot;, &quot;Name&quot;, &quot;Contact Number&quot;, &quot;Balance&quot;};</span>
+<span class="nc" id="L57">        TableModel = new DefaultTableModel(columns, 0) {</span>
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+<span class="nc" id="L61">                return false;</span>
+            }
+        };
+
+<span class="nc" id="L65">        OwnerTable = new JTable(TableModel);</span>
+
+<span class="nc" id="L67">        OwnerTable.setSize(new Dimension(1330, 550));</span>
+<span class="nc" id="L68">        ScrollPane1 = new JScrollPane(OwnerTable);</span>
+<span class="nc" id="L69">        OwnerTable.setFillsViewportHeight(true);// makes the size of table equal to that of scroll pane to fill the table in the scrollpane</span>
+//        ArrayList&lt;CarOwner&gt; OwnersList = //Call controller;
+//        ArrayList&lt;CarOwner&gt; CarOwner_objects = new ArrayList&lt;CarOwner&gt;();
+//        for (int i = 0; i &lt; CarOwner_objects.size(); i++) {
+//            int ID = CarOwner_objects.get(i).getID();
+//            String Name = CarOwner_objects.get(i).getName();
+//            String ContactNo = CarOwner_objects.get(i).getContactNo();
+//            int Balance = CarOwner_objects.get(i).getBalance();
+//
+//            String[] tableRecord = {&quot;&quot; + ID, Name, ContactNo, Balance + &quot;&quot;};
+//            TableModel.addRow(tableRecord);
+//        }
+
+        // center aligning the text in all the columns
+<span class="nc" id="L83">        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();</span>
+<span class="nc" id="L84">        centerRenderer.setHorizontalAlignment(JLabel.CENTER);</span>
+<span class="nc" id="L85">        OwnerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L86">        OwnerTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L87">        OwnerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);</span>
+<span class="nc" id="L88">        OwnerTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);</span>
+
+        // adjusting size of each column
+<span class="nc" id="L91">        OwnerTable.getColumnModel().getColumn(0).setPreferredWidth(70);</span>
+<span class="nc" id="L92">        OwnerTable.getColumnModel().getColumn(1).setPreferredWidth(150);</span>
+<span class="nc" id="L93">        OwnerTable.getColumnModel().getColumn(2).setPreferredWidth(170);</span>
+<span class="nc" id="L94">        OwnerTable.getColumnModel().getColumn(3).setPreferredWidth(110);</span>
+
+//        jScrollPane1.setViewportView(jTable1);
+<span class="nc" id="L97">        MainPanel.add(SearchIdButton, new AbsoluteConstraints(390, 10, 130, 22));</span>
+<span class="nc" id="L98">        MainPanel.add(SearchIdTextField, new AbsoluteConstraints(525, 10, 240, 22));</span>
+<span class="nc" id="L99">        MainPanel.add(SearchNameButton, new AbsoluteConstraints(10, 10, 130, 22));</span>
+<span class="nc" id="L100">        MainPanel.add(SearchNameTextField, new AbsoluteConstraints(145, 10, 240, 22));</span>
+<span class="nc" id="L101">        MainPanel.add(ScrollPane1, new AbsoluteConstraints(10, 50, 1330, 550));</span>
+<span class="nc" id="L102">        MainPanel.add(UpdateButton, new AbsoluteConstraints(579, 625, 130, 22));</span>
+<span class="nc" id="L103">        MainPanel.add(AddButton, new AbsoluteConstraints(420, 625, 130, 22));</span>
+<span class="nc" id="L104">        MainPanel.add(RemoveButton, new AbsoluteConstraints(735, 625, 130, 22));</span>
+<span class="nc" id="L105">        MainPanel.add(BackButton, new AbsoluteConstraints(1106, 625, 130, 22));</span>
+<span class="nc" id="L106">        MainPanel.add(ClearBalanceButton, new AbsoluteConstraints(10, 625, 130, 22));</span>
+
+<span class="nc" id="L108">        SearchIdButton.addActionListener(this);</span>
+<span class="nc" id="L109">        SearchNameButton.addActionListener(this);</span>
+<span class="nc" id="L110">        BackButton.addActionListener(this);</span>
+<span class="nc" id="L111">        RemoveButton.addActionListener(this);</span>
+<span class="nc" id="L112">        AddButton.addActionListener(this);</span>
+<span class="nc" id="L113">        UpdateButton.addActionListener(this);    </span>
+<span class="nc" id="L114">        ClearBalanceButton.addActionListener(this);</span>
+<span class="nc" id="L115">    }</span>
+
+    public JPanel getMainPanel() {
+<span class="nc" id="L118">        return MainPanel;</span>
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L123" title="All 8 branches missed.">        switch (e.getActionCommand()) {</span>
+            case &quot;Search ID&quot;: {
+<span class="nc" id="L125">                String id = SearchIdTextField.getText().trim();</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                if (!id.isEmpty()) {</span>
+//                    CarOwner co = CarOwner.SearchById(Integer.parseInt(id));
+//                    if (co != null) {
+//                        JOptionPane.showMessageDialog(null, co.toString());
+//                        SearchIdTextField.setText(&quot;&quot;);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, &quot;ID not found!&quot;);
+//                        SearchIdTextField.setText(&quot;&quot;);
+//                    }                   
+                } else {
+<span class="nc" id="L136">                    JOptionPane.showMessageDialog(null, &quot;Please enter ID&quot;);</span>
+                }
+            }
+<span class="nc" id="L139">            break;</span>
+            case &quot;Search Name&quot;: {
+<span class="nc" id="L141">                String name = SearchNameTextField.getText().trim();</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">                if (!name.isEmpty()) {</span>
+//                        ArrayList&lt;CarOwner&gt; carOwnerArrayList = CarOwner.SearchByName(name);
+//                        String record = &quot;&quot;;
+//                        if (!carOwnerArrayList.isEmpty()) {
+//                            for (int i = 0; i &lt; carOwnerArrayList.size(); i++) {
+//                                record += carOwnerArrayList.get(i).toString() + &quot;\n&quot;;
+//                            }
+//                            JOptionPane.showMessageDialog(null, record);
+//                            SearchNameTextField.setText(&quot;&quot;);
+//                        } else {
+//                            JOptionPane.showMessageDialog(null, &quot;Required person not found&quot;);
+//                            SearchNameTextField.setText(&quot;&quot;);
+//                        }
+                } else {
+<span class="nc" id="L156">                    JOptionPane.showMessageDialog(null, &quot;Please enter a name&quot;);</span>
+                }
+            }
+<span class="nc" id="L159">            break;</span>
+            case &quot;Add&quot;: {
+<span class="nc" id="L161">                ParentFrame.getMainFrame().setEnabled(false);</span>
+<span class="nc" id="L162">                AddCarOwner aco = new AddCarOwner();</span>
+<span class="nc" id="L163">                aco.frame.setVisible(true);</span>
+            }
+<span class="nc" id="L165">            break;</span>
+            case &quot;Remove&quot;: {
+<span class="nc" id="L167">                ParentFrame.getMainFrame().setEnabled(false);</span>
+<span class="nc" id="L168">                new RemoveCarOwner().frame.setVisible(true);</span>
+            }
+<span class="nc" id="L170">            break;</span>
+            case &quot;Update&quot;: {
+<span class="nc" id="L172">                ParentFrame.getMainFrame().setEnabled(false);</span>
+<span class="nc" id="L173">                new UpdateCarOwner().frame.setVisible(true);</span>
+            }
+<span class="nc" id="L175">            break;</span>
+            case &quot;Clear Balance&quot;: {
+//                Creating an array that contains IDs of all CarOwners
+//                ArrayList&lt;CarOwner&gt; View = CarOwner.View(); // getting all the available Car Owner Objects
+//                if (!View.isEmpty()) {
+//                    ArrayList&lt;String&gt; IDsArray = new ArrayList&lt;&gt;(0);
+//                    for (int i = 0; i &lt; View.size(); i++) { // getting IDs of all the Car Owners with Balance &gt; 0
+//                        if (View.get(i).getBalance() != 0) {
+//                            IDsArray.add(View.get(i).getID() + &quot;&quot;);
+//                        }
+//                    }
+//
+//                    Object showInputDialog = JOptionPane.showInputDialog(null, &quot;Select ID for Car Owner whose balance you want to clear.&quot;,
+//                            &quot;Clear Balance&quot;, JOptionPane.PLAIN_MESSAGE, null, IDsArray.toArray(), null);
+//                    System.out.println(showInputDialog);
+//
+//                    if (showInputDialog != null) {
+//                        CarOwner carOwner = CarOwner.SearchByID(Integer.parseInt(showInputDialog + &quot;&quot;));
+//
+//                        int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to clear the balance for the following Car Owner\n&quot;
+//                                + carOwner + &quot;\nAre you sure you want to continue ?&quot;, &quot;Clear Balance Confirmation&quot;,
+//                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+//                        if (showConfirmDialog == 0) {
+//                            carOwner.setBalance(0);
+//                            carOwner.Update();
+//                            Parent_JFrame.getMainFrame().getContentPane().removeAll();
+//                            CarOwner_Details cd = new CarOwner_Details();
+//                            Parent_JFrame.getMainFrame().add(cd.getMainPanel());
+//                            Parent_JFrame.getMainFrame().getContentPane().revalidate();
+//                            JOptionPane.showMessageDialog(null, &quot;Balance Successfully Cleared !&quot;);
+//                        }
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(null, &quot;No Car Owner is registered !&quot;);
+//                }
+            }
+<span class="nc" id="L211">            break;</span>
+            case &quot;Back&quot;: {
+<span class="nc" id="L213">                ParentFrame.getMainFrame().setTitle(&quot;Rent and Roll - Car Management System&quot;);</span>
+<span class="nc" id="L214">                MainMenu mm = new MainMenu();</span>
+<span class="nc" id="L215">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L216">                ParentFrame.getMainFrame().add(mm.getMainPanel());</span>
+<span class="nc" id="L217">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+            }
+            break;
+        }
+<span class="nc" id="L221">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

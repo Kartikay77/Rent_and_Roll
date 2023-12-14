@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainMenu.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">MainMenu.java</span></div><h1>MainMenu.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package View;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author erkur
+ */
+public class MainMenu implements ActionListener {
+    private static JButton CarsButton, CustomerButton, OwnerButton, BookingButton;
+    private JPanel MainPanel;
+
+    public JPanel getMainPanel() {
+<span class="nc" id="L25">        return MainPanel;</span>
+    }
+
+<span class="nc" id="L28">    public MainMenu() {</span>
+<span class="nc" id="L29">        MainPanel = new JPanel();</span>
+        
+<span class="nc" id="L31">        MainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 200));</span>
+<span class="nc" id="L32">        MainPanel.setMinimumSize(new Dimension(1366, 730));</span>
+<span class="nc" id="L33">        MainPanel.setBackground(new Color(166,166,166));</span>
+
+<span class="nc" id="L35">        CustomerButton = new JButton(&quot;Customer&quot;);</span>
+<span class="nc" id="L36">        CarsButton = new JButton(&quot;Cars&quot;);</span>
+<span class="nc" id="L37">        OwnerButton = new JButton(&quot;Owner&quot;);</span>
+<span class="nc" id="L38">        BookingButton = new JButton(&quot;Booking Details&quot;);</span>
+
+<span class="nc" id="L40">        CustomerButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L41">        CarsButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L42">        OwnerButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L43">        BookingButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+
+<span class="nc" id="L45">        CustomerButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L46">        OwnerButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L47">        BookingButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L48">        CarsButton.setBackground(new Color(0,151,178));</span>
+        
+<span class="nc" id="L50">        MainPanel.add(CustomerButton);</span>
+<span class="nc" id="L51">        MainPanel.add(CarsButton);</span>
+<span class="nc" id="L52">        MainPanel.add(OwnerButton);</span>
+<span class="nc" id="L53">        MainPanel.add(BookingButton);</span>
+        
+<span class="nc" id="L55">        BookingButton.addActionListener(this);</span>
+<span class="nc" id="L56">        CustomerButton.addActionListener(this);</span>
+<span class="nc" id="L57">        OwnerButton.addActionListener(this);</span>
+<span class="nc" id="L58">        CarsButton.addActionListener(this);</span>
+<span class="nc" id="L59">    }</span>
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L63" title="All 5 branches missed.">        switch (e.getActionCommand()) {  </span>
+            case &quot;Cars&quot;: {
+<span class="nc" id="L65">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+//                CarDetails cd = new CarDetails();
+//                ParentFrame.getMainFrame().add(cd.getMainPanel());
+//                ParentFrame.getMainFrame().getContentPane().revalidate();
+            }
+<span class="nc" id="L70">            break;</span>
+            case &quot;Customer&quot;: {
+<span class="nc" id="L72">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L73">                CustomerDetails cd = new CustomerDetails();</span>
+<span class="nc" id="L74">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L75">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+            }
+<span class="nc" id="L77">            break;</span>
+            case &quot;Owner&quot;: {
+<span class="nc" id="L79">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L80">                CarOwnerDetails cd = new CarOwnerDetails();</span>
+<span class="nc" id="L81">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L82">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+            }
+<span class="nc" id="L84">            break;</span>
+            case &quot;Booking Details&quot;: {
+<span class="nc" id="L86">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+//                BookingDetails cd = new BookingDetails();
+//                ParentJFrame.getMainFrame().add(cd.getMainPanel());
+//                ParentJFrame.getMainFrame().getContentPane().revalidate();
+            }
+            break;
+        }
+<span class="nc" id="L93">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

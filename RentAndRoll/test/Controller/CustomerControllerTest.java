@@ -6,10 +6,14 @@ package Controller;
 
 import Controller.CustomerController;
 import Model.Customer;
+import utilities.DatabaseConnector;
+
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -48,13 +52,92 @@ public class CustomerControllerTest {
 
     }
     
+    
     @Test
     public void testConstructor() {
-        // Verify that the connection and statement are not null after construction
-        assertNotNull(mockCustomerDashboard.connection);
-        assertNotNull(mockCustomerDashboard.stmt);
+        try {
+            // Create an instance of CustomerController
+            CustomerController customerController = new CustomerController();
+
+            // Access private fields if needed (not recommended in general, but may be necessary for some tests)
+            Connection connection = customerController.getConnection();
+            Statement statement = customerController.getStatement();
+
+            // Check if the connection and statement are not null
+            assertNotNull("Connection should not be null", connection);
+            assertNotNull("Statement should not be null", statement);
+
+            // Additional assertions or verifications can be added as needed
+
+        } catch (Exception e) {
+            // Fail the test if an exception is thrown during the constructor
+            fail("Exception occurred: " + e.getMessage());
+        }
     }
     
+    @Test
+    public void testConstructor2() {
+        try {
+            // Mock the DatabaseConnector
+            DatabaseConnector databaseConnectorMock = mock(DatabaseConnector.class);
+            Connection connectionMock = mock(Connection.class);
+            Statement statementMock = mock(Statement.class);
+
+            // Mock the behavior of DatabaseConnector
+            when(databaseConnectorMock.getConnection()).thenReturn(connectionMock);
+            when(connectionMock.createStatement()).thenReturn(statementMock);
+
+            // Create an instance of CustomerController without passing DatabaseConnector
+            CustomerController customerController = new CustomerController();
+            
+            // Set the DatabaseConnector using a setter method or constructor injection
+            customerController.setDatabaseConnector(databaseConnectorMock);
+
+            // Access private fields if needed (not recommended in general, but may be necessary for some tests)
+            Connection connection = customerController.getConnection();
+            Statement statement = customerController.getStatement();
+
+            // Verify that the mocked connection and statement are not null
+            assertNotNull("Connection should not be null", connection);
+            assertNotNull("Statement should not be null", statement);
+
+            // Additional assertions or verifications can be added as needed
+
+        } catch (SQLException e) {
+            // Fail the test if an unexpected SQLException occurs
+            fail("Unexpected SQLException occurred: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testConstructorWithException() {
+        try {
+            // Mock the DatabaseConnector to throw SQLException
+            DatabaseConnector databaseConnectorMock = mock(DatabaseConnector.class);
+            when(databaseConnectorMock.getConnection()).thenThrow(new SQLException("Mocked exception"));
+
+            // Create an instance of CustomerController with the mocked DatabaseConnector
+//            CustomerController customerController = new CustomerController(databaseConnectorMock);
+            // Create an instance of CustomerController without passing DatabaseConnector
+            CustomerController customerController = new CustomerController();
+            
+            // Set the DatabaseConnector using a setter method or constructor injection
+            customerController.setDatabaseConnector(databaseConnectorMock);
+
+            // Access private fields if needed (not recommended in general, but may be necessary for some tests)
+            Connection connection = customerController.getConnection();
+            Statement statement = customerController.getStatement();
+
+            // If no exception is thrown, fail the test
+            fail("Expected SQLException, but no exception was thrown");
+
+        } catch (SQLException e) {
+            // Verify that the expected exception is thrown
+            System.out.println("Caught expected exception: " + e.getMessage());
+            // Additional assertions or verifications can be added as needed
+        }
+    }
+
     @Test
     public void testGetAllCustomers() {
         
@@ -210,5 +293,94 @@ public class CustomerControllerTest {
         // Verify the result
         assertFalse(clearBalanceResult);
     }
+    
+    @Test
+    public void testAddCustomerWithSQLException() throws SQLException {
+        // Mock the necessary objects
+        Connection connectionMock = mock(Connection.class);
+        PreparedStatement preparedStatementMock = mock(PreparedStatement.class);
+        ResultSet resultSetMock = mock(ResultSet.class);
+
+        // Mock the behavior of the mocked objects
+        when(connectionMock.prepareStatement("insert into customer (customer_name, contact_no, bill) values (?, ?, ?)",
+                Statement.RETURN_GENERATED_KEYS)).thenReturn(preparedStatementMock);
+        when(preparedStatementMock.executeUpdate()).thenThrow(new SQLException("Mocked SQL exception"));
+        when(preparedStatementMock.getGeneratedKeys()).thenReturn(resultSetMock);
+        when(resultSetMock.next()).thenReturn(true);
+        when(resultSetMock.getInt(1)).thenReturn(123); // Mock the generated customer ID
+
+        // Create an instance of CustomerController with the mocked Connection
+        CustomerController customerController = new CustomerController(connectionMock);
+
+        // Test the addCustomer method
+        int generatedCustomerId = customerController.addCustomer("John Doe", "1234567890", 1000.0);
+
+        // Verify that the catch block is executed and the expected customer ID is returned
+        assertEquals(-999, generatedCustomerId);
+    }
+    
+    @Test
+    public void testGetCustomersByNameWithSQLException() throws SQLException {
+        // Mock the necessary objects
+        Statement statementMock = mock(Statement.class);
+        ResultSet resultSetMock = mock(ResultSet.class);
+
+        // Mock the behavior of the mocked objects
+        when(statementMock.executeQuery("select * from customer where customer_name=\"John Doe\";"))
+                .thenThrow(new SQLException("Mocked SQL exception"));
+
+        // Create an instance of CustomerController with the mocked Statement
+        CustomerController customerController = new CustomerController();
+        customerController.setStatement(statementMock); // Assume there's a setter for Statement
+
+        // Test the getCustomersByName method
+        List<Customer> customers = customerController.getCustomersByName("John Doe");
+
+        // Verify that the catch block is executed and the returned list is empty
+        assertEquals(0, customers.size());
+    }
+    
+    @Test
+    public void testGetCustomerByIdWithSQLException() throws SQLException {
+        // Mock the necessary objects
+        Statement statementMock = mock(Statement.class);
+        ResultSet resultSetMock = mock(ResultSet.class);
+
+        // Mock the behavior of the mocked objects
+        when(statementMock.executeQuery("select * from customer where customer_id=123;"))
+                .thenThrow(new SQLException("Mocked SQL exception"));
+
+        // Create an instance of CustomerController with the mocked Statement
+        CustomerController customerController = new CustomerController();
+        customerController.setStatement(statementMock); // Assume there's a setter for Statement
+
+        // Test the getCustomerById method
+        Customer customer = customerController.getCustomerById(123);
+
+        // Verify that the catch block is executed and the returned customer is null
+        assertEquals(0.0, customer.getBillAmount(), 0.01);
+    }
+    
+    @Test
+    public void testGetAllCustomersWithSQLException() throws SQLException {
+        // Mock the necessary objects
+        Statement statementMock = mock(Statement.class);
+        ResultSet resultSetMock = mock(ResultSet.class);
+
+        // Mock the behavior of the mocked objects
+        when(statementMock.executeQuery("select * from customer")).thenThrow(new SQLException("Mocked SQL exception"));
+
+        // Create an instance of CustomerController with the mocked Statement
+        CustomerController customerController = new CustomerController();
+        customerController.setStatement(statementMock); // Assume there's a setter for Statement
+
+        // Test the getAllCustomers method
+        List<Customer> customers = customerController.getAllCustomers();
+
+        // Verify that the catch block is executed, and the returned list is empty
+        assertTrue(customers.isEmpty());
+    }
+
+    
     
 }

@@ -28,7 +28,7 @@ FOREIGN KEY (owner_id) REFERENCES car_owner(owner_id));
 
 CREATE TABLE 
 booking (
-booking_id INT PRIMARY KEY,
+booking_id INT AUTO_INCREMENT PRIMARY KEY,
 rent_time DATETIME,
 return_time DATETIME,
 FOREIGN KEY (customer_id) REFERENCES customer(customer_id),

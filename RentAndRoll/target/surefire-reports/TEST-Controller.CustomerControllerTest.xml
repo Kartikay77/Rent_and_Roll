@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="Controller.CustomerControllerTest" time="1.679" tests="15" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\Bora\Downloads\520_Project_final\Rent_and_Roll\RentAndRoll\target\test-classes;C:\Users\Bora\Downloads\520_Project_final\Rent_and_Roll\RentAndRoll\target\classes;C:\Users\Bora\.m2\repository\mysql\mysql-connector-java\8.0.26\mysql-connector-java-8.0.26.jar;C:\Users\Bora\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;C:\Users\Bora\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE200\AbsoluteLayout-RELEASE200.jar;C:\Users\Bora\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\Bora\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Bora\.m2\repository\org\hamcrest\hamcrest-all\1.3\hamcrest-all-1.3.jar;C:\Users\Bora\.m2\repository\org\mockito\mockito-core\5.8.0\mockito-core-5.8.0.jar;C:\Users\Bora\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Bora\.m2\repository\net\bytebuddy\byte-buddy\1.14.10\byte-buddy-1.14.10.jar;C:\Users\Bora\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.10\byte-buddy-agent-1.14.10.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://openjdk.java.net/"/>
+    <property name="user.timezone" value="America/New_York"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
+    <property name="sun.java.command" value="C:\Users\Bora\AppData\Local\Temp\surefire15226618827762175461\surefirebooter-20231214100553128_3.jar C:\Users\Bora\AppData\Local\Temp\surefire15226618827762175461 2023-12-14T10-05-52_581-jvmRun1 surefire-20231214100553128_1tmp surefire_0-20231214100553128_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\Bora\Downloads\520_Project_final\Rent_and_Roll\RentAndRoll\target\test-classes;C:\Users\Bora\Downloads\520_Project_final\Rent_and_Roll\RentAndRoll\target\classes;C:\Users\Bora\.m2\repository\mysql\mysql-connector-java\8.0.26\mysql-connector-java-8.0.26.jar;C:\Users\Bora\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;C:\Users\Bora\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE200\AbsoluteLayout-RELEASE200.jar;C:\Users\Bora\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\Bora\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Bora\.m2\repository\org\hamcrest\hamcrest-all\1.3\hamcrest-all-1.3.jar;C:\Users\Bora\.m2\repository\org\mockito\mockito-core\5.8.0\mockito-core-5.8.0.jar;C:\Users\Bora\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Bora\.m2\repository\net\bytebuddy\byte-buddy\1.14.10\byte-buddy-1.14.10.jar;C:\Users\Bora\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.10\byte-buddy-agent-1.14.10.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Bora"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-04-18"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-11"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\Bora\Downloads\520_Project_final\Rent_and_Roll\RentAndRoll"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\Bora\AppData\Local\Temp\surefire15226618827762175461\surefirebooter-20231214100553128_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.19+9-LTS-224"/>
+    <property name="user.name" value="Bora"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="18.9"/>
+    <property name="localRepository" value="C:\Users\Bora\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\Bora\AppData\Local\Temp\"/>
+    <property name="java.version" value="11.0.19"/>
+    <property name="user.dir" value="C:\Users\Bora\Downloads\520_Project_final\Rent_and_Roll\RentAndRoll"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-11\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\Bora\Downloads\apache-ant-1.9.16-bin\apache-ant-1.9.16\bin;C:\Users\Bora\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Bora\AppData\Local\Programs\Python\Python312\;C:\Users\Bora\AppData\Local\Programs\Python\Launcher\;C:\Users\Bora\AppData\Local\Microsoft\WindowsApps;C:\Users\Bora\AppData\Roaming\npm;C:\Users\Bora\Downloads\apache-ant-1.10.14-bin\apache-ant-1.10.14\\bin;C:\Program Files\Java\jdk-11\bin;C:\Users\Bora\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Bora\Downloads\apache-maven-3.9.6-bin\apache-maven-3.9.6\bin;;."/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vm.version" value="11.0.19+9-LTS-224"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="testAddCustomerWithSQLException" classname="Controller.CustomerControllerTest" time="0.372">
+    <system-err><![CDATA[java.sql.SQLException: Mocked SQL exception
+	at Controller.CustomerController.addCustomer(CustomerController.java:128)
+	at Controller.CustomerControllerTest.testAddCustomerWithSQLException(CustomerControllerTest.java:322)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+]]></system-err>
+  </testcase>
+  <testcase name="testGetCustomerById" classname="Controller.CustomerControllerTest" time="0.0"/>
+  <testcase name="testGetAllCustomersWithSQLException" classname="Controller.CustomerControllerTest" time="0.869">
+    <system-out><![CDATA[Unable to get all customers: java.sql.SQLException: Mocked SQL exception
+]]></system-out>
+  </testcase>
+  <testcase name="testGetCustomersByName" classname="Controller.CustomerControllerTest" time="0.0"/>
+  <testcase name="testAddCustomer" classname="Controller.CustomerControllerTest" time="0.0"/>
+  <testcase name="testConstructor2" classname="Controller.CustomerControllerTest" time="0.168"/>
+  <testcase name="testRemoveCustomerFailure" classname="Controller.CustomerControllerTest" time="0.07">
+    <system-out><![CDATA[Unable to remove customer: java.sql.SQLException
+]]></system-out>
+  </testcase>
+  <testcase name="testGetAllCustomers" classname="Controller.CustomerControllerTest" time="0.0"/>
+  <testcase name="testClearBalanceFailure" classname="Controller.CustomerControllerTest" time="0.006">
+    <system-out><![CDATA[Unable to update customer: java.sql.SQLException
+]]></system-out>
+  </testcase>
+  <testcase name="testConstructorWithException" classname="Controller.CustomerControllerTest" time="0.037">
+    <system-out><![CDATA[Caught expected exception: Mocked exception
+]]></system-out>
+  </testcase>
+  <testcase name="testGetCustomersByNameWithSQLException" classname="Controller.CustomerControllerTest" time="0.043">
+    <system-out><![CDATA[Unable to get customers: java.sql.SQLException: Mocked SQL exception
+]]></system-out>
+  </testcase>
+  <testcase name="testClearBalance" classname="Controller.CustomerControllerTest" time="0.0"/>
+  <testcase name="testGetCustomerByIdWithSQLException" classname="Controller.CustomerControllerTest" time="0.049">
+    <system-out><![CDATA[Unable to get customers: java.sql.SQLException: Mocked SQL exception
+]]></system-out>
+  </testcase>
+  <testcase name="testConstructor" classname="Controller.CustomerControllerTest" time="0.042"/>
+  <testcase name="testRemoveCustomer" classname="Controller.CustomerControllerTest" time="0.0"/>
+</testsuite>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MysqlCon.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">Backend</a> &gt; <span class="el_source">MysqlCon.java</span></div><h1>MysqlCon.java</h1><pre class="source lang-java linenums">package Backend;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;  
+<span class="nc" id="L6">public class MysqlCon{  </span>
+public static void main(String args[]){  
+try{  
+<span class="nc" id="L9">Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);  </span>
+<span class="nc" id="L10">Connection con=DriverManager.getConnection(  </span>
+&quot;jdbc:mysql://localhost:3306/se&quot;,&quot;root&quot;,&quot;admin123&quot;);  
+//here stock is database name, root is username and heart is password  
+<span class="nc" id="L13">Statement stmt=con.createStatement(); </span>
+
+//String sql1 = &quot;insert into customer values (5,'Rachna','+918778993789',180.5)&quot;;
+//String sql1 = &quot;insert into customer values (6,'Pranchal','+918778883789',280.5)&quot;;
+//String sql1 = &quot;insert into customer values (7,'Manish','+9199778993789',380.5)&quot;;
+//String sql1 = &quot;insert into customer values (8,'Rachna','+918778993789',480.5)&quot;;
+//String sql1 = &quot;insert into customer values (9,'Aaditriee','+910078993789',580.5)&quot;;
+<span class="nc" id="L20">String sql1 = &quot;insert into customer values (10,'Adwait','+918700993789',680.5)&quot;;</span>
+<span class="nc" id="L21">stmt.executeUpdate(sql1);</span>
+//String sql3 = &quot;insert into car_owner values (5,'Aprajit','66681891',887.5)&quot;;
+//String sql3 = &quot;insert into car_owner values (6,'karim lala','90981891',789.5)&quot;;
+//String sql3 = &quot;insert into car_owner values (7,'Haji mastan','77981891',745.5)&quot;;
+//String sql3 = &quot;insert into car_owner values (8,'pasha','88981891',589.5)&quot;;
+//String sql3 = &quot;insert into car_owner values (9,'pathaan','956981891',689.5)&quot;;
+//String sql3 = &quot;insert into car_owner values (10,'Animal','977981891',788.5)&quot;;
+//stmt.executeUpdate(sql3);
+//String sql2 = &quot;insert into car values (4,'Volkswagen','Audi A3,','Blue','Wagon','Huge','MO99EK1111','Bad',8,175.5,5)&quot;;
+//String sql2 = &quot;insert into car values (5,'Ford F-Series','Ford Mustang','Pink','Convertible','small','SE88DT1310','POOR',2,150.5,5)&quot;;
+//String sql2 = &quot;insert into car values (6,'General Motors (GM)','Chevrolet Equinox','Orange','Coupe','big','AP97KG1311','POOR',5,250.5,6)&quot;;
+//String sql2 = &quot;insert into car values (7,'Volkswagen','Audi A3,','Black','Hatchback','small','VG70VG2008','POOR',4,550.5,7)&quot;;
+//String sql2 = &quot;insert into car values (8,'BMW Group','BMW 5 Series,','Blue','SUV (Sports Utility Vehicle)','big','SG71SG1807','POOR',5,750.5,5)&quot;;
+//String sql2 = &quot;insert into car values (9,'Mercedes-Benz','Mercedes GLC,','Black','Convertible','big','KL41GU1941','Excellent',2,1000.5,8)&quot;;
+//String sql2 = &quot;insert into car values (10,'Hyundai Motor Group','Hyundai Elantra','Blue','SUV (Sports Utility Vehicle)','big','DT13DT1807','POOR',5,420.5,9)&quot;;
+//stmt.executeUpdate(sql2);
+//String sql4 = &quot;insert into booking values (3, '2023-12-01 10:00:00', '2023-12-01 10:30:00',4,4)&quot;;
+//String sql4 = &quot;insert into booking values (5, '2021-12-01 11:30:00', '2022-11-01 14:45:00',5,5)&quot;;
+//String sql4 = &quot;insert into booking values (6, '2022-11-01 12:30:00', '2020-12-01 15:45:00',6,6)&quot;;
+//String sql4 = &quot;insert into booking values (7, '2022-01-01 10:30:00', '2021-08-01 13:45:00',3,3)&quot;;
+//String sql4 = &quot;INSERT INTO booking VALUES (8, '2023-01-11 11:00:00', '2023-01-09 17:30:00', 7, 7)&quot;;
+//String sql4 = &quot;insert into booking values (9, '2022-07-01 12:00:00', '2022-03-01 18:45:00',5,5)&quot;;
+//String sql4 = &quot;INSERT INTO booking VALUES (10, '2022-01-18 10:00:00', '2022-04-01 19:45:00', 6, 6)&quot;;
+//stmt.executeUpdate(sql4);
+//ResultSet rs=stmt.executeQuery(&quot;select * from customer&quot;); 
+//while(rs.next())  
+//System.out.println(rs.getInt(1)+&quot;  &quot;+rs.getString(2)+&quot;  &quot;+rs.getString(3)+&quot;  &quot;+rs.getInt(4));  
+<span class="nc" id="L48">con.close();  </span>
+<span class="nc" id="L49">}catch(Exception e){ System.out.println(e);}  </span>
+<span class="nc" id="L50">}  </span>
+}  
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

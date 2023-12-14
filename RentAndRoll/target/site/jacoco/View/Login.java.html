@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Login.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RentAndRoll</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">Login.java</span></div><h1>Login.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package View;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author erkur
+ */
+public class Login {
+    private final JPanel MiniPanel, MainPanel, ButtonPanel, UnPanel, PwPanel;
+    private final JButton Close_Button, Login_Button;
+    private final JLabel PW_Label, UN_Label, Image_jLabel, info_Label;
+    private final JTextField UN_TextField;
+    private final JPasswordField Password_Field;
+
+<span class="nc" id="L36">    public Login() {</span>
+
+<span class="nc" id="L38">        MiniPanel = new JPanel();</span>
+<span class="nc" id="L39">        MainPanel = new JPanel(new BorderLayout());</span>
+<span class="nc" id="L40">        ButtonPanel = new JPanel();</span>
+<span class="nc" id="L41">        UnPanel = new JPanel();</span>
+<span class="nc" id="L42">        PwPanel = new JPanel();</span>
+
+<span class="nc" id="L44">        Close_Button = new JButton(&quot;Close&quot;);</span>
+<span class="nc" id="L45">        Login_Button = new JButton(&quot;Login&quot;);</span>
+
+<span class="nc" id="L47">        PW_Label = new JLabel(&quot;Password&quot;);</span>
+<span class="nc" id="L48">        UN_Label = new JLabel(&quot;Username&quot;);</span>
+<span class="nc" id="L49">        info_Label = new JLabel(&quot;Please Enter your Login Details&quot;);</span>
+<span class="nc" id="L50">        Image_jLabel = new JLabel();</span>
+
+<span class="nc" id="L52">        UN_TextField = new JTextField();</span>
+<span class="nc" id="L53">        Password_Field = new JPasswordField();</span>
+
+<span class="nc" id="L55">        MainPanel.setPreferredSize(new Dimension(1366, 730));</span>
+        
+<span class="nc" id="L57">        UN_TextField.setPreferredSize(new Dimension(200, 20));</span>
+<span class="nc" id="L58">        UN_TextField.setMaximumSize(new Dimension(200, UN_TextField.getMinimumSize().height));</span>
+        
+<span class="nc" id="L60">        Password_Field.setPreferredSize(new Dimension(200, 20));</span>
+<span class="nc" id="L61">        Password_Field.setMaximumSize(new Dimension(Password_Field.getPreferredSize().width, Password_Field.getMinimumSize().height));</span>
+        
+<span class="nc" id="L63">        info_Label.setFont(new Font(&quot;Poppins&quot;, 1, 18)); // Consolas, Bold , 18pt</span>
+<span class="nc" id="L64">        info_Label.setForeground(Color.WHITE);</span>
+
+<span class="nc" id="L66">        UN_Label.setFont(new Font(&quot;Poppins&quot;, 0, 18));</span>
+<span class="nc" id="L67">        UN_Label.setForeground(Color.WHITE);</span>
+<span class="nc" id="L68">        UN_Label.setPreferredSize(new Dimension(100, 20));</span>
+
+<span class="nc" id="L70">        PW_Label.setFont(new Font(&quot;Poppins&quot;, 0, 18));</span>
+<span class="nc" id="L71">        PW_Label.setForeground(Color.WHITE);</span>
+<span class="nc" id="L72">        PW_Label.setPreferredSize(new Dimension(100, 20));</span>
+        
+<span class="nc" id="L74">        UnPanel.setLayout(new FlowLayout());</span>
+<span class="nc" id="L75">        UnPanel.setBackground(new Color(43,31,80));</span>
+<span class="nc" id="L76">        UnPanel.setMaximumSize(new Dimension(683, 50));</span>
+<span class="nc" id="L77">        UnPanel.add(UN_Label);</span>
+<span class="nc" id="L78">        UnPanel.add(UN_TextField);</span>
+        
+<span class="nc" id="L80">        PwPanel.setLayout(new FlowLayout());</span>
+<span class="nc" id="L81">        PwPanel.setMaximumSize(new Dimension(683, 50));</span>
+<span class="nc" id="L82">        PwPanel.setBackground(new Color(43,31,80));</span>
+<span class="nc" id="L83">        PwPanel.add(PW_Label);</span>
+<span class="nc" id="L84">        PwPanel.add(Password_Field);</span>
+        
+<span class="nc" id="L86">        Login_Button.setPreferredSize(new Dimension(80, 20));</span>
+<span class="nc" id="L87">        Close_Button.setPreferredSize(new Dimension(80, 20));</span>
+<span class="nc" id="L88">        ButtonPanel.setBackground(new Color(43,31,80));</span>
+<span class="nc" id="L89">        ButtonPanel.setLayout(new FlowLayout());</span>
+<span class="nc" id="L90">        ButtonPanel.add(Login_Button);</span>
+<span class="nc" id="L91">        ButtonPanel.add(Close_Button);</span>
+        
+<span class="nc" id="L93">        MiniPanel.setPreferredSize(new Dimension(683, 730));</span>
+<span class="nc" id="L94">        MiniPanel.setBackground(new Color(43,31,80));</span>
+<span class="nc" id="L95">        MiniPanel.setLayout(new BoxLayout(MiniPanel, BoxLayout.Y_AXIS));</span>
+<span class="nc" id="L96">        MiniPanel.add(Box.createRigidArea(new Dimension(0,100)));</span>
+<span class="nc" id="L97">        MiniPanel.add(info_Label);</span>
+<span class="nc" id="L98">        MiniPanel.add(UnPanel);</span>
+<span class="nc" id="L99">        MiniPanel.add(PwPanel);</span>
+<span class="nc" id="L100">        MiniPanel.add(ButtonPanel);</span>
+        
+<span class="nc" id="L102">        Image_jLabel.setPreferredSize(new Dimension(683, 730));</span>
+<span class="nc" id="L103">        Image_jLabel.setIcon(new ImageIcon(&quot;LoginImage3.jpg&quot;));</span>
+
+<span class="nc" id="L105">        MainPanel.add(MiniPanel, BorderLayout.WEST);</span>
+<span class="nc" id="L106">        MainPanel.add(Image_jLabel, BorderLayout.EAST);</span>
+
+<span class="nc" id="L108">        Login_Button.addActionListener(new LoginActionListener());</span>
+<span class="nc" id="L109">        Close_Button.addActionListener(new LoginActionListener());</span>
+<span class="nc" id="L110">    }</span>
+
+    /**
+     * @return the MainPanel
+     */
+    public JPanel getMainPanel() {
+<span class="nc" id="L116">        return MainPanel;</span>
+    }
+
+<span class="nc" id="L119">    private class LoginActionListener implements ActionListener {</span>
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L123" title="All 3 branches missed.">            switch (e.getActionCommand()) {</span>
+                case &quot;Close&quot;: {
+<span class="nc" id="L125">                    int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
+                            + &quot; Are you sure you want to continue ?&quot;, &quot;Close Confirmation&quot;, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null);
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                    if (showConfirmDialog == 0) {</span>
+<span class="nc" id="L128">                        System.exit(0);</span>
+                    }
+                    break;
+                }
+                case &quot;Login&quot;: {
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                    if (UN_TextField.getText().trim().equalsIgnoreCase(&quot;admin&quot;)</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                            &amp;&amp; String.valueOf(Password_Field.getPassword()).equals(&quot;123&quot;)) {</span>
+<span class="nc" id="L135">                        UN_TextField.setText(&quot;&quot;);</span>
+<span class="nc" id="L136">                        Password_Field.setText(&quot;&quot;);</span>
+<span class="nc" id="L137">                        Runner.getFrame().dispose();</span>
+<span class="nc" id="L138">                        ParentFrame frame = new ParentFrame();</span>
+<span class="nc" id="L139">                        MainMenu menu = new MainMenu();</span>
+<span class="nc" id="L140">                        JFrame mainFrame = ParentFrame.getMainFrame();</span>
+<span class="nc" id="L141">                        JPanel mainPanel = menu.getMainPanel();</span>
+<span class="nc" id="L142">                        mainFrame.add(menu.getMainPanel());</span>
+<span class="nc" id="L143">                        mainFrame.setVisible(true);</span>
+<span class="nc" id="L144">                    } else {</span>
+<span class="nc" id="L145">                        JOptionPane.showMessageDialog(null, &quot;Invalid UserName/Password&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+                    }
+                    break;
+                }
+            }
+<span class="nc" id="L150">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
