@@ -12,7 +12,7 @@ public class Car {
     private float rentPerHour;
     private int carOwnerId;
     private String carOwnerName;
-    private String markerName;
+    private String makerName;
     private String carName;
     private String color;
     private String carType;
@@ -39,14 +39,14 @@ public class Car {
      */
     
         public String getMakerName() {
-        return markerName;
+        return makerName;
     }
 
     /**
      * @param markerName the markerName to set
      */
     public void setMakerName(String markerName) {
-        this.markerName = markerName;
+        this.makerName = markerName;
     }
     
     
@@ -195,5 +195,10 @@ public class Car {
      */
     public void setCarOwnerName(String carOwnerName) {
         this.carOwnerName = carOwnerName;
+    }
+    
+    @Override
+    public String toString() {
+    	return ("Reg No: " + this.carRegNo + " Name: " + this.carName + " Maker: " + this.makerName);
     }
 }

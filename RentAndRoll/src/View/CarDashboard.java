@@ -8,6 +8,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
+
+import Controller.CarController;
+import Model.Car;
+import Model.CarOwner;
 
 /**
  *
@@ -34,6 +40,7 @@ public class CarDashboard {
     private static JTable CarTable;
     private JPanel MainPanel;
 
+    private CarController carController = new CarController();
     /**
      * @return the tableModel
      */
@@ -64,10 +71,9 @@ public class CarDashboard {
 
         ScrollPane1 = new JScrollPane();
         CarTable = new JTable();
-//ID,  Maker,  Name,  Colour,  Type,  SeatingCapacity,  Model,  Condition,  RegNo, RentPerHour,  IsRented RentDate, carOwner customer
 
-        String[] columns = {"Sr#", "ID", "Maker", "Name", "Colour", "Type", "Seats", "Model", "Condition",
-            "Reg No.", "Rent/hour", "Car Owner"};
+        String[] columns = {"ID", "Maker", "Name", "Colour", "Type", "Seats", "Model", "Condition",
+            "Reg No.", "Rent/hour"};
         tableModel = new DefaultTableModel(columns, 0) {
 
             @Override
@@ -82,29 +88,25 @@ public class CarDashboard {
 //        CarTable.setPreferredScrollableViewportSize(new Dimension(2000, 550));
         ScrollPane1 = new JScrollPane();
         ScrollPane1.setViewportView(CarTable);
-        CarTable.setFillsViewportHeight(true);// makes the size of table equal to that of scroll pane to fill the table in the scrollpane
-//        ArrayList<Car> Car_objects = Car.View();
-//        for (int i = 0; i < Car_objects.size(); i++) {
-////ID,  Maker,  Name,  Colour,  Type,  SeatingCapacity,  Model,  Condition,  RegNo, 
-////RentPerHour,  IsRented RentDate, carOwner customer
-//            int ID = Car_objects.get(i).getID();
-//            String maker = Car_objects.get(i).getMaker();
-//            String Name = Car_objects.get(i).getName();
-//            String color = Car_objects.get(i).getColour();
-//            String type = Car_objects.get(i).getType();
-//            int seatingCapacity = Car_objects.get(i).getSeatingCapacity();
-//            String model = Car_objects.get(i).getModel();
-//            String condition = Car_objects.get(i).getCondition();
-//            String regNo = Car_objects.get(i).getRegNo();
-//            int rentPerHour = Car_objects.get(i).getRentPerHour();
-////            CarOwner carOwner = Car_objects.get(i).getCarOwner();
-//
-//            String customerID = "";
-//            String customerName = "";
-//            String[] one_s_Record = {((i + 1) + ""), "" + ID, maker, Name, color, type, seatingCapacity+"",
-//                model, condition, regNo, rentPerHour + "", carOwner.getID() + ": " + carOwner.getName(), customerID + ": " + customerName};
-//            tableModel.addRow(one_s_Record);
-//        }
+
+        List<Car> CarsList = carController.getAllCars();
+        for (int i = 0; i < CarsList.size(); i++) {
+        	int ID = CarsList.get(i).carId();
+            String carModel = CarsList.get(i).getCarModel();
+            int seatingCapacity = CarsList.get(i).getSeatingCapacity();
+            float rentPerHour = CarsList.get(i).getSeatingCapacity();
+            String makerName = CarsList.get(i).getMakerName();
+            String carName = CarsList.get(i).getCarName();
+            String color = CarsList.get(i).getColor();
+            String carType = CarsList.get(i).getCarType();
+            String carCondition = CarsList.get(i).getCarCondition();
+            String carRegNo = CarsList.get(i).getCarRegNo();
+
+            String[] one_s_Record = {"" + ID, makerName, carName, color, carType, seatingCapacity+"",
+                    carModel, carCondition, carRegNo, rentPerHour + ""};
+           tableModel.addRow(one_s_Record);
+        }
+
 
         // center aligning the text in all the columns
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -119,8 +121,6 @@ public class CarDashboard {
         CarTable.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
         CarTable.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
         CarTable.getColumnModel().getColumn(9).setCellRenderer(centerRenderer);
-        CarTable.getColumnModel().getColumn(10).setCellRenderer(centerRenderer);
-        CarTable.getColumnModel().getColumn(11).setCellRenderer(centerRenderer);
         
 
         // adjusting size of each column
@@ -134,8 +134,6 @@ public class CarDashboard {
         CarTable.getColumnModel().getColumn(7).setMinWidth(90);
         CarTable.getColumnModel().getColumn(8).setMinWidth(160);
         CarTable.getColumnModel().getColumn(9).setMinWidth(170);
-        CarTable.getColumnModel().getColumn(10).setMinWidth(150);
-        CarTable.getColumnModel().getColumn(11).setMinWidth(150);
        
 
         CarTable.getTableHeader().setReorderingAllowed(false);
@@ -161,50 +159,41 @@ public class CarDashboard {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
             switch (e.getActionCommand()) {
-
                 case "Search Registration No": {
                     String regNo = SearchRegNoTextField.getText().trim();
-//                    if (!regNo.isEmpty()) {
-//                        if (Car.isRegNoValid(regNo)) {
-//                            Car car = Car.SearchByRegNo(regNo);
-//                            if (car != null) {
-//                                JOptionPane.showMessageDialog(null, car.toString());
-//                                SearchRegNoTextField.setText("");
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "Required Car not found");
-//                                SearchRegNoTextField.setText("");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Invalid Reg No.");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Please Enter Car Reg no first !");
-//                    }
+                    if (!regNo.isEmpty()) {
+                          Car c = carController.getCarById(regNo);
+                        if (c != null) {
+                            JOptionPane.showMessageDialog(null, c.toString());
+                            SearchRegNoTextField.setText("");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Registration number not found!");
+                            SearchRegNoTextField.setText("");
+                        }                   
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please enter registration number");
+                    }
                 }
                 break;
                 case "Search Name": {
-                    String name = SearchNameTextField.getText().trim();
-//                    if (!name.isEmpty()) {
-//                        if (Car.isNameValid(name)) {
-//
-//                            ArrayList<Car> car = Car.SearchByName(name);
-//
-//                            if (!car.isEmpty()) {
-//                                JOptionPane.showMessageDialog(null, car.toString());
-//                                SearchNameTextField.setText("");
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "Required Car not found");
-//                                SearchNameTextField.setText("");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Invalid Name !");
-//                            SearchNameTextField.setText("");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Please Enter Car Name first !");
-//                    }
+                   String name = SearchNameTextField.getText().trim();
+                   if (!name.isEmpty()) {
+                    List<Car> carList = carController.getCarsByName(name);
+                    String record = "";
+                    if (!carList.isEmpty()) {
+                        for (int i = 0; i < carList.size(); i++) {
+                            record += carList.get(i).toString() + "\n";
+                        }
+                        JOptionPane.showMessageDialog(null, record);
+                        SearchNameTextField.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Car not found");
+                        SearchNameTextField.setText("");
+                    }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please enter a name");
+            }
 
                 }
                 break;
@@ -215,13 +204,36 @@ public class CarDashboard {
                 }
                 break;
                 case "Remove": {
-                    ParentFrame.getMainFrame().setEnabled(false);
-                    RemoveCar ac = new RemoveCar();
-                    ac.setVisible(true);
+                	int selectedIndex = CarTable.getSelectedRow();
+                    if (selectedIndex == -1 && CarTable.getRowCount() > 0) {
+                        JOptionPane.showMessageDialog(null, "Please select a row!");
+                    }
+                    else {
+                        String clearId = (String)CarTable.getValueAt(selectedIndex, 0);
+                        int id = Integer.parseInt(clearId);
+                        String regNo = (String)CarTable.getValueAt(selectedIndex, 8);
+                        Car car = carController.getCarById(regNo);
+                        int showConfirmDialog = JOptionPane.showConfirmDialog(null, "You are about the following car\n"
+                                + car.toString() + "\nAre you sure you want to continue ?", "Remove Car Confirmation",
+                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+                        if (showConfirmDialog == 0) {
+                            boolean removed = carController.removeCar(id);
+                            if(removed){
+                                ParentFrame.getMainFrame().getContentPane().removeAll();
+                                CarDashboard cd = new CarDashboard();
+                                ParentFrame.getMainFrame().add(cd.getMainPanel());
+                                ParentFrame.getMainFrame().getContentPane().revalidate();
+                                JOptionPane.showMessageDialog(null, "Car Removed Succesfully!");
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null, "Error in deleting car. Please try again later!");
+                            }
+                        }
+                    }
                 }
                 break;
                 case "Back": {
-                    ParentFrame.getMainFrame().setTitle("Rent and Roll Car Management System");
+                    ParentFrame.getMainFrame().setTitle("Rent and Roll - Car Rental Management System");
                     MainMenu mm = new MainMenu();
                     ParentFrame.getMainFrame().getContentPane().removeAll();
                     ParentFrame.getMainFrame().add(mm.getMainPanel());
