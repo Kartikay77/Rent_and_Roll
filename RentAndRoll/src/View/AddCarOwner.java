@@ -4,7 +4,7 @@
  */
 package View;
 
-import java.awt.Color;
+import Controller.CarOwnerController;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +27,8 @@ public class AddCarOwner {
     JLabel NameLabel, ContactLabel;
     JTextField NameTextField, ContactTextField;
     JFrame frame = new JFrame();
+    
+    CarOwnerController ownerController = new CarOwnerController();
 
     public AddCarOwner() {
         frame.setTitle("Add Car Owner");
@@ -81,16 +83,22 @@ public class AddCarOwner {
                 case "Add": {
                     String name = NameTextField.getText().trim();
                     String contact = ContactTextField.getText().trim();
+                    double balance = 0;
 
                     if (!name.isEmpty() & !contact.isEmpty()) {
-//                        new CarOwner(name, contact).Add(); // ID is Auto
-                        ParentFrame.getMainFrame().getContentPane().removeAll();
-                        OwnerDashboard cd = new OwnerDashboard();
-                        ParentFrame.getMainFrame().add(cd.getMainPanel());
-                        ParentFrame.getMainFrame().getContentPane().revalidate();
-                        ParentFrame.getMainFrame().setEnabled(true);
-                        JOptionPane.showMessageDialog(null, "Car owner added successfully!");
-                        frame.dispose();
+                        int newId = ownerController.addOwner(name, contact, balance);
+                        if(newId >= 0) {
+                            ParentFrame.getMainFrame().getContentPane().removeAll();
+                            OwnerDashboard cd = new OwnerDashboard();
+                            ParentFrame.getMainFrame().add(cd.getMainPanel());
+                            ParentFrame.getMainFrame().getContentPane().revalidate();
+                            ParentFrame.getMainFrame().setEnabled(true);
+                            JOptionPane.showMessageDialog(null, "Car owner added successfully!");
+                            frame.dispose();
+                        }
+                        else {
+                           JOptionPane.showMessageDialog(null, "Error in adding owner. Please try again later.");
+                        } 
                     } else {
                         JOptionPane.showMessageDialog(null, "Please enter all details");
                     }

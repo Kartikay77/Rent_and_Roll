@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.CustomerController;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,8 @@ public class AddCustomer {
     JLabel NameLabel, ContactLabel;
     JTextField NameTextField, ContactTextField;
     JFrame frame = new JFrame();
+    
+    private CustomerController customerController = new CustomerController();
 
     public AddCustomer() {
         frame.setTitle("Add Customer");
@@ -83,32 +86,25 @@ public class AddCustomer {
                 case "Add": {
                     String name = NameTextField.getText().trim();
                     String contact = ContactTextField.getText().trim();
+                    double bill = 0;
 
-//                    if (Customer.isCNICValid(cnic)) {
-//                        Customer customer = Customer.SearchByCNIC(cnic);
-//                        if (customer == null) {
-//                            if (Customer.isNameValid(name)) {
-//                                if (Customer.isContactNoValid(contact)) {
-//                                    new Customer(0, 0, cnic, name, contact).Add(); // ID is Auto
-//                                    ParentFrame.getMainFrame().getContentPane().removeAll();
-//                                    Customer_Details cd = new Customer_Details();
-//                                    ParentFrame.getMainFrame().add(cd.getMainPanel());
-//                                    ParentFrame.getMainFrame().getContentPane().revalidate();
-//                                    ParentFrame.getMainFrame().setEnabled(true);
-//                                    JOptionPane.showMessageDialog(null, "Customer added successfully !");
-//                                    frame.dispose();
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, "Invalid contact no. !");
-//                                }
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "Invalid Name !");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "This CNIC is already registered !");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Invalid CNIC");
-//                    }
+                    if (!name.isEmpty() & !contact.isEmpty()) {
+                        int newId = customerController.addCustomer(name, contact, bill);
+                        if(newId >= 0) {
+                            ParentFrame.getMainFrame().getContentPane().removeAll();
+                            CustomerDashboard cd = new CustomerDashboard();
+                            ParentFrame.getMainFrame().add(cd.getMainPanel());
+                            ParentFrame.getMainFrame().getContentPane().revalidate();
+                            ParentFrame.getMainFrame().setEnabled(true);
+                            JOptionPane.showMessageDialog(null, "Customer added successfully!");
+                            frame.dispose();
+                        }
+                        else {
+                           JOptionPane.showMessageDialog(null, "Error in adding customer. Please try again later.");
+                        } 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please enter all details");
+                    }
                     break;
                 }
                 case "Cancel": {
