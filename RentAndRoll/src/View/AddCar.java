@@ -7,12 +7,13 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-//import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+
+import Controller.CarController;
 
 /**
  *
@@ -33,6 +36,8 @@ public class AddCar extends JFrame{
     JTextField MakerTextField, NameTextField, RegNoTextField, RentPerHourTextField, OwnerIDTextField;
     JComboBox<String> ColourComboBox, TypeComboBox, ModelComboBox, ConditionComboBox;
     JSpinner SeatingCapacity_Spinner;
+    
+    private CarController carController = new CarController();
 
     public AddCar() {
         super("Add Car");
@@ -146,116 +151,51 @@ public class AddCar extends JFrame{
                         regNo = RegNoTextField.getText().trim(),
                         ownerID = OwnerIDTextField.getText().trim(),
                         rentPerHour = RentPerHourTextField.getText().trim();
-
-//                if (!name.isEmpty()) {
-//                    if (Car.isNameValid(NameTextField.getText().trim())) {
-//                        NameValidityLabel.setText("");
-////                        name = NameTextField.getText().trim();
-//                    } else {
-//                        name = null;
-//                        NameValidityLabel.setText("                                                            Invalid  Car Name !");
-//                    }
-//                } else {
-//                    name = null;
-//                    NameValidityLabel.setText("                                                            Enter Car Name !");
-//                }
-//                if (!maker.isEmpty()) {
-//                    if (Car.isNameValid(maker)) {
-//                        MakerValidityLabel.setText("");
-////                        maker = MakerTextField.getText().trim();
-//                    } else {
-//                        maker = null;
-//                        MakerValidityLabel.setText("                                                            Invalid Maker's Name !");
-//                    }
-//                } else {
-//                    maker = null;
-//                    MakerValidityLabel.setText("                                                            Enter Maker'sName !");
-//                }
-//                if (!regNo.isEmpty()) {
-//                    if (Car.isRegNoValid(regNo)) {
-//                        RegNoValidityLabel.setText("");
-//                    } else {
-//                        regNo = null;
-//                        RegNoValidityLabel.setText("                                                            Invalid Reg no !");
-//                    }
-//                } else {
-//                    regNo = null;
-//                    RegNoValidityLabel.setText("                                                            Enter Reg No !");
-//                }
-//                if (!ownerID.isEmpty()) {
-//                    try {
-//                        if (Integer.parseInt(ownerID) > 0) {
-//                            OwnerIDValidityLabel.setText("");
-////                            ownerID = OwnerIDTextField.getText().trim();
-//                        } else {
-//                            ownerID = null;
-//                            OwnerIDValidityLabel.setText("                                                            ID cannot be '0' or negative !");
-//                        }
-//                    } catch (NumberFormatException ex) {
-//                        System.out.println("In GUI.Car_Add: " + ex);
-//                        ownerID = null;
-//                        OwnerIDValidityLabel.setText("                                                            Invalid ID !");
-//                    }
-//                } else {
-//                    ownerID = null;
-//                    OwnerIDValidityLabel.setText("                                                            Enter Owner ID !");
-//                }
-//                if (!rentPerHour.isEmpty()) {
-//                    try {
-//                        if (Integer.parseInt(rentPerHour) > 0) {
-//                            RentPerHourValidityLabel.setText("");
-//                        } else {
-//                            rentPerHour = null;
-//                            RentPerHourValidityLabel.setText("                                                            Rent cannot be '0' or negative !");
-//                        }
-//                    } catch (NumberFormatException ex) {
-//
-//                        rentPerHour = null;
-//                        RentPerHourValidityLabel.setText("                                                            Invalid Rent !");
-//                    }
-//
-//                } else {
-//                    rentPerHour = null;
-//                    RentPerHourValidityLabel.setText("                                                            Enter Rent !");
-//                }
-//
-////Car(id, maker, name, color, Type, seatingCapacity, model, condition, regNo, rentPerHour, carOwner);
-//                try {
-//                    if (maker != null && name != null && regNo != null && ownerID != null && rentPerHour != null) {
-//                        CarOwner carOwner = CarOwner.SearchByID(Integer.parseInt(ownerID));
-//
-//                        Car car = Car.SearchByRegNo(regNo);
-//
-//                        if (carOwner != null) {
-//                            if (car == null) {
-//                                //Car(id, Maker, Name, Colour, Type, SeatingCapacity, Model, Condition, RegNo, RentPerHour, carOwner)
-//                                // id is auto
-//                                car = new Car(0, maker, name, ColourComboBox.getSelectedItem() + "",
-//                                        TypeComboBox.getSelectedItem() + "",
-//                                        Integer.parseInt(SeatingCapacity_Spinner.getValue().toString()),
-//                                        ModelComboBox.getSelectedItem() + "",
-//                                        ConditionComboBox.getSelectedItem() + "",
-//                                        regNo, Integer.parseInt(rentPerHour), carOwner);
-//                                car.Add();
-//                                
-//                                ParentFrame.getMainFrame().getContentPane().removeAll();
-//                                Car_Details cd = new Car_Details();
-//                                ParentFrame.getMainFrame().add(cd.getMainPanel());
-//                                ParentFrame.getMainFrame().getContentPane().revalidate();
-//                                JOptionPane.showMessageDialog(null, "Record Successfully Added !");
-//                                ParentFrame.getMainFrame().setEnabled(true);
-//                                dispose();
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "This Car Registeration no is already registered !");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Owner ID doesnot exists !");
-//                        }
-//                    }
-//                } catch (HeadlessException | NumberFormatException ex) {
-//                    System.out.println(ex);
+                List<String> invalidFields = new ArrayList<String>();
+                
+                if (maker.isEmpty()) {
+                	invalidFields.add("maker");
                 }
-//            }
+                if (name.isEmpty()) {
+                	invalidFields.add("name");
+                }
+                if (regNo.isEmpty()) {
+                	invalidFields.add("regNo");
+                }
+                if (ownerID.isEmpty()) {
+                	invalidFields.add("ownerID");
+                }
+                if (rentPerHour.isEmpty()) {
+                	invalidFields.add("rentPerHour");
+                }
+                if(!invalidFields.isEmpty()) {
+                	JOptionPane.showMessageDialog(null, "Complete the following fields: \n" + invalidFields);
+                }
+                else {
+                	int newId = carController.addCar(maker, 
+                			name, 
+                			ColourComboBox.getSelectedItem() + "",
+                			TypeComboBox.getSelectedItem() + "",
+                			ModelComboBox.getSelectedItem() + "",
+                			regNo,
+                			ConditionComboBox.getSelectedItem() + "",
+                			Integer.parseInt(SeatingCapacity_Spinner.getValue().toString()),
+                			Double.parseDouble(rentPerHour),
+                			Integer.parseInt(ownerID));
+                    if(newId >= 0) {
+                        ParentFrame.getMainFrame().getContentPane().removeAll();
+                        CarDashboard cd = new CarDashboard();
+                        ParentFrame.getMainFrame().add(cd.getMainPanel());
+                        ParentFrame.getMainFrame().getContentPane().revalidate();
+                        ParentFrame.getMainFrame().setEnabled(true);
+                        JOptionPane.showMessageDialog(null, "Car added successfully!");
+                        dispose();
+                    }
+                    else {
+                       JOptionPane.showMessageDialog(null, "Error in adding car. Please try again later.");
+                    } 
+                }
+            }
         }
         );
         CancelButton.addActionListener(new ActionListener() {

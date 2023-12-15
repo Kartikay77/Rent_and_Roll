@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +25,11 @@ import javax.swing.table.DefaultTableModel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import Controller.BookingController;
+import Model.Booking;
+import Model.Car;
+import Model.Customer;
+
 public class BookingDashboard {
     private static DefaultTableModel tableModel;
     private static JButton SearchCustomerIDButton, SearchCarRegNoButton, BackButton, BookCarButton, UnbookCarButton;
@@ -30,6 +37,8 @@ public class BookingDashboard {
     private static JScrollPane ScrollPane1;
     private static JTable BookingsTable;
     private JPanel MainPanel;
+    
+    private BookingController bookingController = new BookingController();
 
     public BookingDashboard() {
         MainPanel = new JPanel();
@@ -50,7 +59,7 @@ public class BookingDashboard {
         BookingsTable = new JTable();
 //ID,  Maker,  Name,  Colour,  Type,  SeatingCapacity,  Model,  Condition,  RegNo, RentPerHour,  IsRented RentDate, carOwner customer
 
-        String[] columns = {"Sr#", "ID", "Customer ID+Name", "Car Name", "Rent Time", "Return Time"};
+        String[] columns = {"ID", "Customer", "Car Name", "Car Reg No" , "Rent Start Time", "Return Time"};
         tableModel = new DefaultTableModel(columns, 0) {
 
             @Override
@@ -65,32 +74,21 @@ public class BookingDashboard {
         ScrollPane1 = new JScrollPane();
         ScrollPane1.setViewportView(BookingsTable);
         BookingsTable.setFillsViewportHeight(true);// makes the size of table equal to that of scroll pane to fill the table in the scrollpane
-//        ArrayList<Booking> Booking_objects = Booking.View();
-//        for (int i = 0; i < Booking_objects.size(); i++) {
-////ID,  Maker,  Name,  Colour,  Type,  SeatingCapacity,  Model,  Condition,  RegNo, 
-////RentPerHour,  IsRented RentDate, carOwner customer
-//            int ID = Booking_objects.get(i).getID();
-//            String customer_ID_Name = Booking_objects.get(i).getCustomer().getID()
-//                    + ": " + Booking_objects.get(i).getCustomer().getName();
-//            String carName = Booking_objects.get(i).getCar().getName();
-//            String carID = Booking_objects.get(i).getCar().getID()+"";
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm a dd-MM-yyyy");
-//            Date rentime = new Date(Booking_objects.get(i).getRentTime());
-//            String rentTime = dateFormat.format(rentime);
-//
-//            long returnTime_ = Booking_objects.get(i).getReturnTime();
-//            String returnTime;
-//            if (returnTime_ != 0) {
-//                Date returntime = new Date(returnTime_);
-//                returnTime = dateFormat.format(returntime);
-//            } else {
-//                returnTime = "Not returned yet !";
-//            }
-//
-//            String[] one_s_Record = {((i + 1) + ""), "" + ID, customer_ID_Name, carID+": "+carName, rentTime, returnTime};
-//            tableModel.addRow(one_s_Record);
-//        }
 
+        List<Booking> BookingsList = bookingController.getAllBooking();
+        for (int i = 0; i < BookingsList.size(); i++) {
+        	int ID = BookingsList.get(i).bookingId();
+            String carName = BookingsList.get(i).getCarName();
+            String carRegNo = BookingsList.get(i).getReg_No();
+            int customerId = BookingsList.get(i).getCustomerId();
+            String customerName = BookingsList.get(i).getCustomerName();
+            Date rentTime = BookingsList.get(i).getRentalStartTime();
+            Date returnTime = BookingsList.get(i).getRentalReturnTime();
+
+            String[] one_s_Record = {"" + ID, customerId + " " + customerName, carName, carRegNo, rentTime + "", returnTime + ""};
+           tableModel.addRow(one_s_Record);
+        }
+        
         // center aligning the text in all the columns
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -152,71 +150,70 @@ public class BookingDashboard {
                 }
                 break;
                 case "Book": {
-//                    if (!Booking.getUnbookedCars().isEmpty()) {
-//                        ParentFrame.getMainFrame().setEnabled(false);
-//                        Booking_BookCar ac = new Booking_BookCar();
-//                        ac.setVisible(true);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "No UnBooked Cars are available !");
-//                    }
+                	ParentFrame.getMainFrame().setEnabled(false);
+                    AddBooking aco = new AddBooking();
+                    aco.setVisible(true);
                 }
                 break;
                 case "Unbook": {
-//                    if (!Booking.getBookedCars().isEmpty()) {
-//                        ParentFrame.getMainFrame().setEnabled(false);
-//                        Booking_UnBookCar ac = new Booking_UnBookCar();
-//                        ac.setVisible(true);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "No Booked Cars found !");
-//                    }
+                	int selectedIndex = BookingsTable.getSelectedRow();
+                    if (selectedIndex == -1 && BookingsTable.getRowCount() > 0) {
+                        JOptionPane.showMessageDialog(null, "Please select a row!");
+                    }
+                    else {
+                        String clearId = (String)BookingsTable.getValueAt(selectedIndex, 0);
+                        int id = Integer.parseInt(clearId);
+                        Booking customer = bookingController.getBookingById(id);
+                        int showConfirmDialog = JOptionPane.showConfirmDialog(null, "You are about to unbook the following: \n"
+                                + customer + "\nAre you sure you want to continue ?", "Delete Booking Confirmation",
+                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+                        if (showConfirmDialog == 0) {
+                            boolean removed = bookingController.removeBooking(id);
+                            if(removed){
+                                ParentFrame.getMainFrame().getContentPane().removeAll();
+                                CustomerDashboard cd = new CustomerDashboard();
+                                ParentFrame.getMainFrame().add(cd.getMainPanel());
+                                ParentFrame.getMainFrame().getContentPane().revalidate();
+                                JOptionPane.showMessageDialog(null, "Booking Removed Succesfully!");
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null, "Error in deleting booking. Please try again later!");
+                            }
+                        }
+                    }
                 }
                 break;
                 case "Search by Customer ID": {
-                    String customerID = CustomerIDTextField.getText().trim();
-//                    if (!customerID.isEmpty()) {
-//                        if (Customer.isIDvalid(customerID)) {
-//                            Customer customer = Customer.SearchByID(Integer.parseInt(customerID));
-//                            if (customer != null) {
-//                                ArrayList<Booking> bookings = Booking.SearchByCustomerID(Integer.parseInt(customerID));
-//                                if (!bookings.isEmpty()) {
-//                                    JOptionPane.showMessageDialog(null, bookings.toString());
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, "This Customer has not booked any cars yet !");
-//                                }
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "Customer ID not found !");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Invalid Customer ID !");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Enter Customer ID first !");
-//                    }
-//                    CustomerIDTextField.setText("");
+                    String id = CustomerIDTextField.getText().trim();
+                    if (!id.isEmpty()) {
+                        int searchId = Integer.parseInt(id);
+                        Booking co = bookingController.getBookingByCustomerId(searchId);
+                      if (co != null) {
+                          JOptionPane.showMessageDialog(null, co.toString());
+                          CustomerIDTextField.setText("");
+                      } else {
+                          JOptionPane.showMessageDialog(null, "Booking not found!");
+                          CustomerIDTextField.setText("");
+                      }                   
+                  } else {
+                      JOptionPane.showMessageDialog(null, "Please enter ID");
+                  }
                 }
                 break;
                 case "Search by Car RegNo": {
-//                    String carRegNo = CarRegNoTextField.getText().trim();
-//                    if (!carRegNo.isEmpty()) {
-//                        if (Car.isRegNoValid(carRegNo)) {
-//                            Car car = Car.SearchByRegNo(carRegNo);
-//                            if (car != null) {
-//                                ArrayList<Booking> bookings = Booking.SearchByCarRegNo(carRegNo);
-//                                if (!bookings.isEmpty()) {
-//                                    JOptionPane.showMessageDialog(null, bookings.toString());
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, "This Car is not booked yet !");
-//                                }
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "Registeration no. not found !");
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Invalid Registeration no !");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Enter Car Registeration No first !");
-//                    }
-//                    CustomerIDTextField.setText("");
+                	String id = CarRegNoTextField.getText().trim();
+                    if (!id.isEmpty()) {
+                        Booking co = bookingController.getBookingByCarRegNo(id);
+                      if (co != null) {
+                          JOptionPane.showMessageDialog(null, co.toString());
+                          CarRegNoTextField.setText("");
+                      } else {
+                          JOptionPane.showMessageDialog(null, "Booking not found!");
+                          CarRegNoTextField.setText("");
+                      }                   
+                  } else {
+                      JOptionPane.showMessageDialog(null, "Please enter ID");
+                  }
                 }
                 break;
             }
