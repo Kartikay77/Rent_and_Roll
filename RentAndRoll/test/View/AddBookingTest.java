@@ -20,12 +20,14 @@ public class AddBookingTest {
 //        when(oc.addBooking("2023-12-25 09:00:00", "2023-12-30 09:00:00", "9", "7")).thenReturn(30);
         
         ActionEvent ae = mock(ActionEvent.class);
-        when(ae.getActionCommand()).thenReturn("Add");    
+        when(ae.getActionCommand()).thenReturn("Book");    
         
         ao.RentTimeTextField.setText("2023-12-25 09:00:00");
         ao.ReturnTimeTextField.setText("2023-12-30 09:00:00");
         ao.CarIDTextField.setText("9");
         ao.CustomerIDTextField.setText("7");
+        
+        ao.BookButton.doClick();
       
         assertNotNull(ao.getRootPane());
     }
