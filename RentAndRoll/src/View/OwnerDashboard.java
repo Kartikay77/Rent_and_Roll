@@ -26,11 +26,11 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  * This class is responsible for painting the owner dashboard page.
  */
 public class OwnerDashboard implements ActionListener{
-    private JTextField SearchIdTextField;
-    private JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBalanceButton;
+	JTextField SearchIdTextField;
+    JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBalanceButton;
     private JScrollPane ScrollPane1;
     private JTable OwnerTable;
-    private JTextField SearchNameTextField;
+    JTextField SearchNameTextField;
     static DefaultTableModel TableModel;
     private JPanel MainPanel;
     

@@ -20,8 +20,8 @@ import javax.swing.JPanel;
 public class MainMenu implements ActionListener {
     static JButton CarsButton;
 	static JButton CustomerButton;
-	private static JButton OwnerButton;
-	private static JButton BookingButton;
+	static JButton OwnerButton;
+	static JButton BookingButton;
     private JPanel MainPanel;
 
     /**
