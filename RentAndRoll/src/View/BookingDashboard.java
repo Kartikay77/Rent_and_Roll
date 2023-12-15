@@ -30,6 +30,9 @@ import Model.Booking;
 import Model.Car;
 import Model.Customer;
 
+/**
+ * This class is responsible for painting the Bookings dashboard page. 
+ */
 public class BookingDashboard {
     private static DefaultTableModel tableModel;
     private static JButton SearchCustomerIDButton, SearchCarRegNoButton, BackButton, BookCarButton, UnbookCarButton;
@@ -126,16 +129,27 @@ public class BookingDashboard {
         UnbookCarButton.addActionListener(new Booking_Details_ActionListener());
     }
 
+    /**
+     * Returns the default table model for the booking dashboard. 
+     * @return DefaultTableModel
+     */
     public static DefaultTableModel getTablemodel() {
         return tableModel;
     }
-
+    
+    /**
+     * Gets the main JPanel for the Bookings dashboard page.
+     * @return JPanel
+     */
     public JPanel getMainPanel() {
         return MainPanel;
     }
 
     private class Booking_Details_ActionListener implements ActionListener {
-
+    	/**
+         * Perform the action received from the action listener for BookingsDashboard page.
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
 

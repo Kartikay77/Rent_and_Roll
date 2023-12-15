@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.CustomerController;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -26,98 +27,93 @@ public class AddCustomer {
     JButton AddButton, CancelButton;
     JLabel NameLabel, ContactLabel;
     JTextField NameTextField, ContactTextField;
-<span class="nc" id="L29">    JFrame frame = new JFrame();</span>
+<span class="nc" id="L30">    JFrame frame = new JFrame();</span>
+    
+<span class="nc" id="L32">    private CustomerController customerController = new CustomerController();</span>
 
-<span class="nc" id="L31">    public AddCustomer() {</span>
-<span class="nc" id="L32">        frame.setTitle(&quot;Add Customer&quot;);</span>
-<span class="nc" id="L33">        frame.setLayout(new AbsoluteLayout());</span>
-<span class="nc" id="L34">        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);</span>
-<span class="nc" id="L35">        frame.addWindowListener(new WindowAdapter() {</span>
+<span class="nc" id="L34">    public AddCustomer() {</span>
+<span class="nc" id="L35">        frame.setTitle(&quot;Add Customer&quot;);</span>
+<span class="nc" id="L36">        frame.setLayout(new AbsoluteLayout());</span>
+<span class="nc" id="L37">        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);</span>
+<span class="nc" id="L38">        frame.addWindowListener(new WindowAdapter() {</span>
             public void windowClosing(WindowEvent e) {
-<span class="nc" id="L37">                ParentFrame.getMainFrame().setEnabled(true);</span>
-<span class="nc" id="L38">                frame.dispose();</span>
-<span class="nc" id="L39">            }</span>
+<span class="nc" id="L40">                ParentFrame.getMainFrame().setEnabled(true);</span>
+<span class="nc" id="L41">                frame.dispose();</span>
+<span class="nc" id="L42">            }</span>
         });
 
-<span class="nc" id="L42">        frame.setSize(new Dimension(450, 290));</span>
-<span class="nc" id="L43">        frame.setResizable(false);</span>
-<span class="nc" id="L44">        frame.setLocationRelativeTo(ParentFrame.getMainFrame());</span>
+<span class="nc" id="L45">        frame.setSize(new Dimension(450, 290));</span>
+<span class="nc" id="L46">        frame.setResizable(false);</span>
+<span class="nc" id="L47">        frame.setLocationRelativeTo(ParentFrame.getMainFrame());</span>
 
-<span class="nc" id="L46">        AddButton = new JButton(&quot;Add&quot;);</span>
-<span class="nc" id="L47">        CancelButton = new JButton(&quot;Cancel&quot;);</span>
+<span class="nc" id="L49">        AddButton = new JButton(&quot;Add&quot;);</span>
+<span class="nc" id="L50">        CancelButton = new JButton(&quot;Cancel&quot;);</span>
 
-<span class="nc" id="L49">        NameLabel = new JLabel(&quot;Enter Name&quot;);</span>
-<span class="nc" id="L50">        ContactLabel = new JLabel(&quot;Enter Contact&quot;);</span>
+<span class="nc" id="L52">        NameLabel = new JLabel(&quot;Enter Name&quot;);</span>
+<span class="nc" id="L53">        ContactLabel = new JLabel(&quot;Enter Contact&quot;);</span>
         
-<span class="nc" id="L52">        NameTextField = new JTextField();</span>
-<span class="nc" id="L53">        ContactTextField = new JTextField();</span>
+<span class="nc" id="L55">        NameTextField = new JTextField();</span>
+<span class="nc" id="L56">        ContactTextField = new JTextField();</span>
 
-<span class="nc" id="L55">        NameTextField.setPreferredSize(new Dimension(240, 22));</span>
-<span class="nc" id="L56">        ContactTextField.setPreferredSize(new Dimension(240, 22));</span>
+<span class="nc" id="L58">        NameTextField.setPreferredSize(new Dimension(240, 22));</span>
+<span class="nc" id="L59">        ContactTextField.setPreferredSize(new Dimension(240, 22));</span>
 
-<span class="nc" id="L58">        NameLabel.setPreferredSize(new Dimension(175, 22));</span>
-<span class="nc" id="L59">        ContactLabel.setPreferredSize(new Dimension(175, 22));</span>
+<span class="nc" id="L61">        NameLabel.setPreferredSize(new Dimension(175, 22));</span>
+<span class="nc" id="L62">        ContactLabel.setPreferredSize(new Dimension(175, 22));</span>
 
-<span class="nc" id="L61">        ContactLabel.setForeground(Color.red);</span>
-<span class="nc" id="L62">        NameLabel.setForeground(Color.red);</span>
+<span class="nc" id="L64">        ContactLabel.setForeground(Color.red);</span>
+<span class="nc" id="L65">        NameLabel.setForeground(Color.red);</span>
 
-<span class="nc" id="L64">        frame.add(NameLabel, new AbsoluteConstraints(10, 42));</span>
-<span class="nc" id="L65">        frame.add(NameTextField, new AbsoluteConstraints(195, 42));</span>
+<span class="nc" id="L67">        frame.add(NameLabel, new AbsoluteConstraints(10, 42));</span>
+<span class="nc" id="L68">        frame.add(NameTextField, new AbsoluteConstraints(195, 42));</span>
 
-<span class="nc" id="L67">        frame.add(ContactLabel, new AbsoluteConstraints(10, 77));</span>
-<span class="nc" id="L68">        frame.add(ContactTextField, new AbsoluteConstraints(195, 77));</span>
+<span class="nc" id="L70">        frame.add(ContactLabel, new AbsoluteConstraints(10, 77));</span>
+<span class="nc" id="L71">        frame.add(ContactTextField, new AbsoluteConstraints(195, 77));</span>
 
-<span class="nc" id="L70">        frame.add(AddButton, new AbsoluteConstraints(100, 225, 100, 22));</span>
-<span class="nc" id="L71">        frame.add(CancelButton, new AbsoluteConstraints(250, 225, 100, 22));</span>
+<span class="nc" id="L73">        frame.add(AddButton, new AbsoluteConstraints(100, 225, 100, 22));</span>
+<span class="nc" id="L74">        frame.add(CancelButton, new AbsoluteConstraints(250, 225, 100, 22));</span>
 
-<span class="nc" id="L73">        AddButton.addActionListener(new Customer_Add_ActionListener());</span>
+<span class="nc" id="L76">        AddButton.addActionListener(new Customer_Add_ActionListener());</span>
 
-<span class="nc" id="L75">        CancelButton.addActionListener(new Customer_Add_ActionListener());</span>
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L78">        CancelButton.addActionListener(new Customer_Add_ActionListener());</span>
+<span class="nc" id="L79">    }</span>
 
-<span class="nc" id="L78">    private class Customer_Add_ActionListener implements ActionListener {</span>
+<span class="nc" id="L81">    private class Customer_Add_ActionListener implements ActionListener {</span>
 
         @Override
         public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L82" title="All 3 branches missed.">            switch (e.getActionCommand()) {</span>
+<span class="nc bnc" id="L85" title="All 3 branches missed.">            switch (e.getActionCommand()) {</span>
                 case &quot;Add&quot;: {
-<span class="nc" id="L84">                    String name = NameTextField.getText().trim();</span>
-<span class="nc" id="L85">                    String contact = ContactTextField.getText().trim();</span>
+<span class="nc" id="L87">                    String name = NameTextField.getText().trim();</span>
+<span class="nc" id="L88">                    String contact = ContactTextField.getText().trim();</span>
+<span class="nc" id="L89">                    double bill = 0;</span>
 
-//                    if (Customer.isCNICValid(cnic)) {
-//                        Customer customer = Customer.SearchByCNIC(cnic);
-//                        if (customer == null) {
-//                            if (Customer.isNameValid(name)) {
-//                                if (Customer.isContactNoValid(contact)) {
-//                                    new Customer(0, 0, cnic, name, contact).Add(); // ID is Auto
-//                                    ParentFrame.getMainFrame().getContentPane().removeAll();
-//                                    Customer_Details cd = new Customer_Details();
-//                                    ParentFrame.getMainFrame().add(cd.getMainPanel());
-//                                    ParentFrame.getMainFrame().getContentPane().revalidate();
-//                                    ParentFrame.getMainFrame().setEnabled(true);
-//                                    JOptionPane.showMessageDialog(null, &quot;Customer added successfully !&quot;);
-//                                    frame.dispose();
-//                                } else {
-//                                    JOptionPane.showMessageDialog(null, &quot;Invalid contact no. !&quot;);
-//                                }
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, &quot;Invalid Name !&quot;);
-//                            }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, &quot;This CNIC is already registered !&quot;);
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, &quot;Invalid CNIC&quot;);
-//                    }
-<span class="nc" id="L112">                    break;</span>
+<span class="nc bnc" id="L91" title="All 6 branches missed.">                    if (!name.isEmpty() &amp; !contact.isEmpty()) {</span>
+<span class="nc" id="L92">                        int newId = customerController.addCustomer(name, contact, bill);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                        if(newId &gt;= 0) {</span>
+<span class="nc" id="L94">                            ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L95">                            CustomerDashboard cd = new CustomerDashboard();</span>
+<span class="nc" id="L96">                            ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L97">                            ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+<span class="nc" id="L98">                            ParentFrame.getMainFrame().setEnabled(true);</span>
+<span class="nc" id="L99">                            JOptionPane.showMessageDialog(null, &quot;Customer added successfully!&quot;);</span>
+<span class="nc" id="L100">                            frame.dispose();</span>
+<span class="nc" id="L101">                        }</span>
+                        else {
+<span class="nc" id="L103">                           JOptionPane.showMessageDialog(null, &quot;Error in adding customer. Please try again later.&quot;);</span>
+                        } 
+<span class="nc" id="L105">                    } else {</span>
+<span class="nc" id="L106">                        JOptionPane.showMessageDialog(null, &quot;Please enter all details&quot;);</span>
+                    }
+<span class="nc" id="L108">                    break;</span>
                 }
                 case &quot;Cancel&quot;: {
-<span class="nc" id="L115">                    ParentFrame.getMainFrame().setEnabled(true);</span>
-<span class="nc" id="L116">                    frame.dispose();</span>
+<span class="nc" id="L111">                    ParentFrame.getMainFrame().setEnabled(true);</span>
+<span class="nc" id="L112">                    frame.dispose();</span>
                     break;
                 }
             }
-<span class="nc" id="L120">        }</span>
+<span class="nc" id="L116">        }</span>
 
     }
 }

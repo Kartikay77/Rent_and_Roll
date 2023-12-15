@@ -20,58 +20,76 @@ import Controller.CustomerController;
 import Model.Customer;
 import Controller.CarOwnerController;
 import Model.CarOwner;
+import Controller.CarController;
+import Model.Car;
+
 
 /**
  *
  * @author erkur
  */
 public class Runner {
-<span class="nc" id="L29">    private static final JFrame FRAME = new JFrame();</span>
+<span class="nc" id="L32">    private static final JFrame FRAME = new JFrame();</span>
     private final ImageIcon icon;
     private final JLabel L1;
 
     public static JFrame getFrame() {
-<span class="nc" id="L34">        return FRAME;</span>
+<span class="nc" id="L37">        return FRAME;</span>
     }
 
-<span class="nc" id="L37">    public Runner() {</span>
+<span class="nc" id="L40">    public Runner() {</span>
         
-<span class="nc" id="L39">        icon = new ImageIcon(&quot;WelcomeImage2.jpg&quot;);</span>
-<span class="nc" id="L40">        L1 = new JLabel(icon);</span>
-<span class="nc" id="L41">        FRAME.setUndecorated(true);</span>
-<span class="nc" id="L42">        FRAME.setSize(new Dimension(1000, 534));</span>
-<span class="nc" id="L43">        FRAME.setLocationRelativeTo(null);</span>
-<span class="nc" id="L44">        FRAME.add(L1);</span>
-<span class="nc" id="L45">    }</span>
+<span class="nc" id="L42">        icon = new ImageIcon(&quot;WelcomeImage2.jpg&quot;);</span>
+<span class="nc" id="L43">        L1 = new JLabel(icon);</span>
+<span class="nc" id="L44">        FRAME.setUndecorated(true);</span>
+<span class="nc" id="L45">        FRAME.setSize(new Dimension(1000, 534));</span>
+<span class="nc" id="L46">        FRAME.setLocationRelativeTo(null);</span>
+<span class="nc" id="L47">        FRAME.add(L1);</span>
+<span class="nc" id="L48">    }</span>
 
     public static void main(String[] args) {
-<span class="nc" id="L48">        Runner runner = new Runner();</span>
-<span class="nc" id="L49">        Runner.FRAME.setVisible(true);</span>
+<span class="nc" id="L51">        Runner runner = new Runner();</span>
+<span class="nc" id="L52">        Runner.FRAME.setVisible(true);</span>
 
         try {
-<span class="nc" id="L52">            Thread.sleep(1000);</span>
-<span class="nc" id="L53">            Login LoginObject = new Login();</span>
-<span class="nc" id="L54">            Runner.FRAME.getContentPane().removeAll();</span>
-<span class="nc" id="L55">            Runner.FRAME.add(LoginObject.getMainPanel());</span>
-<span class="nc" id="L56">            Runner.FRAME.getContentPane().revalidate();</span>
+<span class="nc" id="L55">            Thread.sleep(1000);</span>
+<span class="nc" id="L56">            Login LoginObject = new Login();</span>
+<span class="nc" id="L57">            Runner.FRAME.getContentPane().removeAll();</span>
+<span class="nc" id="L58">            Runner.FRAME.add(LoginObject.getMainPanel());</span>
+<span class="nc" id="L59">            Runner.FRAME.getContentPane().revalidate();</span>
 
-<span class="nc" id="L58">        } catch (InterruptedException e) {</span>
-<span class="nc" id="L59">            System.out.println(e);</span>
-<span class="nc" id="L60">        }</span>
+<span class="nc" id="L61">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L62">            System.out.println(e);</span>
+<span class="nc" id="L63">        }</span>
         
-<span class="nc" id="L62">                CarOwnerController cd = new CarOwnerController();</span>
-<span class="nc" id="L63">          System.out.println(cd.addOwner(&quot;Adwait&quot;, &quot;123456&quot;, 235))</span>
-                  ;
-//        // Assuming owner ID for whom balance needs to be cleared
-<span class="nc" id="L66">        int ownerId = 1; // Replace this with an existing owner ID from your database</span>
+//    CarController cd = new CarController();
+//    // Call the method to get cars by name
+//    Car carById = cd.getCarById(&quot;DT13DT1807&quot;);
+//    System.out.println(carById);
 //
-//        // Clear balance for the specified owner
-<span class="nc" id="L69">        boolean isBalanceCleared = cd.clearBalance(ownerId);</span>
-//
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (isBalanceCleared) {</span>
-<span class="nc" id="L72">            System.out.println(&quot;Balance successfully cleared for owner with ID &quot; + ownerId);</span>
-        } else {
-<span class="nc" id="L74">            System.out.println(&quot;Failed to clear balance for owner with ID &quot; + ownerId);</span>
+//    // Iterate through the list of cars retrieved and print their details
+//    // Check if car is not null (car found)
+//        if (carById != null) {
+//            System.out.println(&quot;Car ID: &quot; + carById.carId());
+//            System.out.println(&quot;Car Model: &quot; + carById.getCarModel());
+//            System.out.println(&quot;Car Registration No.: &quot; + carById.getCarRegNo());
+//            System.out.println(&quot;Rent per Hour: &quot; + carById.getRentPerHour());
+//            System.out.println(&quot;---------------------&quot;);
+//        } else {
+//            System.out.println(&quot;Car with registration number &quot; + &quot; not found.&quot;);
+//        }
+//          System.out.println(cd.addOwner(&quot;Adwait&quot;, &quot;123456&quot;, 235))
+//                  ;
+////        // Assuming owner ID for whom balance needs to be cleared
+//        int ownerId = 1; // Replace this with an existing owner ID from your database
+////
+////        // Clear balance for the specified owner
+//        boolean isBalanceCleared = cd.clearBalance(ownerId);
+////
+//        if (isBalanceCleared) {
+//            System.out.println(&quot;Balance successfully cleared for owner with ID &quot; + ownerId);
+//        } else {
+//            System.out.println(&quot;Failed to clear balance for owner with ID &quot; + ownerId);
 
         // For testing purpose to be deleted
 //        CustomerController cd = new CustomerController();
@@ -84,8 +102,7 @@ public class Runner {
 //        Customer customer = (cd.getCustomerById(14));
 //        for(Customer customer: customers){
 //            System.out.println(customer.getCustomerId() + &quot; &quot; + customer.getCustomerName());
-        }
-<span class="nc" id="L88">    }</span>
-    
+//        }
+<span class="nc" id="L106">    }   </span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

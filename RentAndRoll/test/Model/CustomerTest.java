@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 public class CustomerTest {
 		
+	
 	@Test
     public void testDefaultConstructor() {
         Customer customer = new Customer();

@@ -1,5 +1,9 @@
 Model\CustomerTest.class
+Model\CustomerTest2.class
 utilities\DatabaseConnectorTest.class
+View\ParentFrameTest.class
+Controller\CarControllerTest.class
 Controller\CarOwnerControllerTest.class
+Model\CarTest.class
 Controller\CustomerControllerTest.class
 Model\CarOwnerTest.class

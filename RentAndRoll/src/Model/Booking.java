@@ -6,6 +6,9 @@ package Model;
 
 import java.util.Date;
 
+/**
+ * The Booking is the model class for a Booking object.
+ */
 public class Booking {
     private int bookingId;
     private int customerId;

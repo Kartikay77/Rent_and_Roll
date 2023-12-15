@@ -4,7 +4,178 @@
  */
 package Controller;
 
-<span class="nc" id="L7">public class CarController {</span>
+import Model.Car;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;  
+import java.sql.PreparedStatement;  
+
+import utilities.DatabaseConnector;
+public class CarController {
+<span class="nc" id="L18">    List&lt;Car&gt; cars = new ArrayList&lt;&gt;();</span>
+    Statement stmt;
+    Connection connection;
+<span class="nc" id="L21">    DatabaseConnector databaseConnector = new DatabaseConnector();</span>
+
+<span class="nc" id="L23">    public CarController() {</span>
+         try {
+<span class="nc" id="L25">            this.connection = databaseConnector.getConnection();</span>
+<span class="nc" id="L26">            this.stmt = connection.createStatement(); </span>
+<span class="nc" id="L27">        } catch(SQLException e) {</span>
+<span class="nc" id="L28">            System.out.println(&quot;Unable to make database connection: &quot;+e);</span>
+<span class="nc" id="L29">        }</span>
+<span class="nc" id="L30">    }</span>
+<span class="nc" id="L31">    protected CarController(Connection conn) {</span>
+<span class="nc" id="L32">            this.connection = conn;</span>
+<span class="nc" id="L33">    }   </span>
+        /**
+     * Gets all car from database.
+     * @return list of Car objects
+     */    
+    public List&lt;Car&gt; getAllCars(){
+        //To DO: Get all car owners from database
+<span class="nc" id="L40">        List&lt;Car&gt; cars = new ArrayList&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L43">            String sqlQuery = &quot;select * from car&quot;;</span>
+<span class="nc" id="L44">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            while (rs.next()) {</span>
+<span class="nc" id="L46">                Car car = new Car();</span>
+<span class="nc" id="L47">                car.setCarId(rs.getInt(&quot;car_id&quot;));</span>
+<span class="nc" id="L48">                car.setMakerName(rs.getString(&quot;maker&quot;));</span>
+<span class="nc" id="L49">                car.setCarName(rs.getString(&quot;car_name&quot;));</span>
+<span class="nc" id="L50">                car.setColor(rs.getString(&quot;color&quot;));</span>
+<span class="nc" id="L51">                car.setCarType(rs.getString(&quot;car_type&quot;));</span>
+<span class="nc" id="L52">                car.setCarModel(rs.getString(&quot;model&quot;));</span>
+<span class="nc" id="L53">                car.setCarRegNo(rs.getString(&quot;reg_no&quot;));</span>
+<span class="nc" id="L54">                car.setCarCondition(rs.getString(&quot;car_condition&quot;));</span>
+<span class="nc" id="L55">                car.setSeatingCapacity(rs.getInt(&quot;seating_capacity&quot;));</span>
+<span class="nc" id="L56">                car.setRentPerHour(rs.getFloat(&quot;rent_per_hour&quot;));</span>
+<span class="nc" id="L57">                car.setcarOwnerID(rs.getInt(&quot;owner_id&quot;));</span>
+<span class="nc" id="L58">                car.setCarOwnerName(rs.getString(&quot;owner_name&quot;));</span>
+<span class="nc" id="L59">                cars.add(car);</span>
+<span class="nc" id="L60">            }</span>
+<span class="nc" id="L61">        } catch (SQLException e) {</span>
+<span class="nc" id="L62">            System.out.println(&quot;Unable to get all Cars , Owners&quot;+e);</span>
+<span class="nc" id="L63">        }</span>
+<span class="nc" id="L64">        return cars;</span>
+    }
     
+            /**
+     * Gets Car object by ID
+     * @param id id of the Car whose details are to be retrieved.
+     * @return Car object
+     */
+    public Car getCarById(String carRegNo) {
+<span class="nc" id="L73">    Car car = null;</span>
+<span class="nc" id="L74">    try (PreparedStatement preparedStatement = this.connection.prepareStatement(&quot;SELECT * FROM car WHERE reg_no=?&quot;)) {</span>
+<span class="nc" id="L75">        preparedStatement.setString(1, carRegNo);</span>
+
+<span class="nc" id="L77">        try (ResultSet rs = preparedStatement.executeQuery()) {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (rs.next()) {</span>
+<span class="nc" id="L79">                car = new Car();</span>
+<span class="nc" id="L80">                car.setCarId(rs.getInt(&quot;car_id&quot;));</span>
+<span class="nc" id="L81">                car.setCarModel(rs.getString(&quot;model&quot;));</span>
+<span class="nc" id="L82">                car.setCarRegNo(rs.getString(&quot;reg_no&quot;));</span>
+<span class="nc" id="L83">                car.setRentPerHour(rs.getFloat(&quot;rent_per_hour&quot;));</span>
+            }
+        }
+<span class="nc" id="L86">    } catch (Exception e) {</span>
+<span class="nc" id="L87">        System.out.println(&quot;Unable to get Car: &quot; + e);</span>
+<span class="nc" id="L88">    }</span>
+<span class="nc" id="L89">    return car;</span>
+ }
+    
+            /**
+     * Gets all Car that match the given name.
+     * @param car_name name to be matched
+     * @return List of car objects whose name matches the name given.
+     */
+    public List&lt;Car&gt; getCarsByName(String name){
+        // To do: Get Car by name from database
+<span class="nc" id="L99">        List&lt;Car&gt; cars = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="nc" id="L101">            String sqlQuery = &quot;select * from car where car_name=\&quot;&quot; + name +&quot;\&quot;;&quot;;</span>
+<span class="nc" id="L102">            ResultSet rs = this.stmt.executeQuery(sqlQuery); </span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            while(rs.next()){</span>
+<span class="nc" id="L104">                Car car = new Car();</span>
+<span class="nc" id="L105">                car.setCarId(rs.getInt(&quot;car_id&quot;));</span>
+<span class="nc" id="L106">                car.setCarModel(rs.getString(&quot;model&quot;));</span>
+<span class="nc" id="L107">                car.setCarRegNo(rs.getString(&quot;reg_no&quot;));</span>
+<span class="nc" id="L108">                car.setRentPerHour(rs.getFloat(&quot;rent_per_hour&quot;));</span>
+<span class="nc" id="L109">                cars.add(car);</span>
+<span class="nc" id="L110">            }</span>
+<span class="nc" id="L111">        } catch (Exception e) {</span>
+<span class="nc" id="L112">            System.out.println(&quot;Unable to get car: &quot;+e);</span>
+<span class="nc" id="L113">        }</span>
+<span class="nc" id="L114">        return cars;</span>
+    }
+    
+            /**
+     * Adds car with given details to the database
+     * @param name name of the car
+     * @param car type of the car
+     * @param seating capacity of the car
+     * @return rent_per_hour of the car
+     */
+    public int addCar(String maker, String car_name,String color, String car_type,String model,String reg_no,String car_condition,int seating_capacity,double rent_per_hour,int owner_id){
+        // To do: Add car with the details into database and return id
+<span class="nc" id="L126">        String sqlQuery = &quot;insert into car (maker, car_name, color, car_type, model,reg_no,car_condition,seating_capacity,rent_per_hour,owner_id) values (?,?,?,?,?,?,?,?,?,?)&quot;;</span>
+<span class="nc" id="L127">        int generatedCarId = -999;</span>
+<span class="nc" id="L128">        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {</span>
+
+<span class="nc" id="L130">            preparedStatement.setString(1, maker);</span>
+<span class="nc" id="L131">            preparedStatement.setString(2, car_name);</span>
+<span class="nc" id="L132">            preparedStatement.setString(3, color);</span>
+<span class="nc" id="L133">            preparedStatement.setString(4, car_type);</span>
+<span class="nc" id="L134">            preparedStatement.setString(5, model);</span>
+<span class="nc" id="L135">            preparedStatement.setString(6, reg_no);</span>
+<span class="nc" id="L136">            preparedStatement.setString(7, car_condition);</span>
+<span class="nc" id="L137">            preparedStatement.setInt(8, seating_capacity);</span>
+<span class="nc" id="L138">            preparedStatement.setDouble(9, rent_per_hour);</span>
+<span class="nc" id="L139">            preparedStatement.setInt(10, owner_id);</span>
+            
+
+<span class="nc" id="L142">            int affectedRows = preparedStatement.executeUpdate();</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if (affectedRows &gt; 0) {</span>
+                // Retrieving the generated ID
+<span class="nc" id="L145">                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                    if (generatedKeys.next()) {</span>
+<span class="nc" id="L147">                        generatedCarId = generatedKeys.getInt(1);</span>
+                    }
+                }
+            }
+<span class="nc" id="L151">        } catch (Exception e) {</span>
+<span class="nc" id="L152">            e.printStackTrace();</span>
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">        return generatedCarId;</span>
+    }
+    
+            /**
+     * Removes car from database
+     * @param id ID of the car to be removed.
+     * @return true if removal was successful else false.
+     */
+    public boolean removeCar(int id){
+        // To do: Remove Car from database.
+        try {
+<span class="nc" id="L165">            String sqlQuery = &quot;delete from car where car_id=&quot; + id +&quot;;&quot;;</span>
+<span class="nc" id="L166">            this.stmt.executeUpdate(sqlQuery);</span>
+<span class="nc" id="L167">        } catch (SQLException e) {</span>
+<span class="nc" id="L168">            System.out.println(&quot;Unable to remove Car: &quot;+e);</span>
+<span class="nc" id="L169">            return false;</span>
+<span class="nc" id="L170">        }</span>
+<span class="nc" id="L171">        return true;</span>
+    }    
+
+    public void setStatement(Statement statementMock) {
+<span class="nc" id="L175">	this.stmt = statementMock;</span>
+<span class="nc" id="L176">	}</span>
+    Object getConnection() {
+<span class="nc" id="L178">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

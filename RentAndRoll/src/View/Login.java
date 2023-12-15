@@ -23,8 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- *
- * @author erkur
+ * This class creates the Login page for the application.
  */
 public class Login {
     private final JPanel MiniPanel, MainPanel, ButtonPanel, UnPanel, PwPanel;
@@ -110,14 +109,19 @@ public class Login {
     }
 
     /**
-     * @return the MainPanel
+     * Returns the main panel for the login page.
+     * @return JPanel
      */
     public JPanel getMainPanel() {
         return MainPanel;
     }
 
     private class LoginActionListener implements ActionListener {
-
+    	
+    	/**
+         * Perform the action received from the action listener for Login page.
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {

@@ -24,19 +24,24 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
- *
- * @author erkur
+ * This class is responsible for painting the Customer dashboard in the UI.
  */
 public class CustomerDashboard implements ActionListener{
-    private JTextField SearchIdTextField;
-    private JButton SearchIdButton, SearchNameButton, UpdateButton, AddButton, RemoveButton, BackButton, ClearBillButton;
+    JTextField SearchIdTextField;
+    JButton SearchIdButton;
+	private JButton SearchNameButton;
+	private JButton UpdateButton;
+	private JButton AddButton;
+	private JButton RemoveButton;
+	private JButton BackButton;
+	private JButton ClearBillButton;
     private JScrollPane ScrollPane1;
     private JTable CustomerTable;
     private JTextField SearchNameTextField;
     static DefaultTableModel tableModel;
     private JPanel MainPanel;
     
-    private CustomerController customerController = new CustomerController();
+    CustomerController customerController = new CustomerController();
 
     public CustomerDashboard() {
         MainPanel = new JPanel();
@@ -59,6 +64,12 @@ public class CustomerDashboard implements ActionListener{
         String[] columns = {"ID", "Name", "Contact Number", "Bill"};
         tableModel = new DefaultTableModel(columns, 0) {
 
+        	/**
+             * Returns whether the cell is editable.
+             * @param row
+             * @param column
+             * @return boolean
+             */
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
@@ -122,10 +133,19 @@ public class CustomerDashboard implements ActionListener{
 //        new Customer_Details().setVisible(true);
 //
 //    }
+    
+    /**
+     * Returns the main panel for the CustomerDashboard class.
+     * @return JPanel
+     */
     public JPanel getMainPanel() {
         return MainPanel;
     }
 
+    /**
+     * Perform the action received from the action listener for the Customer Dashboard page.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {

@@ -4,6 +4,9 @@
  */
 package Model;
 
+/**
+ * The Car is the model class for a Car object.
+ */
 public class Car {
     
     private int carId;

@@ -26,8 +26,7 @@ import javax.swing.SpinnerNumberModel;
 import Controller.CarController;
 
 /**
- *
- * @author erkur
+ * This class is responsible for painting the add car dialogue box on the UI.
  */
 public class AddCar extends JFrame{
     JButton AddButton, CancelButton;
@@ -143,8 +142,12 @@ public class AddCar extends JFrame{
         add(CancelButton);
 
         AddButton.addActionListener(new ActionListener() {
-            @Override
-
+            
+        	/**
+             * Perform the action received from the action listener for the AddCar page.
+             * @param e
+             */
+        	@Override
             public void actionPerformed(ActionEvent e) {
                 String maker = MakerTextField.getText().trim(),
                         name = NameTextField.getText().trim(),
@@ -198,7 +201,12 @@ public class AddCar extends JFrame{
             }
         }
         );
+        
         CancelButton.addActionListener(new ActionListener() {
+        	/**
+             * Perform the action received from the action listener for the Add car page.
+             * @param e
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 ParentFrame.getMainFrame().setEnabled(true);

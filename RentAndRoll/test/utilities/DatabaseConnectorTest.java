@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import static org.mockito.Mockito.*;
 
 public class DatabaseConnectorTest {
+	
 	@Test
     public void testCloseConnection() {
         Connection connection = null;

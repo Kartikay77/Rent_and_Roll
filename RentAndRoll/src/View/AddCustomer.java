@@ -20,8 +20,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
- *
- * @author erkur
+ * This class is responsible for painting the dialogue box for adding a customer.
  */
 public class AddCustomer {
     JButton AddButton, CancelButton;
@@ -80,6 +79,10 @@ public class AddCustomer {
 
     private class Customer_Add_ActionListener implements ActionListener {
 
+    	/**
+         * Perform the action received from the action listener for the add customer page.
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {

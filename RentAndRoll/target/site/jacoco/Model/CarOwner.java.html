@@ -12,67 +12,72 @@ public class CarOwner implements Serializable{
     private String phoneNo;
     private float balance_due;
 
-<span class="fc" id="L15">    public CarOwner(int ownerId, String ownerName, String phoneNo, float balance_due) {</span>
-<span class="fc" id="L16">        this.ownerId = ownerId;</span>
-<span class="fc" id="L17">        this.ownerName = ownerName;</span>
-<span class="fc" id="L18">        this.phoneNo = phoneNo;</span>
-<span class="fc" id="L19">        this.balance_due = balance_due;</span>
-<span class="fc" id="L20">    }</span>
-<span class="fc" id="L21">    public CarOwner() {}</span>
+<span class="nc" id="L15">    public CarOwner(int ownerId, String ownerName, String phoneNo, float balance_due) {</span>
+<span class="nc" id="L16">        this.ownerId = ownerId;</span>
+<span class="nc" id="L17">        this.ownerName = ownerName;</span>
+<span class="nc" id="L18">        this.phoneNo = phoneNo;</span>
+<span class="nc" id="L19">        this.balance_due = balance_due;</span>
+<span class="nc" id="L20">    }</span>
+<span class="nc" id="L21">    public CarOwner() {}</span>
     /**
      * @return the ownerId
      */
     public int getOwnerId() {
-<span class="fc" id="L26">        return ownerId;</span>
+<span class="nc" id="L26">        return ownerId;</span>
     }
 
     /**
      * @param ownerId the ownerId to set
      */
     public void setOwnerId(int ownerId) {
-<span class="fc" id="L33">        this.ownerId = ownerId;</span>
-<span class="fc" id="L34">    }</span>
+<span class="nc" id="L33">        this.ownerId = ownerId;</span>
+<span class="nc" id="L34">    }</span>
 
     /**
      * @return the ownerName
      */
     public String getOwnerName() {
-<span class="fc" id="L40">        return ownerName;</span>
+<span class="nc" id="L40">        return ownerName;</span>
     }
 
     /**
      * @param ownerName the ownerName to set
      */
     public void setOwnerName(String ownerName) {
-<span class="fc" id="L47">        this.ownerName = ownerName;</span>
-<span class="fc" id="L48">    }</span>
+<span class="nc" id="L47">        this.ownerName = ownerName;</span>
+<span class="nc" id="L48">    }</span>
 
     /**
      * @return the phoneNo
      */
     public String getPhoneNo() {
-<span class="fc" id="L54">        return phoneNo;</span>
+<span class="nc" id="L54">        return phoneNo;</span>
     }
 
     /**
      * @param phoneNo the contactNo to set
      */
     public void setPhoneNo(String phoneNo) {
-<span class="fc" id="L61">        this.phoneNo = phoneNo;</span>
-<span class="fc" id="L62">    }</span>
+<span class="nc" id="L61">        this.phoneNo = phoneNo;</span>
+<span class="nc" id="L62">    }</span>
 
     /**
      * @return the balance due
      */
     public float getBalanceDue() {
-<span class="fc" id="L68">        return balance_due;</span>
+<span class="nc" id="L68">        return balance_due;</span>
     }
 
     /**
      * @param balance_due set the balance due
      */
     public void setBalanceDue(float balance_due) {
-<span class="fc" id="L75">        this.balance_due = balance_due;</span>
-<span class="fc" id="L76">    }</span>
+<span class="nc" id="L75">        this.balance_due = balance_due;</span>
+<span class="nc" id="L76">    }</span>
+    
+    @Override
+    public String toString(){
+<span class="nc" id="L80">        return (&quot;ID: &quot; + this.ownerId + &quot; Name: &quot; + this.ownerName + &quot; Contact: &quot; + this.phoneNo + &quot; Balance: &quot; + this.balance_due);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

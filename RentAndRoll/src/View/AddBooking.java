@@ -26,8 +26,7 @@ import javax.swing.JTextField;
 import Controller.BookingController;
 
 /**
- *
- * @author erkur
+ * This class is responsible for painting the dialogue box for adding a booking.
  */
 public class AddBooking extends JFrame{
     JButton BookButton, CancelButton;
@@ -46,6 +45,7 @@ public class AddBooking extends JFrame{
         setLocationRelativeTo(this);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+        
             @Override
             public void windowClosing(WindowEvent e) {
                 ParentFrame.getMainFrame().setEnabled(true);
@@ -95,6 +95,10 @@ public class AddBooking extends JFrame{
         add(CancelButton);
 
         BookButton.addActionListener(new ActionListener() {
+        	/**
+             * Perform the action received from the action listener for Add booking page.
+             * @param e
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
 

@@ -14,13 +14,20 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- *
- * @author erkur
+ * This class creates the Main menu screen for the application.
+ * 
  */
 public class MainMenu implements ActionListener {
-    private static JButton CarsButton, CustomerButton, OwnerButton, BookingButton;
+    static JButton CarsButton;
+	static JButton CustomerButton;
+	private static JButton OwnerButton;
+	private static JButton BookingButton;
     private JPanel MainPanel;
 
+    /**
+     * Returns the main panel.
+     * @param JPanel
+     */
     public JPanel getMainPanel() {
         return MainPanel;
     }
@@ -58,10 +65,15 @@ public class MainMenu implements ActionListener {
         CarsButton.addActionListener(this);
     }
 
+    /**
+     * Performs the action received from the action listener for main menu.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {  
             case "Cars": {
+            	
                 ParentFrame.getMainFrame().getContentPane().removeAll();
                 CarDashboard cd = new CarDashboard();
                 ParentFrame.getMainFrame().add(cd.getMainPanel());

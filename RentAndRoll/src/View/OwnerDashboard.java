@@ -23,8 +23,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
- *
- * @author erkur
+ * This class is responsible for painting the owner dashboard page.
  */
 public class OwnerDashboard implements ActionListener{
     private JTextField SearchIdTextField;
@@ -58,6 +57,12 @@ public class OwnerDashboard implements ActionListener{
         String[] columns = {"ID", "Name", "Contact Number", "Balance"};
         TableModel = new DefaultTableModel(columns, 0) {
 
+        	/**
+             * Returns whether the form is edutable or not.
+             * @param row
+             * @param column
+             * @return boolean
+             */
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -115,10 +120,18 @@ public class OwnerDashboard implements ActionListener{
         ClearBalanceButton.addActionListener(this);
     }
 
+    /**
+     * Returns the main JPanel for the owner dashboard.
+     * @return JPanel
+     */
     public JPanel getMainPanel() {
         return MainPanel;
     }
 
+    /**
+     * Perform the action received from the action listener for the owner Dashboard page.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -193,11 +206,11 @@ public class OwnerDashboard implements ActionListener{
                 }
             }
             break;
-            case "Update": {
-                ParentFrame.getMainFrame().setEnabled(false);
-                new UpdateCarOwner().frame.setVisible(true);
-            }
-            break;
+//            case "Update": {
+//                ParentFrame.getMainFrame().setEnabled(false);
+//                new UpdateCarOwner().frame.setVisible(true);
+//            }
+//            break;
             case "Clear Balance": {
                 int selectedIndex = OwnerTable.getSelectedRow();
                 if (selectedIndex == -1 && OwnerTable.getRowCount() > 0) {

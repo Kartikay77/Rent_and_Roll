@@ -2,17 +2,14 @@ Model\Booking.class
 Controller\CarController.class
 Backend\MysqlCon.class
 View\AddCarOwner$1.class
-View\RemoveCarOwner$CarOwner_Remove_ActionListener.class
 View\AddBooking$2.class
 View\RemoveBooking$1.class
 View\RemoveCar.class
 View\UpdateCarOwner$2.class
-View\RemoveCustomer$1.class
 View\AddCustomer$1.class
 View\AddCar$3.class
 View\AddCarOwner$CarOwner_Add_ActionListener.class
 View\CarDashboard.class
-View\RemoveCarOwner.class
 Model\Car.class
 View\OwnerDashboard.class
 View\RemoveCar$1.class
@@ -23,7 +20,6 @@ View\AddCustomer$Customer_Add_ActionListener.class
 View\MainMenu.class
 View\BookingDashboard.class
 View\AddCar$2.class
-View\RemoveCarOwner$1.class
 View\UpdateCarOwner$3.class
 View\RemoveBooking.class
 View\AddCustomer.class
@@ -37,10 +33,8 @@ Controller\BookingController.class
 View\BookingDashboard$Booking_Details_ActionListener.class
 View\RemoveBooking$2.class
 View\CustomerDashboard$1.class
-View\RemoveCustomer$Customer_RemoveActionListener.class
 View\AddBooking$3.class
 View\CarDashboard$1.class
-View\RemoveCustomer.class
 View\RemoveCar$3.class
 View\AddCarOwner.class
 View\RemoveBooking$3.class

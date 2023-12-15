@@ -18,78 +18,82 @@ import javax.swing.JPanel;
  * @author erkur
  */
 public class MainMenu implements ActionListener {
-    private static JButton CarsButton, CustomerButton, OwnerButton, BookingButton;
+    static JButton CarsButton;
+	static JButton CustomerButton;
+	private static JButton OwnerButton;
+	private static JButton BookingButton;
     private JPanel MainPanel;
 
     public JPanel getMainPanel() {
-<span class="nc" id="L25">        return MainPanel;</span>
+<span class="nc" id="L28">        return MainPanel;</span>
     }
 
-<span class="nc" id="L28">    public MainMenu() {</span>
-<span class="nc" id="L29">        MainPanel = new JPanel();</span>
+<span class="nc" id="L31">    public MainMenu() {</span>
+<span class="nc" id="L32">        MainPanel = new JPanel();</span>
         
-<span class="nc" id="L31">        MainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 200));</span>
-<span class="nc" id="L32">        MainPanel.setMinimumSize(new Dimension(1366, 730));</span>
-<span class="nc" id="L33">        MainPanel.setBackground(new Color(166,166,166));</span>
+<span class="nc" id="L34">        MainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 200));</span>
+<span class="nc" id="L35">        MainPanel.setMinimumSize(new Dimension(1366, 730));</span>
+<span class="nc" id="L36">        MainPanel.setBackground(new Color(166,166,166));</span>
 
-<span class="nc" id="L35">        CustomerButton = new JButton(&quot;Customer&quot;);</span>
-<span class="nc" id="L36">        CarsButton = new JButton(&quot;Cars&quot;);</span>
-<span class="nc" id="L37">        OwnerButton = new JButton(&quot;Owner&quot;);</span>
-<span class="nc" id="L38">        BookingButton = new JButton(&quot;Booking Details&quot;);</span>
+<span class="nc" id="L38">        CustomerButton = new JButton(&quot;Customer&quot;);</span>
+<span class="nc" id="L39">        CarsButton = new JButton(&quot;Cars&quot;);</span>
+<span class="nc" id="L40">        OwnerButton = new JButton(&quot;Owner&quot;);</span>
+<span class="nc" id="L41">        BookingButton = new JButton(&quot;Booking Details&quot;);</span>
 
-<span class="nc" id="L40">        CustomerButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
-<span class="nc" id="L41">        CarsButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
-<span class="nc" id="L42">        OwnerButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
-<span class="nc" id="L43">        BookingButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L43">        CustomerButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L44">        CarsButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L45">        OwnerButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
+<span class="nc" id="L46">        BookingButton.setFont(new Font(&quot;Poppins&quot;, 1, 30));</span>
 
-<span class="nc" id="L45">        CustomerButton.setBackground(new Color(0,151,178));</span>
-<span class="nc" id="L46">        OwnerButton.setBackground(new Color(0,151,178));</span>
-<span class="nc" id="L47">        BookingButton.setBackground(new Color(0,151,178));</span>
-<span class="nc" id="L48">        CarsButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L48">        CustomerButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L49">        OwnerButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L50">        BookingButton.setBackground(new Color(0,151,178));</span>
+<span class="nc" id="L51">        CarsButton.setBackground(new Color(0,151,178));</span>
         
-<span class="nc" id="L50">        MainPanel.add(CustomerButton);</span>
-<span class="nc" id="L51">        MainPanel.add(CarsButton);</span>
-<span class="nc" id="L52">        MainPanel.add(OwnerButton);</span>
-<span class="nc" id="L53">        MainPanel.add(BookingButton);</span>
+<span class="nc" id="L53">        MainPanel.add(CustomerButton);</span>
+<span class="nc" id="L54">        MainPanel.add(CarsButton);</span>
+<span class="nc" id="L55">        MainPanel.add(OwnerButton);</span>
+<span class="nc" id="L56">        MainPanel.add(BookingButton);</span>
         
-<span class="nc" id="L55">        BookingButton.addActionListener(this);</span>
-<span class="nc" id="L56">        CustomerButton.addActionListener(this);</span>
-<span class="nc" id="L57">        OwnerButton.addActionListener(this);</span>
-<span class="nc" id="L58">        CarsButton.addActionListener(this);</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L58">        BookingButton.addActionListener(this);</span>
+<span class="nc" id="L59">        CustomerButton.addActionListener(this);</span>
+<span class="nc" id="L60">        OwnerButton.addActionListener(this);</span>
+<span class="nc" id="L61">        CarsButton.addActionListener(this);</span>
+<span class="nc" id="L62">    }</span>
 
     @Override
     public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L63" title="All 5 branches missed.">        switch (e.getActionCommand()) {  </span>
+<span class="nc bnc" id="L66" title="All 5 branches missed.">        switch (e.getActionCommand()) {  </span>
             case &quot;Cars&quot;: {
-<span class="nc" id="L65">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-<span class="nc" id="L66">                CarDashboard cd = new CarDashboard();</span>
-<span class="nc" id="L67">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
-<span class="nc" id="L68">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+            	
+<span class="nc" id="L69">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L70">                CarDashboard cd = new CarDashboard();</span>
+<span class="nc" id="L71">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L72">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
-<span class="nc" id="L70">            break;</span>
+<span class="nc" id="L74">            break;</span>
             case &quot;Customer&quot;: {
-<span class="nc" id="L72">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-<span class="nc" id="L73">                CustomerDashboard cd = new CustomerDashboard();</span>
-<span class="nc" id="L74">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
-<span class="nc" id="L75">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+<span class="nc" id="L76">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L77">                CustomerDashboard cd = new CustomerDashboard();</span>
+<span class="nc" id="L78">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L79">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
-<span class="nc" id="L77">            break;</span>
+<span class="nc" id="L81">            break;</span>
             case &quot;Owner&quot;: {
-<span class="nc" id="L79">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-<span class="nc" id="L80">                OwnerDashboard cd = new OwnerDashboard();</span>
-<span class="nc" id="L81">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
-<span class="nc" id="L82">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+<span class="nc" id="L83">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L84">                OwnerDashboard cd = new OwnerDashboard();</span>
+<span class="nc" id="L85">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L86">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
-<span class="nc" id="L84">            break;</span>
+<span class="nc" id="L88">            break;</span>
             case &quot;Booking Details&quot;: {
-<span class="nc" id="L86">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
-<span class="nc" id="L87">                BookingDashboard cd = new BookingDashboard();</span>
-<span class="nc" id="L88">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
-<span class="nc" id="L89">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
+<span class="nc" id="L90">                ParentFrame.getMainFrame().getContentPane().removeAll();</span>
+<span class="nc" id="L91">                BookingDashboard cd = new BookingDashboard();</span>
+<span class="nc" id="L92">                ParentFrame.getMainFrame().add(cd.getMainPanel());</span>
+<span class="nc" id="L93">                ParentFrame.getMainFrame().getContentPane().revalidate();</span>
             }
             break;
         }
-<span class="nc" id="L93">    }</span>
+<span class="nc" id="L97">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

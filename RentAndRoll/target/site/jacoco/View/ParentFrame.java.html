@@ -21,80 +21,82 @@ import javax.swing.JPanel;
 public class ParentFrame {
     private static JFrame MainFrame;
     private final JMenuBar menu_Bar;
-    private final JMenuItem Exit, Logout, Help;
+    final JMenuItem Exit;
+	final JMenuItem Logout;
+	final JMenuItem Help;
 
-<span class="nc" id="L26">    public ParentFrame() {</span>
-<span class="nc" id="L27">        MainFrame = new JFrame(&quot;Rent And Roll - Car Management System&quot;);</span>
-<span class="nc" id="L28">        MainFrame.setSize(1366, 730);</span>
-<span class="nc" id="L29">        MainFrame.setVisible(true);</span>
+<span class="nc" id="L28">    public ParentFrame() {</span>
+<span class="nc" id="L29">        MainFrame = new JFrame(&quot;Rent and Roll - Car Rental Management System&quot;);</span>
+<span class="nc" id="L30">        MainFrame.setSize(1366, 730);</span>
+<span class="nc" id="L31">        MainFrame.setVisible(true);</span>
 
                 
-<span class="nc" id="L32">        MainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);</span>
-<span class="nc" id="L33">        MainFrame.addWindowListener(new WindowAdapter() {</span>
+<span class="nc" id="L34">        MainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);</span>
+<span class="nc" id="L35">        MainFrame.addWindowListener(new WindowAdapter() {</span>
             @Override
             public void windowClosing(WindowEvent e) {
-<span class="nc" id="L36">                int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
+<span class="nc" id="L38">                int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
                         + &quot; Are you sure you want to continue ?&quot;, &quot;Close Confirmation&quot;, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null);
-<span class="nc bnc" id="L38" title="All 2 branches missed.">                if (showConfirmDialog == 0) {</span>
-<span class="nc" id="L39">                    System.exit(0);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                if (showConfirmDialog == 0) {</span>
+<span class="nc" id="L41">                    System.exit(0);</span>
                 }
-<span class="nc" id="L41">            }</span>
+<span class="nc" id="L43">            }</span>
         });
 
-<span class="nc" id="L44">        menu_Bar = new JMenuBar();</span>
+<span class="nc" id="L46">        menu_Bar = new JMenuBar();</span>
 
-<span class="nc" id="L46">        Exit = new JMenuItem(&quot;Exit&quot;);</span>
-<span class="nc" id="L47">        Logout = new JMenuItem(&quot;Logout&quot;);</span>
-<span class="nc" id="L48">        Help = new JMenuItem(&quot;Help&quot;);</span>
+<span class="nc" id="L48">        Exit = new JMenuItem(&quot;Exit&quot;);</span>
+<span class="nc" id="L49">        Logout = new JMenuItem(&quot;Logout&quot;);</span>
+<span class="nc" id="L50">        Help = new JMenuItem(&quot;Help&quot;);</span>
 
-<span class="nc" id="L50">        menu_Bar.add(Exit);</span>
-<span class="nc" id="L51">        menu_Bar.add(Logout);</span>
-<span class="nc" id="L52">        menu_Bar.add(Help);</span>
+<span class="nc" id="L52">        menu_Bar.add(Exit);</span>
+<span class="nc" id="L53">        menu_Bar.add(Logout);</span>
+<span class="nc" id="L54">        menu_Bar.add(Help);</span>
         
-<span class="nc" id="L54">        MainFrame.setJMenuBar(menu_Bar);</span>
+<span class="nc" id="L56">        MainFrame.setJMenuBar(menu_Bar);</span>
 
-<span class="nc" id="L56">        Exit.addActionListener(new Parent_JFrame_ActionListner());</span>
-<span class="nc" id="L57">        Logout.addActionListener(new Parent_JFrame_ActionListner());</span>
-<span class="nc" id="L58">        Help.addActionListener(new Parent_JFrame_ActionListner());</span>
+<span class="nc" id="L58">        Exit.addActionListener(new Parent_JFrame_ActionListner());</span>
+<span class="nc" id="L59">        Logout.addActionListener(new Parent_JFrame_ActionListner());</span>
+<span class="nc" id="L60">        Help.addActionListener(new Parent_JFrame_ActionListner());</span>
 
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L62">    }</span>
 
     public static JFrame getMainFrame() {
-<span class="nc" id="L63">        return MainFrame;</span>
+<span class="nc" id="L65">        return MainFrame;</span>
     }
 
-<span class="nc" id="L66">    private class Parent_JFrame_ActionListner implements ActionListener {</span>
+<span class="nc" id="L68">    class Parent_JFrame_ActionListner implements ActionListener {</span>
 
         @Override
         public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L70" title="All 4 branches missed.">            switch (e.getActionCommand()) {</span>
+<span class="nc bnc" id="L72" title="All 4 branches missed.">            switch (e.getActionCommand()) {</span>
                 case &quot;Exit&quot;: {
-<span class="nc" id="L72">                    int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
+<span class="nc" id="L74">                    int showConfirmDialog = JOptionPane.showConfirmDialog(null, &quot;You are about to terminate the program.\n&quot;</span>
                             + &quot; Are you sure you want to continue ?&quot;, &quot;Close Confirmation&quot;, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null);
-<span class="nc bnc" id="L74" title="All 2 branches missed.">                    if (showConfirmDialog == 0) {</span>
-<span class="nc" id="L75">                        System.exit(0);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                    if (showConfirmDialog == 0) {</span>
+<span class="nc" id="L77">                        System.exit(0);</span>
                     }
                 }
-<span class="nc" id="L78">                break;</span>
+<span class="nc" id="L80">                break;</span>
        
                 case &quot;Help&quot;: {
-<span class="nc" id="L81">                    JOptionPane.showMessageDialog(null, &quot;This is a car rental management system by Its_Not_A_Bug_Its_A_Feature&quot;);</span>
+<span class="nc" id="L83">                    JOptionPane.showMessageDialog(null, &quot;This is a car rental management system by Its_Not_A_Bug_Its_A_Feature&quot;);</span>
                 }
-<span class="nc" id="L83">                break;</span>
+<span class="nc" id="L85">                break;</span>
                 
                 case &quot;Logout&quot;: {
-<span class="nc" id="L86">                ParentFrame.getMainFrame().dispose();</span>
-<span class="nc" id="L87">                Runner r = new Runner();</span>
-<span class="nc" id="L88">                JFrame frame = r.getFrame();</span>
-<span class="nc" id="L89">                Login login = new Login();</span>
-<span class="nc" id="L90">                JPanel panel = login.getMainPanel();</span>
-<span class="nc" id="L91">                frame.add(panel);</span>
-<span class="nc" id="L92">                frame.setVisible(true);</span>
+<span class="nc" id="L88">                ParentFrame.getMainFrame().dispose();</span>
+<span class="nc" id="L89">                Runner r = new Runner();</span>
+<span class="nc" id="L90">                JFrame frame = r.getFrame();</span>
+<span class="nc" id="L91">                Login login = new Login();</span>
+<span class="nc" id="L92">                JPanel panel = login.getMainPanel();</span>
+<span class="nc" id="L93">                frame.add(panel);</span>
+<span class="nc" id="L94">                frame.setVisible(true);</span>
             }
             break;
 
             }
-<span class="nc" id="L97">        }</span>
+<span class="nc" id="L99">        }</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

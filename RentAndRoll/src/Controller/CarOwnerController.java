@@ -14,6 +14,11 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;  
 
 import utilities.DatabaseConnector;
+
+/**
+ * The CarOwnerController class is responsible for adding, retrieving and querying data 
+ from the CarOwner table in the database.
+ */
 public class CarOwnerController {
     List<CarOwner> carOwners = new ArrayList<>();
     Statement stmt;
