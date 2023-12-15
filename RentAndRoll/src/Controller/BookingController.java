@@ -65,7 +65,7 @@ public class BookingController {
             booking.setCustomerName(rs.getString("customer_name"));
             bookings.add(booking);
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         System.out.println("Unable to get all Booking with car names: " + e);
     }
     return bookings;
@@ -127,7 +127,7 @@ public class BookingController {
             booking.setCarName(rs.getString("car_name")); // Set car name
             booking.setCustomerName(rs.getString("customer_name"));
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         System.out.println("Unable to get bookings: " + e);
     }
     return booking;
@@ -174,7 +174,7 @@ public class BookingController {
                 }
             }
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         e.printStackTrace();
     }
     return generatedBookingId;
@@ -227,7 +227,7 @@ public class BookingController {
                booking.setCarName(rs.getString("car_name"));
                booking.setCustomerName(rs.getString("customer_name")); // Set customer name
            }
-       } catch (SQLException e) {
+       } catch (Exception e) {
            System.out.println("Unable to get booking by car registration number: " + e);
        }
        return booking;
