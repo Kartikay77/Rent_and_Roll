@@ -6,6 +6,7 @@ package Controller;
 
 import Model.Booking;
 import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,10 +23,11 @@ import utilities.DatabaseConnector;
 public class BookingController {
     Statement stmt;
     Connection connection;
+    DatabaseConnector databaseConnector = new DatabaseConnector();
     
     public BookingController() {
         try {
-//            this.connection = DatabaseConnector.getConnection();
+            this.connection = this.databaseConnector.getConnection();
             this.stmt = connection.createStatement(); 
         } catch(SQLException e) {
             System.out.println("Unable to make database connection: "+e);
@@ -45,22 +47,25 @@ public class BookingController {
         List<Booking> bookings = new ArrayList<>();
 
         try {
-        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, c.reg_no, cust.customer_name  " +
                           "FROM booking b " +
-                          "JOIN car c ON b.car_id = c.car_id";
+                          "JOIN car c ON b.car_id = c.car_id " +
+                          "JOIN customer cust ON b.customer_id = cust.customer_id";
 
         ResultSet rs = this.stmt.executeQuery(sqlQuery);
         while (rs.next()) {
             Booking booking = new Booking();
             booking.setBookingId(rs.getInt("booking_id"));
-            booking.setRentalStartTime(rs.getLong("rent_time"));
-            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setRentalStartTime(rs.getDate("rent_time"));
+            booking.setRentalReturnTime(rs.getDate("return_time"));
             booking.setCustomerId(rs.getInt("customer_id"));
             booking.setCarId(rs.getInt("car_id"));
             booking.setCarName(rs.getString("car_name")); // Set car name
+            booking.setReg_No(rs.getString("reg_no"));
+            booking.setCustomerName(rs.getString("customer_name"));
             bookings.add(booking);
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         System.out.println("Unable to get all Booking with car names: " + e);
     }
     return bookings;
@@ -71,25 +76,58 @@ public class BookingController {
      * @param id id of the Booking whose details are to be retrieved.
      * @return Booking object
      */
+    public Booking getBookingById(int id){
+        // To do: Get booking by Id
+        Booking booking = new Booking();
+        try {
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, cust.customer_name " +
+                          "FROM booking b " +
+                          "JOIN car c ON b.car_id = c.car_id " +
+                          "JOIN customer cust ON b.customer_id = cust.customer_id " +
+                          "WHERE b.booking_id = " + id;
+
+        ResultSet rs = this.stmt.executeQuery(sqlQuery);
+        while (rs.next()) {
+            booking.setBookingId(rs.getInt("booking_id"));
+            booking.setRentalStartTime(rs.getDate("rent_time"));
+            booking.setRentalReturnTime(rs.getDate("return_time"));
+            booking.setCustomerId(rs.getInt("customer_id"));
+            booking.setCarId(rs.getInt("car_id"));
+            booking.setCarName(rs.getString("car_name")); // Set car name
+            booking.setCustomerName(rs.getString("customer_name"));
+        }
+    } catch (SQLException e) {
+        System.out.println("Unable to get bookings: " + e);
+    }
+    return booking;
+    }
+    
+    /**
+     * Gets Booking object by Customer ID
+     * @param id id of the Booking whose details are to be retrieved.
+     * @return Booking object
+     */
     public Booking getBookingByCustomerId(int id){
         // To do: Get booking by Id
         Booking booking = new Booking();
         try {
-        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name " +
+        String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, cust.customer_name " +
                           "FROM booking b " +
                           "JOIN car c ON b.car_id = c.car_id " +
+                          "JOIN customer cust ON b.customer_id = cust.customer_id " +
                           "WHERE b.customer_id = " + id;
 
         ResultSet rs = this.stmt.executeQuery(sqlQuery);
         while (rs.next()) {
             booking.setBookingId(rs.getInt("booking_id"));
-            booking.setRentalStartTime(rs.getLong("rent_time"));
-            booking.setRentalReturnTime(rs.getLong("return_time"));
+            booking.setRentalStartTime(rs.getDate("rent_time"));
+            booking.setRentalReturnTime(rs.getDate("return_time"));
             booking.setCustomerId(rs.getInt("customer_id"));
             booking.setCarId(rs.getInt("car_id"));
             booking.setCarName(rs.getString("car_name")); // Set car name
+            booking.setCustomerName(rs.getString("customer_name"));
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         System.out.println("Unable to get bookings: " + e);
     }
     return booking;
@@ -103,8 +141,8 @@ public class BookingController {
      * @param balance balance amount due to be paid by the customer
      * @return int id of the customer after addition in the database
      */
-    public int addBooking(String rentTime, String returnTime, int customerId, int carId) {
-    String sqlQuery = "INSERT INTO booking (rentTime, returnTime, customerId, carId, reg_no) VALUES (?, ?, ?, ?, ?)";
+    public int addBooking(Timestamp rentTime, Timestamp returnTime, int customerId, int carId) {
+    String sqlQuery = "INSERT INTO booking (rent_time, return_time, customer_id, car_id) VALUES (?, ?, ?, ?)";
     int generatedBookingId = -999;
     String carRegNo = ""; // Variable to store car registration number
 
@@ -121,11 +159,10 @@ public class BookingController {
 
         // Proceed with adding the booking details
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, rentTime);
-            preparedStatement.setString(2, returnTime);
+            preparedStatement.setTimestamp(1, rentTime);
+            preparedStatement.setTimestamp(2, returnTime);
             preparedStatement.setInt(3, customerId);
             preparedStatement.setInt(4, carId);
-            preparedStatement.setString(5, carRegNo); // Set the registration number
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {
@@ -137,7 +174,7 @@ public class BookingController {
                 }
             }
         }
-    } catch (SQLException e) {
+    } catch (Exception e) {
         e.printStackTrace();
     }
     return generatedBookingId;
@@ -170,7 +207,12 @@ public class BookingController {
        // To do: Get booking by car registration number
        Booking booking = null;
        try {
-           String sqlQuery = "SELECT * FROM booking INNER JOIN car ON booking.car_id = car.car_id WHERE car.reg_no=?";
+    	   String sqlQuery = "SELECT b.booking_id, b.rent_time, b.return_time, b.customer_id, b.car_id, c.car_name, cust.customer_name " +
+                   "FROM booking b " +
+                   "JOIN car c ON b.car_id = c.car_id " +
+                   "JOIN customer cust ON b.customer_id = cust.customer_id " +
+                   "WHERE c.reg_no = ?";
+    	   
            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
            preparedStatement.setString(1, regNo);
            ResultSet rs = preparedStatement.executeQuery();
@@ -178,12 +220,14 @@ public class BookingController {
            if (rs.next()) {
                booking = new Booking();
                booking.setBookingId(rs.getInt("booking_id"));
-               booking.setRentalStartTime(rs.getLong("rent_time"));
-               booking.setRentalReturnTime(rs.getLong("return_time"));
+               booking.setRentalStartTime(rs.getDate("rent_time"));
+               booking.setRentalReturnTime(rs.getDate("return_time"));
                booking.setCustomerId(rs.getInt("customer_id"));
                booking.setCarId(rs.getInt("car_id"));
+               booking.setCarName(rs.getString("car_name"));
+               booking.setCustomerName(rs.getString("customer_name")); // Set customer name
            }
-       } catch (SQLException e) {
+       } catch (Exception e) {
            System.out.println("Unable to get booking by car registration number: " + e);
        }
        return booking;

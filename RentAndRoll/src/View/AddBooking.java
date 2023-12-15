@@ -11,11 +11,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import Controller.BookingController;
 
 /**
  * This class is responsible for painting the dialogue box for adding a booking.
@@ -24,14 +32,15 @@ public class AddBooking extends JFrame{
     JButton BookButton, CancelButton;
     JLabel CarIDLabel, CustomerIDLabel;
     JTextField CarIDTextField, CustomerIDTextField;
-
-//    private Car car;
-//    private Customer customer;
+    JTextField RentTimeTextField, ReturnTimeTextField;
+    JLabel ReturnTimeLabel, RentTimeLabel;
+    
+    private BookingController bookingController = new BookingController();
 
     public AddBooking() {
         super("Book Car");
         setLayout(new FlowLayout());
-        setSize(new Dimension(300, 200));
+        setSize(new Dimension(300, 300));
         setResizable(false);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -52,10 +61,19 @@ public class AddBooking extends JFrame{
 
         CustomerIDLabel = new JLabel("Enter Customer ID");
         CustomerIDTextField = new JTextField();
+        
+//        SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        JTextField RentTimeTextField = new JTextField();
+        JTextField ReturnTimeTextField = new JTextField();
+        
+        ReturnTimeLabel = new JLabel("Return Time (yyyy-mm-dd hh:mm:ss)");
+        RentTimeLabel = new JLabel("Rent Time (yyyy-mm-dd hh:mm:ss)");
 
         CarIDTextField.setPreferredSize(new Dimension(240, 22));
-
         CustomerIDTextField.setPreferredSize(new Dimension(240, 22));
+        
+        RentTimeTextField.setPreferredSize(new Dimension(240, 22));
+        ReturnTimeTextField.setPreferredSize(new Dimension(240, 22));
 
         BookButton.setPreferredSize(new Dimension(100, 22));
         CancelButton.setPreferredSize(new Dimension(100, 22));
@@ -66,6 +84,12 @@ public class AddBooking extends JFrame{
 
         add(CustomerIDLabel);
         add(CustomerIDTextField);
+        
+        add(RentTimeLabel);
+        add(RentTimeTextField);
+        
+        add(ReturnTimeLabel);
+        add(ReturnTimeTextField);
 
         add(BookButton);
         add(CancelButton);
@@ -78,72 +102,40 @@ public class AddBooking extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String CarID = CarIDTextField.getText().trim();
-//                if (!CarID.isEmpty()) {
-//                    try {
-//                        if (Integer.parseInt(CarID) > 0) {
-//                            car = Car.SearchByID(Integer.parseInt(CarID));
-//                            if (car != null) {
-//                                if (!car.isRented()) {
-//                                    CarIDValidityLabel.setText("");
-//                                } else {
-//                                    car = null;
-//                                    JOptionPane.showMessageDialog(null, "This car is already booked !");
-//                                }
-//                            } else {
-//                                CarID = null;
-//                            }
-//                        } else {
-//                            CarID = null;
-//                        }
-//                    } catch (NumberFormatException ex) {
-//                        CarID = null;
-//                    }
-//                } else {
-//                    CarID = null;
-//                }
-//
-//                String customerID = CustomerIDTextField.getText().trim();
-//                if (!customerID.isEmpty()) {
-//                    try {
-//                        if (Integer.parseInt(customerID) > 0) {
-//                            customer = Customer.SearchByID(Integer.parseInt(customerID));
-//                            if (customer != null) {
-//                            } else {
-//                                customerID = null;
-//                                JOptionPane.showMessageDialog(null, "Customer ID does not exists !");
-//                            }
-//                        } else {
-//                            customerID = null;
-//                        }
-//                    } catch (NumberFormatException ex) {
-//                        customerID = null;
-//                    }
-//                } else {
-//                    customerID = null;
-//                }
-//
-//                if (CarID != null & customerID != null) {
-//                    setEnabled(false);
-//                    int showConfirmDialog = JOptionPane.showConfirmDialog(null,
-//                            "You are about to Book the Car: \n" + car.toString() + "\n against the Customer: \n"
-//                            + customer.toString() + "\n Are you sure you want to continue??",
-//                            "Book Confirmation", JOptionPane.OK_CANCEL_OPTION);
-//                    if (showConfirmDialog == 0) {
-//                        Booking booking = new Booking(0, customer, car, System.currentTimeMillis(), 0);
-//                        booking.Add();
-//                        ParentFrame.getMainFrame().getContentPane().removeAll();
-//                        Booking_Details cd = new Booking_Details();
-//                        ParentFrame.getMainFrame().add(cd.getMainPanel());
-//                        ParentFrame.getMainFrame().getContentPane().revalidate();
-//                        JOptionPane.showMessageDialog(null, "Car Successfully Booked !");
-//                        ParentFrame.getMainFrame().setEnabled(true);
-//                        dispose();
-//                    }
-//                }
-            }
-        }
-        );
+                String carId = CarIDTextField.getText().trim();
+                String custId = CustomerIDTextField.getText().trim();
+                Timestamp rentTime = Timestamp.valueOf(RentTimeTextField.getText().trim());
+                Timestamp returnTime = Timestamp.valueOf(ReturnTimeTextField.getText().trim());
+
+                List<String> invalidFields = new ArrayList<String>();
+                if (carId.isEmpty()) {
+                	invalidFields.add("carId");
+                }
+                if (custId.isEmpty()) {
+                	invalidFields.add("custId");
+                }
+                
+                else {
+                	int newId = bookingController.addBooking(rentTime, 
+                			returnTime, 
+                			Integer.parseInt(custId),
+                			Integer.parseInt(carId));
+                    if(newId >= 0) {
+                        ParentFrame.getMainFrame().getContentPane().removeAll();
+                        BookingDashboard cd = new BookingDashboard();
+                        ParentFrame.getMainFrame().add(cd.getMainPanel());
+                        ParentFrame.getMainFrame().getContentPane().revalidate();
+                        ParentFrame.getMainFrame().setEnabled(true);
+                        JOptionPane.showMessageDialog(null, "Booking added successfully!");
+                        dispose();
+                    }
+                    else {
+                       JOptionPane.showMessageDialog(null, "Error in adding booking. Please try again later.");
+                    } 
+                }
+            }             
+          }
+         );
         CancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

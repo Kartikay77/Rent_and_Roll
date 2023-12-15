@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  * The Booking is the model class for a Booking object.
  */
@@ -11,9 +13,10 @@ public class Booking {
     private int bookingId;
     private int customerId;
     private int carId;
-    private long rentalStartTime, rentalReturnTime;
+    private Date rentalStartTime, rentalReturnTime;
     private String carName;
     private String carRegNo;
+    private String customerName; 
     
     /**
      * @return the carID
@@ -60,28 +63,28 @@ public class Booking {
     /**
      * @return the rentalStartTime
      */
-    public long getRentalStartTime() {
+    public Date getRentalStartTime() {
         return rentalStartTime;
     }
 
     /**
      * @param rentalStartTime the rentalStartTime to set
      */
-    public void setRentalStartTime(long rentalStartTime) {
+    public void setRentalStartTime(Date rentalStartTime) {
         this.rentalStartTime = rentalStartTime;
     }
     
     /**
      * @return the rentalReturnTime
      */
-    public long getRentalReturnTime() {
+    public Date getRentalReturnTime() {
         return rentalReturnTime;
     }
 
     /**
      * @param rentalReturnTime the rentalReturnTime to set
      */
-    public void setRentalReturnTime(long rentalReturnTime) {
+    public void setRentalReturnTime(Date rentalReturnTime) {
         this.rentalReturnTime = rentalReturnTime;
     }
     
@@ -110,5 +113,18 @@ public class Booking {
      */
     public void setReg_No(String carRegNo) {
         this.carRegNo = carRegNo;
+    }
+    
+    public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	@Override
+    public String toString() {
+    	return ("ID: " + this.bookingId + " Car: " + this.carName + " Customer: " + this.customerName);
     }
 }
