@@ -29,15 +29,15 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 public class CustomerDashboard implements ActionListener{
     JTextField SearchIdTextField;
     JButton SearchIdButton;
-	private JButton SearchNameButton;
-	private JButton UpdateButton;
-	private JButton AddButton;
-	private JButton RemoveButton;
-	private JButton BackButton;
-	private JButton ClearBillButton;
-    private JScrollPane ScrollPane1;
-    private JTable CustomerTable;
-    private JTextField SearchNameTextField;
+	JButton SearchNameButton;
+	JButton UpdateButton;
+	JButton AddButton;
+	JButton RemoveButton;
+	JButton BackButton;
+	JButton ClearBillButton;
+    JScrollPane ScrollPane1;
+    JTable CustomerTable;
+    JTextField SearchNameTextField;
     static DefaultTableModel tableModel;
     private JPanel MainPanel;
     
