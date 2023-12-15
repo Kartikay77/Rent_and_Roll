@@ -25,6 +25,11 @@ We have also implemented functionalities in frontend for Owner to see what balan
 We have created schemas for database.
 which include the tables as follows 1.customer 2.booking 3.car_owner 4.car
 
+# Javadoc
+![javadoc-1](https://github.com/Kartikay77/Rent_and_Roll/assets/56752791/3fea2db9-9781-4812-9f20-3b68a7a30f34)
+![javadoc-3](https://github.com/Kartikay77/Rent_and_Roll/assets/56752791/f2173dbd-6748-4a63-8a29-14234b387641)
+![javadoc-2](https://github.com/Kartikay77/Rent_and_Roll/assets/56752791/6e8a2415-623d-4c46-b07d-98e5f6bd06f9)
+
 # User Acceptance Testing Results
 ![Response](https://github.com/Kartikay77/Rent_and_Roll/assets/56752791/fb04731a-a713-4f05-b4de-1b7147fb34d9)
 ![issues](https://github.com/Kartikay77/Rent_and_Roll/assets/56752791/bf02bb4a-b6e0-4f91-a3e9-9437a81218f2)
