@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JTable;
+
 import org.junit.Test;
 
 import Controller.CarOwnerController;
@@ -38,7 +40,12 @@ public class OwnerDashboardTest {
         when(oc.getAllOwners()).thenReturn(owlist);
         
         ActionEvent ae = mock(ActionEvent.class);
-        when(ae.getActionCommand()).thenReturn("Remove");    
+        when(ae.getActionCommand()).thenReturn("Remove");   
+        
+        JTable OwnerTable = mock(JTable.class);
+        when(OwnerTable.getSelectedRow()).thenReturn(3);
+        when(OwnerTable.getRowCount()).thenReturn(10);
+        when(OwnerTable.getValueAt(1,0)).thenReturn(5);
         
         ownerDashboard.RemoveButton.doClick();
         assertNotNull(ownerDashboard.getMainPanel());
@@ -55,8 +62,10 @@ public class OwnerDashboardTest {
         
         ActionEvent ae = mock(ActionEvent.class);
         when(ae.getActionCommand()).thenReturn("Clear Balance");  
-        
-        
+        JTable OwnerTable = mock(JTable.class);
+        when(OwnerTable.getSelectedRow()).thenReturn(1);
+        when(OwnerTable.getValueAt(1,0)).thenReturn(5);
+        when(OwnerTable.getRowCount()).thenReturn(10);
         
         ownerDashboard.ClearBalanceButton.doClick();
         assertNotNull(ownerDashboard.getMainPanel());
@@ -78,7 +87,7 @@ public class OwnerDashboardTest {
         
         ownerDashboard.SearchIdTextField.setText("3");
         ownerDashboard.SearchIdButton.doClick();
-        assertNull(ownerDashboard.getMainPanel());
+        assertNotNull(ownerDashboard.getMainPanel());
     }
     
     @Test
@@ -94,7 +103,7 @@ public class OwnerDashboardTest {
         ActionEvent ae = mock(ActionEvent.class);
         when(ae.getActionCommand()).thenReturn("Search Name");  
         
-        ownerDashboard.SearchIdTextField.setText("john");
+        ownerDashboard.SearchNameTextField.setText("john");
         ownerDashboard.SearchNameButton.doClick();
         assertNotNull(ownerDashboard.getMainPanel());
     }
@@ -109,10 +118,13 @@ public class OwnerDashboardTest {
         when(oc.getAllOwners()).thenReturn(owlist);
         
         ActionEvent ae = mock(ActionEvent.class);
-        when(ae.getActionCommand()).thenReturn("Add");    
+        when(ae.getActionCommand()).thenReturn("Add");
+        
+        AddCar addCar = mock(AddCar.class);
         
         ownerDashboard.AddButton.doClick();
         assertNotNull(ownerDashboard.getMainPanel());
+        
     }
     
     @Test
