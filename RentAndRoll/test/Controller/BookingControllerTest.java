@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -90,7 +91,7 @@ public void testGetAllBookings() {
     assertEquals(1, bookings.get(0).getCustomerId());
     assertEquals(1, bookings.get(0).carId());
     assertEquals(1, bookings.get(0).getCustomerName());
-    assertEquals(1, bookings.get(0).getRegNo());
+    assertEquals(1, bookings.get(0).getReg_No());
     
 
     // Verify details of the second booking
@@ -100,7 +101,7 @@ public void testGetAllBookings() {
     assertEquals(2, bookings.get(1).getCustomerId());
     assertEquals(2, bookings.get(1).carId());
     assertEquals(2, bookings.get(1).getCustomerName());
-    assertEquals(1, bookings.get(0).getRegNo());
+    assertEquals(1, bookings.get(0).getReg_No());
 
     // Print details of all bookings
     for (Booking booking : bookings) {
@@ -110,7 +111,7 @@ public void testGetAllBookings() {
         System.out.println("Customer ID: " + booking.getCustomerId());
         System.out.println("Car ID: " + booking.carId());
         System.out.println("Customer Name: " + booking.getCustomerName());
-        System.out.println("Car Registration Number: " + booking.getRegNo());
+        System.out.println("Car Registration Number: " + booking.getReg_No());
         System.out.println("-------------------------");
     }
 }
@@ -196,9 +197,11 @@ public void testGetAllBookings() {
 
         // Create an instance of carCarController with the mocked Connection
         BookingController bookingController = new BookingController(connectionMock);
-
+        Timestamp rentTime = Timestamp.valueOf("2023-12-01 10:30:00");
+        Timestamp returnTime = Timestamp.valueOf("2023-12-01 10:30:00");
         // Test the addCar method
-        int generatedBookingId = bookingController.addBooking("2023-12-01 10:30:00","2023-12-01 10:30:00",2,4);
+        int generatedBookingId = bookingController.addBooking(rentTime, returnTime, 2, 4);
+
 
         // Verify that the catch block is executed and the expected car Car ID is returned
         assertEquals(-999, generatedBookingId);
